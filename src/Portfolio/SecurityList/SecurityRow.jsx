@@ -9,7 +9,7 @@ class SecurityRow extends React.Component {
     handleChanges = (e) => {
         this.props.onSecurityChange({
             ...this.props.security,
-            [e.target.name]: parseFloat(e.target.value)
+            [e.target.name]: e.target.value
         });
     }
 
@@ -17,11 +17,17 @@ class SecurityRow extends React.Component {
         const security = this.props.security;
         return(
             <tr className="SecurityRow">
-                <td className="SecurityRow-cell">{security.symbol}</td>
-                <td className="SecurityRow-cell">{security.cost}</td>
                 <td className="SecurityRow-cell">
                     <input
                         type="text"
+                        name="symbol"
+                        value={security.symbol.toUpperCase()}
+                        onChange={this.handleChanges}/>
+                </td>
+                <td className="SecurityRow-cell">{security.cost}</td>
+                <td className="SecurityRow-cell">
+                    <input
+                        type="number"
                         name="mktValue"
                         value={this.props.security.mktValue}
                         onChange={this.handleChanges}/>
@@ -29,14 +35,14 @@ class SecurityRow extends React.Component {
                 <td className="SecurityRow-cell">{security.portPercent}</td>
                 <td className="SecurityRow-cell">
                     <input
-                        type="text"
+                        type="number"
                         name="portPercentTarget"
                         value={this.props.security.portPercentTarget}
                         onChange={this.handleChanges}/>
                 </td>
                 <td className="SecurityRow-cell">
                     <input
-                        type="text"
+                        type="number"
                         name="buyQty"
                         value={this.props.security.buyQty}
                         onChange={this.handleChanges}/>
