@@ -6,9 +6,9 @@ class SecurityListHeader extends React.Component {
             <tr className="SecurityListHeader">
                 <th>Symbol</th>
                 <th>Cost ($)</th>
+                <th>Target (%)</th>
                 <th>Mkt Val ($)</th>
                 <th>Current (%)</th>
-                <th>Target (%)</th>
                 <th>Buy Qty</th>
                 <th>New (%)</th>
             </tr>

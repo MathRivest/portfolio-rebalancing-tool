@@ -23,18 +23,18 @@ class SecurityRow extends React.Component {
                 <td>
                     <input
                         type="number"
+                        name="portPercentTarget"
+                        value={security.portPercentTarget}
+                        onChange={this.handleChanges}/>
+                </td>
+                <td>
+                    <input
+                        type="number"
                         name="mktValue"
                         value={security.mktValue}
                         onChange={this.handleChanges}/>
                 </td>
                 <td>{security.portPercent}</td>
-                <td>
-                    <input
-                        type="number"
-                        name="portPercentTarget"
-                        value={security.portPercentTarget}
-                        onChange={this.handleChanges}/>
-                </td>
                 <td>
                     <input
                         type="number"

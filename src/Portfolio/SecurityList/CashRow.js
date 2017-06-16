@@ -21,17 +21,17 @@ class CashRow extends React.Component {
                     <input
                         type="number"
                         name="portPercentTarget"
+                        value={cash.portPercentTarget}
+                        onChange={this.handleChanges}/>
+                </td>
+                <td>
+                    <input
+                        type="number"
+                        name="mktValue"
                         value={cash.mktValue}
                         onChange={this.handleChanges}/>
                 </td>
                 <td>{cash.portPercent}</td>
-                <td>
-                    <input
-                        type="number"
-                        name="portPercentTarget"
-                        value={cash.portPercentTarget}
-                        onChange={this.handleChanges}/>
-                </td>
                 <td></td>
                 <td>{cash.portPercentNew}</td>
             </tr>
