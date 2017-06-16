@@ -115,11 +115,16 @@ class Portfolio extends React.Component {
                     cash={this.state.cash}
                     onCashChange={this.handleCashChange}/>
 
-                <button onClick={this.handleAddButtonClick}>Add</button>
+                <div>
+                    <button onClick={this.handleAddButtonClick}>Add</button>
+                </div>
+                <br/>
                 Portfolio todo:
                 <ul>
                     <li>Add total row</li>
-                    <li>Add add row</li>
+                    <li>Compute current percent</li>
+                    <li>Compute new %</li>
+                    <li>Delete row</li>
                 </ul>
             </div>
         )

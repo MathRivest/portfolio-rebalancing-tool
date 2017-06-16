@@ -7,7 +7,7 @@ body {
 
 .Portfolio {
   margin: 36px auto;
-  width: 768px;
+  width: 1024px;
   padding: 0 36px;
 }
 
@@ -17,6 +17,9 @@ body {
 .SecurityList td {
   padding: 6px 12px;
   text-align: right;
+}
+.SecurityList input {
+  width: 100%;
 }
 
 .SecurityList .SecurityList-row-cell--left {
