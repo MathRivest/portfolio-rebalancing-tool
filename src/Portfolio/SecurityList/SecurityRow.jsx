@@ -21,7 +21,7 @@ class SecurityRow extends React.Component {
                     <input
                         type="text"
                         name="symbol"
-                        value={security.symbol.toUpperCase()}
+                        value={security.symbol}
                         onChange={this.handleChanges}/>
                 </td>
                 <td className="SecurityRow-cell">{security.cost}</td>

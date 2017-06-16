@@ -66,12 +66,15 @@ class Portfolio extends React.Component {
     render() {
         return(
             <div className="Portfolio">
-                Portfolio
                 <SecurityGraphs/>
                 <SecurityList
                     securities={this.state.securities}
                     onSecurityChange={this.onSecurityChange}/>
-                {JSON.stringify(this.props.securities)}
+                Portfolio todo:
+                <ul>
+                    <li>Add total row</li>
+                    <li>Add add row</li>
+                </ul>
             </div>
         )
     }
