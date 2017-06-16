@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SecurityListHeader from './SecurityListHeader';
 import SecurityRow from './SecurityRow';
 
-function SecurityList(props) {
+let SecurityList = (props) => {
     const list = props.securities.map((security) =>
         <SecurityRow
             key={security.id}
