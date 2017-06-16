@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SecurityListHeader from './SecurityListHeader';
 import SecurityRow from './SecurityRow';
+import CashRow from './CashRow';
 
 let SecurityList = (props) => {
     const list = props.securities.map((security) =>
@@ -9,15 +10,19 @@ let SecurityList = (props) => {
             security={security}
             onSecurityChange={props.onSecurityChange}/>
     );
-
     return(
         <div>
             <table className="SecurityList">
                 <thead><SecurityListHeader/></thead>
-                <tbody>{list}</tbody>
+                <tbody>
+                    {list}
+                    <CashRow
+                        cash={props.cash}
+                        onCashChange={props.onCashChange}/>
+                </tbody>
             </table>
         </div>
-    )
+    );
 }
 
 export default SecurityList;

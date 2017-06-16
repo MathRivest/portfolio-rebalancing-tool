@@ -14,6 +14,14 @@ body {
 .SecurityList {
   width: 100%;
 }
+.SecurityList td {
+  padding: 6px 12px;
+  text-align: right;
+}
+
+.SecurityList .SecurityList-row-cell--left {
+  text-align: left;
+}
 /*
 .SecurityRow {
   display: flex;
