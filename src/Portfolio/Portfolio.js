@@ -4,6 +4,16 @@ import _ from 'lodash';
 import SecurityList from './SecurityList/SecurityList';
 import SecurityGraphs from './SecurityGraphs/SecurityGraphs';
 
+let findSecurityById = (securities, id) => {
+    return _.find(securities, {'id': id});
+}
+
+let updateSecurities = (prevState, security) => {
+    let i = _.findIndex(prevState.securities, findSecurityById(prevState.securities, security.id));
+    prevState.securities[i] = security
+    return prevState.securities;
+}
+
 class Portfolio extends React.Component {
     constructor(props) {
         super(props);
@@ -41,26 +51,10 @@ class Portfolio extends React.Component {
                 }
             ]
         }
-
-        this.onSecurityChange = this.onSecurityChange.bind(this);
-        this.updateSecurities = this.updateSecurities.bind(this);
-        this.findSecurityById = this.findSecurityById.bind(this);
     }
 
-    onSecurityChange(security) {
-        this.setState({
-            securities: this.updateSecurities(security)
-        });
-    }
-
-    updateSecurities(security) {
-        let i = _.findIndex(this.state.securities, this.findSecurityById(security.id));
-        this.state.securities[i] = security
-        return this.state.securities;
-    }
-
-    findSecurityById(id) {
-        return _.find(this.state.securities, {'id': id});
+    onSecurityChange = (security) => {
+        this.setState((prevState, props) => updateSecurities(prevState, security));
     }
 
     render() {
