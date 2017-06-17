@@ -8,6 +8,10 @@ class SecurityRow extends React.Component {
         });
     }
 
+    handleRemove = (e) => {
+        this.props.onSecurityRemove(this.props.security);
+    }
+
     render() {
         const security = this.props.security;
         return(
@@ -43,6 +47,7 @@ class SecurityRow extends React.Component {
                         onChange={this.handleChanges}/>
                 </td>
                 <td>{security.portPercentNew}</td>
+                <td><button onClick={this.handleRemove}>Remove</button></td>
             </tr>
         )
     }

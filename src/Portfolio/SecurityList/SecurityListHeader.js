@@ -11,6 +11,7 @@ class SecurityListHeader extends React.Component {
                 <th>Current (%)</th>
                 <th>Buy Qty</th>
                 <th>New (%)</th>
+                <th></th>
             </tr>
         )
     }

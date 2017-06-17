@@ -14,17 +14,6 @@ function guid() {
     s4() + '-' + s4() + s4() + s4();
 }
 
-
-let findSecurityById = (securities, id) => {
-    return _.find(securities, {'id': id});
-}
-
-let updateSecurities = (prevState, security) => {
-    let i = _.findIndex(prevState.securities, findSecurityById(prevState.securities, security.id));
-    prevState.securities[i] = security
-    return prevState.securities;
-}
-
 let createSecurity = () => {
     return {
         id: guid(),
@@ -39,9 +28,31 @@ let createSecurity = () => {
 }
 
 let addSecurity = (prevState, security) => {
-    console.log([...prevState.securities, security]);
-    prevState.securities.push(security);
-    return prevState.securities;
+    let updatedList = [...prevState.securities, security];
+    return {
+        securities: updatedList
+    }
+}
+
+let removeSecurity = (prevState, security) => {
+    let updatedList = _.filter(prevState.securities, item => {
+        return item.id !== security.id;
+    });
+    return {
+        securities: updatedList
+    };
+}
+
+let updateSecurity = (prevState, security) => {
+    let updatedList = prevState.securities.map((i) => {
+        if(i.id === security.id) {
+            i = security;
+        }
+        return i;
+    });
+    return {
+        securities: updatedList
+    };
 }
 
 class Portfolio extends React.Component {
@@ -90,19 +101,28 @@ class Portfolio extends React.Component {
         }
     }
 
+    handleAddButtonClick = () => {
+        this.setState((prevState, props) => addSecurity(prevState, createSecurity()));
+    }
+
+    handleSecurityRemove = (security) => {
+        this.setState((prevState, props) => removeSecurity(prevState, security));
+
+        this.setState((prevState, props) => {
+            if(prevState.securities.length === 0) {
+                addSecurity(prevState, createSecurity());
+            }
+        });
+    }
+
     handleSecurityChange = (security) => {
-        this.setState((prevState, props) => updateSecurities(prevState, security));
+        this.setState((prevState, props) => updateSecurity(prevState, security));
     }
 
     handleCashChange = (cash) => {
         this.setState({
             cash
         });
-    }
-
-    handleAddButtonClick = () => {
-        let security = createSecurity();
-        this.setState((prevState, props) => addSecurity(prevState, security));
     }
 
     render() {
@@ -112,6 +132,7 @@ class Portfolio extends React.Component {
                 <SecurityList
                     securities={this.state.securities}
                     onSecurityChange={this.handleSecurityChange}
+                    onSecurityRemove={this.handleSecurityRemove}
                     cash={this.state.cash}
                     onCashChange={this.handleCashChange}/>
 

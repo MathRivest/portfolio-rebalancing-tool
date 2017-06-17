@@ -8,7 +8,8 @@ let SecurityList = (props) => {
         <SecurityRow
             key={security.id}
             security={security}
-            onSecurityChange={props.onSecurityChange}/>
+            onSecurityChange={props.onSecurityChange}
+            onSecurityRemove={props.onSecurityRemove}/>
     );
     return(
         <div>
