@@ -58,7 +58,6 @@ class Portfolio extends React.Component {
                     cost: 38.23,
                     portPercentTarget: 25,
                     mktValue: 2126.38,
-                    portPercent: 10,
                     buyQty: 0,
                     portPercentNew: 25
                 },
@@ -68,7 +67,6 @@ class Portfolio extends React.Component {
                     cost: 16.34,
                     portPercentTarget: 15,
                     mktValue: 1672.38,
-                    portPercent: 5,
                     buyQty: 0,
                     portPercentNew: 15
                 },
@@ -78,7 +76,6 @@ class Portfolio extends React.Component {
                     cost: 16.34,
                     portPercentTarget: 55,
                     mktValue: 13672.38,
-                    portPercent: 20,
                     buyQty: 0,
                     portPercentNew: 15
                 }
@@ -86,7 +83,6 @@ class Portfolio extends React.Component {
             cash: {
                 symbol: 'Cash',
                 mktValue: 20000,
-                portPercent: 20,
                 portPercentTarget: 0,
                 portPercentNew: 5
             }
@@ -120,6 +116,11 @@ class Portfolio extends React.Component {
     render() {
         return(
             <div className="Portfolio">
+
+                <div className="Portfolio-actions">
+                    <button onClick={this.handleAddButtonClick}>Add</button>
+                </div>
+
                 <SecurityGraphs/>
                 <SecurityList
                     securities={this.state.securities}
@@ -128,9 +129,6 @@ class Portfolio extends React.Component {
                     cash={this.state.cash}
                     onCashChange={this.handleCashChange}/>
 
-                <div>
-                    <button onClick={this.handleAddButtonClick}>Add</button>
-                </div>
                 <br/>
                 Portfolio todo:
                 <ul>

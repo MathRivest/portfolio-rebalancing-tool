@@ -42,7 +42,7 @@ class SecurityRow extends React.Component {
                         value={security.mktValue}
                         onChange={this.handleChanges}/>
                 </td>
-                <td>{security.portPercent}</td>
+                <td>Compute me</td>
                 <td>
                     <input
                         type="number"

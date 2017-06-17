@@ -10,20 +10,44 @@ body {
   width: 1024px;
   padding: 0 36px;
 }
+.Portfolio-actions {
+  display: flex;
+  justify-content: flex-end;
+}
 
 .SecurityList {
   width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-bottom: 24px;
 }
-.SecurityList td {
-  padding: 6px 12px;
+
+.SecurityList td,
+.SecurityList th {
+  padding: 12px;
   text-align: right;
+  border: 1px solid lightgray;
 }
+
+.SecurityList th {
+  text-align: center;
+}
+
 .SecurityList input {
-  width: 100%;
+  max-width: 100%;
+  font-size: 12px;
+}
+
+.SecurityList thead,
+.SecurityList tfoot {
+  background: #EEEEEE;
 }
 
 .SecurityList .SecurityList-row-cell--left {
   text-align: left;
+}
+.SecurityList .SecurityList-row-cell--center {
+  text-align: center;
 }
 /*
 .SecurityRow {

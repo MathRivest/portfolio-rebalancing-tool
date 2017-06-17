@@ -35,9 +35,10 @@ class CashRow extends React.Component {
                         value={cash.mktValue}
                         onChange={this.handleChanges}/>
                 </td>
-                <td>{cash.portPercent}</td>
+                <td>Compute me</td>
                 <td></td>
                 <td>{cash.portPercentNew}</td>
+                <td></td>
             </tr>
         )
     }

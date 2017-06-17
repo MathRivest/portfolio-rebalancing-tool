@@ -18,11 +18,11 @@ let SecurityList = (props) => {
                 <thead><SecurityListHeader /></thead>
                 <tbody>
                     {list}
-                    <CashRow
-                        cash={props.cash}
-                        onCashChange={props.onCashChange} />
                 </tbody>
                 <tfoot>
+                    <CashRow
+                    cash={props.cash}
+                    onCashChange={props.onCashChange} />
                     <TotalRow securities={props.securities} cash={props.cash} />
                 </tfoot>
             </table>
