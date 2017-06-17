@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class SecurityRow extends React.Component {
     handleChanges = (e) => {
+        let newValue = e.target.value;
+        if(e.target.type === 'number') {
+            newValue = parseFloat(newValue) || '';
+        }
         this.props.onSecurityChange({
             ...this.props.security,
-            [e.target.name]: e.target.value
+            [e.target.name]: newValue
         });
     }
 

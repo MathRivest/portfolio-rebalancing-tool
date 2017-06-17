@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import _ from 'lodash';
 
 import SecurityList from './SecurityList/SecurityList';
@@ -19,9 +19,9 @@ let createSecurity = () => {
         id: guid(),
         symbol: '',
         cost: 0,
+        portPercentTarget: 0,
         mktValue: 0,
         portPercent: 0,
-        portPercentTarget: 0,
         buyQty: 0,
         portPercentNew: 0
     }
@@ -64,9 +64,9 @@ class Portfolio extends React.Component {
                     id: guid(),
                     symbol: 'VDU',
                     cost: 38.23,
+                    portPercentTarget: 25,
                     mktValue: 2126.38,
                     portPercent: 19.47,
-                    portPercentTarget: 25,
                     buyQty: 0,
                     portPercentNew: 25.02
                 },
@@ -74,9 +74,9 @@ class Portfolio extends React.Component {
                     id: guid(),
                     symbol: 'VSX',
                     cost: 16.34,
+                    portPercentTarget: 15,
                     mktValue: 1672.38,
                     portPercent: 9.70,
-                    portPercentTarget: 15,
                     buyQty: 0,
                     portPercentNew: 16
                 },
@@ -84,9 +84,9 @@ class Portfolio extends React.Component {
                     id: guid(),
                     symbol: 'VCN',
                     cost: 16.34,
+                    portPercentTarget: 55,
                     mktValue: 13672.38,
                     portPercent: 19.70,
-                    portPercentTarget: 55,
                     buyQty: 0,
                     portPercentNew: 16
                 }

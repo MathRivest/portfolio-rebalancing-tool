@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 class CashRow extends React.Component {
 
     handleChanges = (e) => {
+        let newValue = e.target.value;
+        if(e.target.type === 'number') {
+            newValue = parseFloat(newValue) || '';
+        }
         this.props.onCashChange({
             ...this.props.cash,
-            [e.target.name]: e.target.value
+            [e.target.name]: newValue
         });
     }
 
