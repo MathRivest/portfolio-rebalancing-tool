@@ -66,9 +66,9 @@ class Portfolio extends React.Component {
                     cost: 38.23,
                     portPercentTarget: 25,
                     mktValue: 2126.38,
-                    portPercent: 19.47,
+                    portPercent: 10,
                     buyQty: 0,
-                    portPercentNew: 25.02
+                    portPercentNew: 25
                 },
                 {
                     id: guid(),
@@ -76,9 +76,9 @@ class Portfolio extends React.Component {
                     cost: 16.34,
                     portPercentTarget: 15,
                     mktValue: 1672.38,
-                    portPercent: 9.70,
+                    portPercent: 5,
                     buyQty: 0,
-                    portPercentNew: 16
+                    portPercentNew: 15
                 },
                 {
                     id: guid(),
@@ -86,9 +86,9 @@ class Portfolio extends React.Component {
                     cost: 16.34,
                     portPercentTarget: 55,
                     mktValue: 13672.38,
-                    portPercent: 19.70,
+                    portPercent: 20,
                     buyQty: 0,
-                    portPercentNew: 16
+                    portPercentNew: 15
                 }
             ],
             cash: {
@@ -110,7 +110,7 @@ class Portfolio extends React.Component {
 
         this.setState((prevState, props) => {
             if(prevState.securities.length === 0) {
-                addSecurity(prevState, createSecurity());
+                return addSecurity(prevState, createSecurity());
             }
         });
     }

@@ -7,35 +7,33 @@ class TotalRow extends React.Component {
         return _.reduce(arr, (sum, val) => {
             if(_.isNumber(val)) {
                 return val + sum;
+            } else {
+                return sum;
             }
         }, acc);
     };
 
-    computePortPercentTarget = () => {
-        let securitiesPortPercentTarget = _.map(this.props.securities, 'portPercentTarget');
-        let start = this.props.cash.portPercentTarget;
-        return this.sumList(securitiesPortPercentTarget, start);
-    }
-
-    computeMktVal = () => {
-        let securitiesMktValues = _.map(this.props.securities, 'mktValue');
-        let start = this.props.cash.mktValue;
-        return this.sumList(securitiesMktValues, start);
+    computeTotalWithCash = (securities, cash, property) => {
+        return this.sumList(_.map(securities, property), cash[property]);
     }
 
     render() {
-        const totalTarget = this.computePortPercentTarget();
-        const totalMktVal = this.computeMktVal();
+        const portPercentTargetTotal = this.computeTotalWithCash(this.props.securities, this.props.cash, 'portPercentTarget');
+        const mktValueTotal = this.computeTotalWithCash(this.props.securities, this.props.cash, 'mktValue');
+        const portPercentTotal = this.computeTotalWithCash(this.props.securities, this.props.cash, 'portPercent');
+        const portPercentNewTotal = this.computeTotalWithCash(this.props.securities, this.props.cash, 'portPercentNew');
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
                     Total
                 </td>
                 <td></td>
-                <td>{totalTarget}</td>
-                <td>{totalMktVal}</td>
+                <td>{portPercentTargetTotal}</td>
+                <td>{mktValueTotal}</td>
+                <td>{portPercentTotal}</td>
                 <td></td>
-                <td>Compute new</td>
+                <td>{portPercentNewTotal}</td>
+                <td></td>
             </tr>
         )
     }
