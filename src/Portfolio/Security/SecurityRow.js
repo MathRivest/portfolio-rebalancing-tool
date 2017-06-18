@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 
 // Components
 import { Format } from '../../Components';

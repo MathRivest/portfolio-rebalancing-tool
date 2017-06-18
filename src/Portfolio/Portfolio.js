@@ -56,31 +56,31 @@ class Portfolio extends React.Component {
                 {
                     id: guid(),
                     symbol: 'VDU',
-                    cost: 38.23,
+                    cost: 50,
                     portPercentTarget: 25,
-                    mktValue: 2126.38,
+                    mktValue: 20000,
                     buyQty: 0
                 },
                 {
                     id: guid(),
                     symbol: 'VSX',
-                    cost: 16.34,
+                    cost: 25,
                     portPercentTarget: 15,
-                    mktValue: 1672.38,
+                    mktValue: 10000,
                     buyQty: 0
                 },
                 {
                     id: guid(),
                     symbol: 'VCN',
-                    cost: 16.34,
+                    cost: 50,
                     portPercentTarget: 45,
-                    mktValue: 13672.38,
+                    mktValue: 40000,
                     buyQty: 0
                 }
             ],
             cash: {
                 symbol: 'Cash',
-                mktValue: 20000,
+                mktValue: 35000,
                 portPercentTarget: 10
             }
         }
@@ -131,11 +131,8 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>PriceTotal = total</li>
-                    <li>Total = cash - priceTotal</li>
-                    <li>Remove all floor/round and replace by component</li>
-                    <li>Compute new % based on buy qty</li>
-                    <li>Compute new % total</li>
+                    <li>Fetch data</li>
+                    <li>Refresh data button</li>
                 </ul>
             </div>
         )

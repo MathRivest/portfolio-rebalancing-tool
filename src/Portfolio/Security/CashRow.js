@@ -18,10 +18,17 @@ class CashRow extends React.Component {
         });
     }
 
+    getPortPercentNew = () => {
+        let totalPrice = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
+        console.log(this.props.cash.mktValue, - totalPrice)
+        return getPercentOf(this.props.cash.mktValue - totalPrice, this.props.total);
+    }
+
     render() {
         const cash = this.props.cash;
         const cashPortPercent = getPercentOf(this.props.cash.mktValue, this.props.total);
         const priceTotal = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
+        const cashPortPercentNew = this.getPortPercentNew();
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
@@ -45,7 +52,7 @@ class CashRow extends React.Component {
                 <td>{cashPortPercent}</td>
                 <td></td>
                 <td><Format format="financial" value={priceTotal}/></td>
-                <td>portPercentNew</td>
+                <td>{cashPortPercentNew}</td>
                 <td></td>
             </tr>
         )
