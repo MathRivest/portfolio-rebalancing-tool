@@ -59,8 +59,7 @@ class Portfolio extends React.Component {
                     cost: 38.23,
                     portPercentTarget: 25,
                     mktValue: 2126.38,
-                    buyQty: 0,
-                    portPercentNew: 25
+                    buyQty: 0
                 },
                 {
                     id: guid(),
@@ -68,24 +67,21 @@ class Portfolio extends React.Component {
                     cost: 16.34,
                     portPercentTarget: 15,
                     mktValue: 1672.38,
-                    buyQty: 0,
-                    portPercentNew: 15
+                    buyQty: 0
                 },
                 {
                     id: guid(),
                     symbol: 'VCN',
                     cost: 16.34,
-                    portPercentTarget: 55,
+                    portPercentTarget: 45,
                     mktValue: 13672.38,
-                    buyQty: 0,
-                    portPercentNew: 15
+                    buyQty: 0
                 }
             ],
             cash: {
                 symbol: 'Cash',
                 mktValue: 20000,
-                portPercentTarget: 0,
-                portPercentNew: 5
+                portPercentTarget: 10
             }
         }
     }

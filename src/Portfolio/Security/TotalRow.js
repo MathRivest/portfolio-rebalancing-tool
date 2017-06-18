@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTotalWithCash } from './SecurityHelper';
+import { getTotalWithCash, getResultTotal } from './SecurityHelper';
 
 class TotalRow extends React.Component {
     render() {
@@ -7,6 +7,8 @@ class TotalRow extends React.Component {
         const mktValueTotal = getTotalWithCash(this.props.securities, this.props.cash, 'mktValue');
         const portPercentTotal = getTotalWithCash(this.props.securities, this.props.cash, 'portPercent');
         const portPercentNewTotal = getTotalWithCash(this.props.securities, this.props.cash, 'portPercentNew');
+
+        const priceTotal = getResultTotal(this.props.securities, 'cost', 'buyQty')
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
@@ -17,8 +19,8 @@ class TotalRow extends React.Component {
                 <td>{mktValueTotal}</td>
                 <td>{portPercentTotal}</td>
                 <td></td>
-                <td>price</td>
-                <td>{portPercentNewTotal}</td>
+                <td>{priceTotal}</td>
+                <td></td>
                 <td></td>
             </tr>
         )

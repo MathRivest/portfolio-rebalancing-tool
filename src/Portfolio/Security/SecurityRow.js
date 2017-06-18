@@ -1,6 +1,7 @@
 import React from 'react';
+import _ from 'lodash';
 
-import { getPercentOf } from './SecurityHelper';
+import { getPercentOf, multiplyValues } from './SecurityHelper';
 
 class SecurityRow extends React.Component {
     handleChanges = (e) => {
@@ -18,9 +19,20 @@ class SecurityRow extends React.Component {
         this.props.onSecurityRemove(this.props.security);
     }
 
+    getPrice = () => {
+        return multiplyValues(this.props.security.cost, this.props.security.buyQty);
+    }
+
+    getPortPercentNew = () => {
+        let price = this.getPrice();
+        return getPercentOf(this.props.security.mktValue + price, this.props.total);
+    }
+
     render() {
         const security = this.props.security;
         const securityPortPercent = getPercentOf(this.props.security.mktValue, this.props.total);
+        const price = this.getPrice();
+        const securityPortPercentNew = this.getPortPercentNew();
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
@@ -53,8 +65,8 @@ class SecurityRow extends React.Component {
                         value={security.buyQty}
                         onChange={this.handleChanges}/>
                 </td>
-                <td>price</td>
-                <td>{security.portPercentNew}</td>
+                <td>{price}</td>
+                <td>{securityPortPercentNew}</td>
                 <td className="SecurityList-row-cell--center">
                     <button onClick={this.handleRemove}>Remove</button>
                 </td>
