@@ -23,7 +23,7 @@ class SecurityRow extends React.Component {
         const securityPortPercent = getPercentOf(this.props.security.mktValue, this.props.total);
         return(
             <tr className="SecurityList-row">
-                <td>
+                <td className="SecurityList-row-cell--left">
                     <input
                         type="text"
                         name="symbol"
@@ -53,8 +53,11 @@ class SecurityRow extends React.Component {
                         value={security.buyQty}
                         onChange={this.handleChanges}/>
                 </td>
+                <td>price</td>
                 <td>{security.portPercentNew}</td>
-                <td><button onClick={this.handleRemove}>Remove</button></td>
+                <td className="SecurityList-row-cell--center">
+                    <button onClick={this.handleRemove}>Remove</button>
+                </td>
             </tr>
         )
     }

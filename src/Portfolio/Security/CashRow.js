@@ -40,6 +40,7 @@ class CashRow extends React.Component {
                 </td>
                 <td>{cashPortPercent}</td>
                 <td></td>
+                <td></td>
                 <td>{cash.portPercentNew}</td>
                 <td></td>
             </tr>

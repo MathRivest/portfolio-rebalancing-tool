@@ -17,6 +17,7 @@ class TotalRow extends React.Component {
                 <td>{mktValueTotal}</td>
                 <td>{portPercentTotal}</td>
                 <td></td>
+                <td>price</td>
                 <td>{portPercentNewTotal}</td>
                 <td></td>
             </tr>

@@ -10,6 +10,7 @@ class SecurityListHeader extends React.Component {
                 <th>Mkt Val ($)</th>
                 <th>Current (%)</th>
                 <th>Buy Qty</th>
+                <th>Price</th>
                 <th>New (%)</th>
                 <th></th>
             </tr>

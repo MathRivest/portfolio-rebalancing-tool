@@ -29,13 +29,18 @@ body {
   border: 1px solid lightgray;
 }
 
+.SecurityList td input {
+  text-align: right;
+}
+
 .SecurityList th {
   text-align: center;
 }
 
 .SecurityList input {
-  max-width: 100%;
+  max-width: 80px;
   font-size: 12px;
+  box-sizing: border-box;
 }
 
 .SecurityList thead,
@@ -44,6 +49,9 @@ body {
 }
 
 .SecurityList .SecurityList-row-cell--left {
+  text-align: left;
+}
+.SecurityList .SecurityList-row-cell--left input {
   text-align: left;
 }
 .SecurityList .SecurityList-row-cell--center {
