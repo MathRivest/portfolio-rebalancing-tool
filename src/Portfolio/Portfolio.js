@@ -1,10 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 
+import { guid } from './PortfolioHelper';
+import { getTotalWithCash } from './Security/SecurityHelper';
+
 import SecurityList from './Security/SecurityList';
 import SecurityGraphs from './Security/SecurityGraphs';
-
-import { guid } from './PortfolioHelper';
 
 let createSecurity = () => {
     return {
@@ -114,6 +115,7 @@ class Portfolio extends React.Component {
     }
 
     render() {
+        const total = getTotalWithCash(this.state.securities, this.state.cash, 'mktValue');
         return(
             <div className="Portfolio">
 
@@ -127,15 +129,15 @@ class Portfolio extends React.Component {
                     onSecurityChange={this.handleSecurityChange}
                     onSecurityRemove={this.handleSecurityRemove}
                     cash={this.state.cash}
-                    onCashChange={this.handleCashChange}/>
+                    onCashChange={this.handleCashChange}
+                    total={total}/>
 
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Add total row</li>
-                    <li>Compute current percent</li>
-                    <li>Compute new %</li>
-                    <li>Delete row</li>
+                    <li>Add price row</li>
+                    <li>Compute new % based on buy qty</li>
+                    <li>Compute new % total</li>
                 </ul>
             </div>
         )

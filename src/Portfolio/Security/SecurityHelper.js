@@ -11,9 +11,13 @@ let sumList = (arr, start) => {
     }, acc);
 };
 
-let computeTotalWithCash = (securities, cash, property) => {
-    return sumList(_.map(securities, property), cash[property]);
+let getTotalWithCash = (securities, cash, property) => {
+    let sum = sumList(_.map(securities, property), cash[property]);
+    return _.round(sum, 2);
 }
 
+let getPercentOf = (val, total) => {
+    return _.round((val / total) * 100, 2);
+}
 
-export { computeTotalWithCash };
+export { getTotalWithCash, getPercentOf };

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getPercentOf } from './SecurityHelper';
+
 class CashRow extends React.Component {
 
     handleChanges = (e) => {
@@ -15,6 +17,7 @@ class CashRow extends React.Component {
 
     render() {
         const cash = this.props.cash;
+        const cashPortPercent = getPercentOf(this.props.cash.mktValue, this.props.total);
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
@@ -35,7 +38,7 @@ class CashRow extends React.Component {
                         value={cash.mktValue}
                         onChange={this.handleChanges}/>
                 </td>
-                <td>Compute me</td>
+                <td>{cashPortPercent}</td>
                 <td></td>
                 <td>{cash.portPercentNew}</td>
                 <td></td>

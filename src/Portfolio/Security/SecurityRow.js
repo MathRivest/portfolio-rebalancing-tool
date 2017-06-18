@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { getPercentOf } from './SecurityHelper';
+
 class SecurityRow extends React.Component {
     handleChanges = (e) => {
         let newValue = e.target.value;
@@ -18,6 +20,7 @@ class SecurityRow extends React.Component {
 
     render() {
         const security = this.props.security;
+        const securityPortPercent = getPercentOf(this.props.security.mktValue, this.props.total);
         return(
             <tr className="SecurityList-row">
                 <td>
@@ -42,7 +45,7 @@ class SecurityRow extends React.Component {
                         value={security.mktValue}
                         onChange={this.handleChanges}/>
                 </td>
-                <td>Compute me</td>
+                <td>{securityPortPercent}</td>
                 <td>
                     <input
                         type="number"

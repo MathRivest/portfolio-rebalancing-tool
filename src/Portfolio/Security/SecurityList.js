@@ -10,7 +10,8 @@ let SecurityList = (props) => {
             key={security.id}
             security={security}
             onSecurityChange={props.onSecurityChange}
-            onSecurityRemove={props.onSecurityRemove}/>
+            onSecurityRemove={props.onSecurityRemove}
+            total={props.total}/>
     );
     return(
         <div>
@@ -21,9 +22,13 @@ let SecurityList = (props) => {
                 </tbody>
                 <tfoot>
                     <CashRow
-                    cash={props.cash}
-                    onCashChange={props.onCashChange} />
-                    <TotalRow securities={props.securities} cash={props.cash} />
+                        cash={props.cash}
+                        onCashChange={props.onCashChange}
+                        securities={props.securities}
+                        total={props.total} />
+                    <TotalRow
+                        securities={props.securities}
+                        cash={props.cash} />
                 </tfoot>
             </table>
         </div>
