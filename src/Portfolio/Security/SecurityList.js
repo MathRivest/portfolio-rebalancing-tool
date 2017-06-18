@@ -13,7 +13,7 @@ let SecurityList = (props) => {
             onSecurityRemove={props.onSecurityRemove}
             total={props.total}/>
     );
-    return(
+    return (
         <div>
             <table className="SecurityList">
                 <thead><SecurityListHeader /></thead>

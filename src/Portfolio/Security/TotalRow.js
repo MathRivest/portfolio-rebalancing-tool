@@ -1,6 +1,18 @@
 import React from 'react';
 import { getTotalWithCash, getResultTotal } from './SecurityHelper';
 
+let TargetIndicator = (props) => {
+    let styleClass = 'TargetIndicator--neutral';
+    if(props.val > props.maxVal) {
+        styleClass = 'TargetIndicator--danger'
+    }
+    return (
+        <span className={'TargetIndicator ' + styleClass}>
+            {props.children}
+        </span>
+    )
+}
+
 class TotalRow extends React.Component {
     render() {
         const portPercentTargetTotal = getTotalWithCash(this.props.securities, this.props.cash, 'portPercentTarget');
@@ -19,7 +31,13 @@ class TotalRow extends React.Component {
                 <td>{mktValueTotal}</td>
                 <td>{portPercentTotal}</td>
                 <td></td>
-                <td>{priceTotal}</td>
+                <td>
+                    <TargetIndicator
+                        val={priceTotal}
+                        maxVal={this.props.cash.mktValue}>
+                        {priceTotal}
+                    </TargetIndicator>
+                </td>
                 <td></td>
                 <td></td>
             </tr>

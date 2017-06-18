@@ -57,6 +57,10 @@ body {
 .SecurityList .SecurityList-row-cell--center {
   text-align: center;
 }
+
+.TargetIndicator.TargetIndicator--danger {
+  color: red;
+}
 /*
 .SecurityRow {
   display: flex;

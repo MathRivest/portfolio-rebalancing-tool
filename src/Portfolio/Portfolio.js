@@ -131,7 +131,8 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Add price row</li>
+                    <li>PriceTotal = total</li>
+                    <li>Total = cash - priceTotal</li>
                     <li>Compute new % based on buy qty</li>
                     <li>Compute new % total</li>
                 </ul>
