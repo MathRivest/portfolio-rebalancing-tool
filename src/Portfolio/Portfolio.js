@@ -1,6 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
+import PortfolioService from './PortfolioService';
+
 import { guid } from './PortfolioHelper';
 import { getTotalWithCash } from './Security/SecurityHelper';
 
@@ -48,6 +50,16 @@ let updateSecurity = (prevState, security) => {
     };
 }
 
+let updateSecurities = (prevState, partialSecurities) => {
+    let updatedList = prevState.securities.map((security) => {
+        let partialSecurity = _.find(partialSecurities, {'symbol': security.symbol});
+        return _.assign(security, partialSecurity);
+    });
+    return {
+        securities: updatedList
+    };
+}
+
 class Portfolio extends React.Component {
     constructor(props) {
         super(props);
@@ -55,35 +67,62 @@ class Portfolio extends React.Component {
             securities: [
                 {
                     id: guid(),
-                    symbol: 'VDU',
-                    cost: 50,
+                    symbol: 'VUN',
+                    cost: 0,
                     portPercentTarget: 25,
-                    mktValue: 20000,
-                    buyQty: 0
-                },
-                {
-                    id: guid(),
-                    symbol: 'VSX',
-                    cost: 25,
-                    portPercentTarget: 15,
-                    mktValue: 10000,
+                    mktValue: 3825.00,
                     buyQty: 0
                 },
                 {
                     id: guid(),
                     symbol: 'VCN',
-                    cost: 50,
-                    portPercentTarget: 45,
-                    mktValue: 40000,
+                    cost: 0,
+                    portPercentTarget: 25,
+                    mktValue: 3753.94,
+                    buyQty: 0
+                },
+                {
+                    id: guid(),
+                    symbol: 'VAB',
+                    cost: 0,
+                    portPercentTarget: 20,
+                    mktValue: 3052.66,
+                    buyQty: 0
+                },
+                {
+                    id: guid(),
+                    symbol: 'VDU',
+                    cost: 0,
+                    portPercentTarget: 20,
+                    mktValue: 3050.96,
+                    buyQty: 0
+                },
+                {
+                    id: guid(),
+                    symbol: 'ZRE',
+                    cost: 0,
+                    portPercentTarget: 10,
+                    mktValue: 1659.68,
                     buyQty: 0
                 }
             ],
             cash: {
                 symbol: 'Cash',
-                mktValue: 35000,
-                portPercentTarget: 10
+                mktValue: 2000,
+                portPercentTarget: 0
             }
         }
+    }
+
+    componentDidMount() {
+        const symbols = this.state.securities.map((security) => {
+            return security.symbol;
+        });
+
+        PortfolioService.getSecurities(symbols)
+            .then((resp) => {
+                this.setState((prevState, props) => updateSecurities(prevState, resp));
+            });
     }
 
     handleAddButtonClick = () => {
@@ -116,7 +155,8 @@ class Portfolio extends React.Component {
             <div className="Portfolio">
 
                 <div className="Portfolio-actions">
-                    <button onClick={this.handleAddButtonClick}>Add</button>
+                    <button onClick={this.handleAddButtonClick}>Add Security</button>
+                    <button>Refresh Quotes</button>
                 </div>
 
                 <SecurityGraphs/>
@@ -131,7 +171,8 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Fetch data</li>
+                    <li>Manage error from api</li>
+                    <li>Handle on change</li>
                     <li>Refresh data button</li>
                 </ul>
             </div>

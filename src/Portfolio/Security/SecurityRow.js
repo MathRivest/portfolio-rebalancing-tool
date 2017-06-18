@@ -6,6 +6,7 @@ import { Format } from '../../Components';
 import { getPercentOf, multiplyValues } from './SecurityHelper';
 
 class SecurityRow extends React.Component {
+
     handleChanges = (e) => {
         let newValue = e.target.value;
         if(e.target.type === 'number') {
