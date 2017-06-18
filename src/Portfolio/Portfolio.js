@@ -133,6 +133,7 @@ class Portfolio extends React.Component {
                 <ul>
                     <li>PriceTotal = total</li>
                     <li>Total = cash - priceTotal</li>
+                    <li>Remove all floor/round and replace by component</li>
                     <li>Compute new % based on buy qty</li>
                     <li>Compute new % total</li>
                 </ul>

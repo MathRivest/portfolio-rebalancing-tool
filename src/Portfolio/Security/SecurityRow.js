@@ -1,6 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
 
+// Components
+import { Format } from '../../Components';
+
 import { getPercentOf, multiplyValues } from './SecurityHelper';
 
 class SecurityRow extends React.Component {
@@ -42,7 +45,7 @@ class SecurityRow extends React.Component {
                         value={security.symbol}
                         onChange={this.handleChanges}/>
                 </td>
-                <td>{security.cost}</td>
+                <td><Format format="financial" value={security.cost}/></td>
                 <td>
                     <input
                         type="number"
@@ -65,7 +68,7 @@ class SecurityRow extends React.Component {
                         value={security.buyQty}
                         onChange={this.handleChanges}/>
                 </td>
-                <td>{price}</td>
+                <td><Format format="financial" value={price}/></td>
                 <td>{securityPortPercentNew}</td>
                 <td className="SecurityList-row-cell--center">
                     <button onClick={this.handleRemove}>Remove</button>

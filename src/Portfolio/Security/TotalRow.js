@@ -1,5 +1,10 @@
 import React from 'react';
-import { getTotalWithCash, getResultTotal } from './SecurityHelper';
+
+// Components
+import { Format } from '../../Components';
+
+// Helpers
+import { getTotalWithCash, getTotalofMultiplied } from './SecurityHelper';
 
 let TargetIndicator = (props) => {
     let styleClass = 'TargetIndicator--neutral';
@@ -20,7 +25,8 @@ class TotalRow extends React.Component {
         const portPercentTotal = getTotalWithCash(this.props.securities, this.props.cash, 'portPercent');
         const portPercentNewTotal = getTotalWithCash(this.props.securities, this.props.cash, 'portPercentNew');
 
-        const priceTotal = getResultTotal(this.props.securities, 'cost', 'buyQty')
+        const priceTotal = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
+        const cashLeft = this.props.cash.mktValue - priceTotal;
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
@@ -28,16 +34,10 @@ class TotalRow extends React.Component {
                 </td>
                 <td></td>
                 <td>{portPercentTargetTotal}</td>
-                <td>{mktValueTotal}</td>
+                <td><Format format="financial" value={mktValueTotal}/></td>
                 <td>{portPercentTotal}</td>
                 <td></td>
-                <td>
-                    <TargetIndicator
-                        val={priceTotal}
-                        maxVal={this.props.cash.mktValue}>
-                        {priceTotal}
-                    </TargetIndicator>
-                </td>
+                <td><Format format="financial" value={cashLeft}/></td>
                 <td></td>
                 <td></td>
             </tr>

@@ -1,6 +1,9 @@
 import React from 'react';
 
-import { getPercentOf } from './SecurityHelper';
+// Components
+import { Format } from '../../Components';
+
+import { getPercentOf, getTotalofMultiplied } from './SecurityHelper';
 
 class CashRow extends React.Component {
 
@@ -18,6 +21,7 @@ class CashRow extends React.Component {
     render() {
         const cash = this.props.cash;
         const cashPortPercent = getPercentOf(this.props.cash.mktValue, this.props.total);
+        const priceTotal = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
@@ -40,7 +44,7 @@ class CashRow extends React.Component {
                 </td>
                 <td>{cashPortPercent}</td>
                 <td></td>
-                <td></td>
+                <td><Format format="financial" value={priceTotal}/></td>
                 <td>portPercentNew</td>
                 <td></td>
             </tr>
