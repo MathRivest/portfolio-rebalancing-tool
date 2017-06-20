@@ -67,7 +67,7 @@ class Portfolio extends React.Component {
             securities: [
                 {
                     id: guid(),
-                    symbol: 'VUN',
+                    symbol: 'VUN.TO',
                     cost: 0,
                     portPercentTarget: 25,
                     mktValue: 3825.00,
@@ -75,7 +75,7 @@ class Portfolio extends React.Component {
                 },
                 {
                     id: guid(),
-                    symbol: 'VCN',
+                    symbol: 'VCN.TO',
                     cost: 0,
                     portPercentTarget: 25,
                     mktValue: 3753.94,
@@ -83,7 +83,7 @@ class Portfolio extends React.Component {
                 },
                 {
                     id: guid(),
-                    symbol: 'VAB',
+                    symbol: 'VAB.TO',
                     cost: 0,
                     portPercentTarget: 20,
                     mktValue: 3052.66,
@@ -91,7 +91,7 @@ class Portfolio extends React.Component {
                 },
                 {
                     id: guid(),
-                    symbol: 'VDU',
+                    symbol: 'VDU.TO',
                     cost: 0,
                     portPercentTarget: 20,
                     mktValue: 3050.96,
@@ -99,7 +99,7 @@ class Portfolio extends React.Component {
                 },
                 {
                     id: guid(),
-                    symbol: 'ZRE',
+                    symbol: 'ZRE.TO',
                     cost: 0,
                     portPercentTarget: 10,
                     mktValue: 1659.68,
