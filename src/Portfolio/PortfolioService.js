@@ -3,7 +3,7 @@ import axios from 'axios';
 
 class PortfolioSvc {
     constructor() {
-        this.baseUrl = 'http://finance.google.com/finance/info?client=ig&q=';
+        this.baseUrl = 'https://finance.google.com/finance/info?client=ig&q=';
     }
 
     getSecurities = (symbols) => {

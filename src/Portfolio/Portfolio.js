@@ -172,6 +172,7 @@ class Portfolio extends React.Component {
                 Portfolio todo:
                 <ul>
                     <li>Manage error from api</li>
+                    <li>Add loader</li>
                     <li>Handle on change</li>
                     <li>Refresh data button</li>
                 </ul>
