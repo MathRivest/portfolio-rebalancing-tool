@@ -114,7 +114,7 @@ class Portfolio extends React.Component {
         }
     }
 
-    componentDidMount() {
+    getSecurities = () => {
         const symbols = this.state.securities.map((security) => {
             return security.symbol;
         });
@@ -123,6 +123,14 @@ class Portfolio extends React.Component {
             .then((resp) => {
                 this.setState((prevState, props) => updateSecurities(prevState, resp));
             });
+    }
+
+    componentDidMount() {
+        this.getSecurities();
+    }
+
+    handleRefreshButtonClick = () => {
+        this.getSecurities();
     }
 
     handleAddButtonClick = () => {
@@ -156,7 +164,7 @@ class Portfolio extends React.Component {
 
                 <div className="Portfolio-actions">
                     <button onClick={this.handleAddButtonClick}>Add Security</button>
-                    <button>Refresh Quotes</button>
+                    <button onClick={this.handleRefreshButtonClick}>Refresh Quotes</button>
                 </div>
 
                 <SecurityGraphs/>
@@ -171,10 +179,9 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Manage error from api</li>
                     <li>Add loader</li>
+                    <li>Manage error from api</li>
                     <li>Handle on change</li>
-                    <li>Refresh data button</li>
                 </ul>
             </div>
         )
