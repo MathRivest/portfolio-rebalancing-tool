@@ -31,11 +31,20 @@ class SecurityRow extends React.Component {
         return getPercentOf(this.props.security.mktValue + price, this.props.total);
     }
 
+    getSecurityStatus = () => {
+        const security = this.props.security;
+        const status = security.status;
+        if(status && status.type === 'Failed') {
+            return status.type;
+        }
+    }
+
     render() {
         const security = this.props.security;
         const securityPortPercent = getPercentOf(this.props.security.mktValue, this.props.total);
         const price = this.getPrice();
         const securityPortPercentNew = this.getPortPercentNew();
+        const securityStatus = this.getSecurityStatus();
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
@@ -45,7 +54,10 @@ class SecurityRow extends React.Component {
                         value={security.symbol}
                         onChange={this.handleChanges}/>
                 </td>
-                <td><Format format="financial" value={security.cost}/></td>
+                <td>
+                    {securityStatus} &nbsp;
+                    <Format format="financial" value={security.cost}/>
+                </td>
                 <td>
                     <input
                         type="number"

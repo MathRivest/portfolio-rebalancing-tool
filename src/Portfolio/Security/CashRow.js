@@ -20,7 +20,6 @@ class CashRow extends React.Component {
 
     getPortPercentNew = () => {
         let totalPrice = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
-        console.log(this.props.cash.mktValue, - totalPrice)
         return getPercentOf(this.props.cash.mktValue - totalPrice, this.props.total);
     }
 

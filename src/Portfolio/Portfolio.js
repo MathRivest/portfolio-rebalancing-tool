@@ -53,7 +53,14 @@ let updateSecurity = (prevState, security) => {
 let updateSecurities = (prevState, partialSecurities) => {
     let updatedList = prevState.securities.map((security) => {
         let partialSecurity = _.find(partialSecurities, {'symbol': security.symbol});
-        return _.assign(security, partialSecurity);
+        let newSecurity = _.assign(security, partialSecurity);
+        if(partialSecurity) {
+            newSecurity.status = {
+                type: partialSecurity.cost ? 'Success' : 'Failed',
+                message: partialSecurity.cost ? null : 'Could not update security'
+            }
+        }
+        return newSecurity;
     });
     return {
         securities: updatedList
@@ -67,7 +74,7 @@ class Portfolio extends React.Component {
             securities: [
                 {
                     id: guid(),
-                    symbol: 'VUN.TO',
+                    symbol: 'VUN.O',
                     cost: 0,
                     portPercentTarget: 25,
                     mktValue: 3825.00,
