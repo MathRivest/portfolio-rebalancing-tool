@@ -43,6 +43,10 @@ let updateSecurity = (prevState, security, partialSecurity) => {
         if(i.id === security.id) {
             if(partialSecurity && partialSecurity.symbol === security.symbol) {
                 i = _.assign(i, partialSecurity);
+                i.status = {
+                    type: partialSecurity.cost ? 'Success' : 'Failed',
+                    message: partialSecurity.cost ? null : 'Could not update security'
+                }
             } else {
                 i = security;
             }
