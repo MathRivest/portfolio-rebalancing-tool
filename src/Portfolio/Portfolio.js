@@ -202,7 +202,8 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Handle on change</li>
+                    <li>Cleanup to portfolio methods</li>
+                    <li>Rebalance button</li>
                 </ul>
             </div>
         )
