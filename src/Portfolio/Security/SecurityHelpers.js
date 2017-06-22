@@ -31,4 +31,11 @@ let getTotalofMultiplied = (securities, propertyA, propertyB) => {
     }, 0);
 }
 
-export { multiplyValues, getTotalWithCash, getPercentOf, getTotalofMultiplied };
+let getBalanceList = (securities) => {
+
+    return securities.map((i) => {
+        i.buyQty = 5;
+    });
+}
+
+export { multiplyValues, getTotalWithCash, getPercentOf, getTotalofMultiplied, getBalanceList };

@@ -15,7 +15,7 @@ class Portfolio extends React.Component {
             securities: [
                 {
                     id: PortfolioHelpers.guid(),
-                    symbol: 'VUN.O',
+                    symbol: 'VUN.TO',
                     cost: 0,
                     portPercentTarget: 25,
                     mktValue: 3825.00,
@@ -113,7 +113,8 @@ class Portfolio extends React.Component {
     }
 
     handleBalancePortfolioButtonClick = () => {
-
+        let balancedSecurities = SecurityHelpers.getBalanceList(this.state.securities);
+        this.setState((prevState, props) => PortfolioHelpers.updateSecurities(prevState, balancedSecurities));
     }
 
     render() {
