@@ -1,10 +1,6 @@
 import React from 'react';
-
-// Components
+import * as SecurityHelpers from './SecurityHelpers';
 import { Format } from '../../Components';
-
-// Helpers
-import { getTotalWithCash, getTotalofMultiplied } from './SecurityHelper';
 
 let TargetIndicator = (props) => {
     let styleClass = 'TargetIndicator--neutral';
@@ -20,10 +16,10 @@ let TargetIndicator = (props) => {
 
 class TotalRow extends React.Component {
     render() {
-        const portPercentTargetTotal = getTotalWithCash(this.props.securities, this.props.cash, 'portPercentTarget');
-        const mktValueTotal = getTotalWithCash(this.props.securities, this.props.cash, 'mktValue');
-        const portPercentTotal = getTotalWithCash(this.props.securities, this.props.cash, 'portPercent');
-        const priceTotal = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
+        const portPercentTargetTotal = SecurityHelpers.getTotalWithCash(this.props.securities, this.props.cash, 'portPercentTarget');
+        const mktValueTotal = SecurityHelpers.getTotalWithCash(this.props.securities, this.props.cash, 'mktValue');
+        const portPercentTotal = SecurityHelpers.getTotalWithCash(this.props.securities, this.props.cash, 'portPercent');
+        const priceTotal = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
         const cashLeft = this.props.cash.mktValue - priceTotal;
         return(
             <tr className="SecurityList-row">

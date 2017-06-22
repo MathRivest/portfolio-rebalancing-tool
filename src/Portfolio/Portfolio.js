@@ -1,79 +1,12 @@
 import React from 'react';
-import _ from 'lodash';
 
 import PortfolioService from './PortfolioService';
 
-import { guid } from './PortfolioHelper';
-import { getTotalWithCash } from './Security/SecurityHelper';
+import * as PortfolioHelpers from './PortfolioHelpers';
+import * as SecurityHelpers from './Security/SecurityHelpers';
 
 import SecurityList from './Security/SecurityList';
 import SecurityGraphs from './Security/SecurityGraphs';
-
-let createSecurity = () => {
-    return {
-        id: guid(),
-        symbol: '',
-        cost: 0,
-        portPercentTarget: 0,
-        mktValue: 0,
-        portPercent: 0,
-        buyQty: 0,
-        portPercentNew: 0
-    }
-}
-
-let addSecurity = (prevState, security) => {
-    let updatedList = [...prevState.securities, security];
-    return {
-        securities: updatedList
-    }
-}
-
-let removeSecurity = (prevState, security) => {
-    let updatedList = _.filter(prevState.securities, item => {
-        return item.id !== security.id;
-    });
-    return {
-        securities: updatedList
-    };
-}
-
-let updateSecurity = (prevState, security, partialSecurity) => {
-    let updatedList = prevState.securities.map((i) => {
-        if(i.id === security.id) {
-            if(partialSecurity && partialSecurity.symbol === security.symbol) {
-                i = _.assign(i, partialSecurity);
-                i.status = {
-                    type: partialSecurity.cost ? 'Success' : 'Failed',
-                    message: partialSecurity.cost ? null : 'Could not update security'
-                }
-            } else {
-                i = security;
-            }
-        }
-        return i;
-    });
-    return {
-        securities: updatedList
-    };
-}
-
-let updateSecurities = (prevState, partialSecurities) => {
-    let updatedList = prevState.securities.map((security) => {
-        let partialSecurity = _.find(partialSecurities, {'symbol': security.symbol});
-        let newSecurity = _.assign(security, partialSecurity);
-        if(partialSecurity) {
-            newSecurity.status = {
-                type: partialSecurity.cost ? 'Success' : 'Failed',
-                message: partialSecurity.cost ? null : 'Could not update security'
-            }
-        }
-        return newSecurity;
-    });
-    return {
-        securities: updatedList
-    };
-}
 
 class Portfolio extends React.Component {
     constructor(props) {
@@ -81,7 +14,7 @@ class Portfolio extends React.Component {
         this.state = {
             securities: [
                 {
-                    id: guid(),
+                    id: PortfolioHelpers.guid(),
                     symbol: 'VUN.O',
                     cost: 0,
                     portPercentTarget: 25,
@@ -89,7 +22,7 @@ class Portfolio extends React.Component {
                     buyQty: 0
                 },
                 {
-                    id: guid(),
+                    id: PortfolioHelpers.guid(),
                     symbol: 'VCN.TO',
                     cost: 0,
                     portPercentTarget: 25,
@@ -97,7 +30,7 @@ class Portfolio extends React.Component {
                     buyQty: 0
                 },
                 {
-                    id: guid(),
+                    id: PortfolioHelpers.guid(),
                     symbol: 'VAB.TO',
                     cost: 0,
                     portPercentTarget: 20,
@@ -105,7 +38,7 @@ class Portfolio extends React.Component {
                     buyQty: 0
                 },
                 {
-                    id: guid(),
+                    id: PortfolioHelpers.guid(),
                     symbol: 'VDU.TO',
                     cost: 0,
                     portPercentTarget: 20,
@@ -113,7 +46,7 @@ class Portfolio extends React.Component {
                     buyQty: 0
                 },
                 {
-                    id: guid(),
+                    id: PortfolioHelpers.guid(),
                     symbol: 'ZRE.TO',
                     cost: 0,
                     portPercentTarget: 10,
@@ -136,7 +69,7 @@ class Portfolio extends React.Component {
 
         PortfolioService.getSecurities(symbols)
             .then((resp) => {
-                this.setState((prevState, props) => updateSecurities(prevState, resp));
+                this.setState((prevState, props) => PortfolioHelpers.updateSecurities(prevState, resp));
             });
     }
 
@@ -144,32 +77,24 @@ class Portfolio extends React.Component {
         this.getSecurities();
     }
 
-    handleRefreshButtonClick = () => {
-        this.getSecurities();
-    }
-
-    handleAddButtonClick = () => {
-        this.setState((prevState, props) => addSecurity(prevState, createSecurity()));
-    }
-
     handleSecurityRemove = (security) => {
-        this.setState((prevState, props) => removeSecurity(prevState, security));
+        this.setState((prevState, props) => PortfolioHelpers.removeSecurity(prevState, security));
 
         this.setState((prevState, props) => {
             if(prevState.securities.length === 0) {
-                return addSecurity(prevState, createSecurity());
+                return PortfolioHelpers.addSecurity(prevState, PortfolioHelpers.createSecurity());
             }
         });
     }
 
     handleSecurityChange = (security) => {
-        this.setState((prevState, props) => updateSecurity(prevState, security));
+        this.setState((prevState, props) => PortfolioHelpers.updateSecurity(prevState, security));
     }
 
     handleSecurityNameChange = (security) => {
         PortfolioService.getSecurities([security.symbol])
             .then((resp) => {
-                this.setState((prevState, props) => updateSecurity(prevState, security, resp[0]));
+                this.setState((prevState, props) => PortfolioHelpers.updateSecurity(prevState, security, resp[0]));
             });
     }
 
@@ -179,17 +104,31 @@ class Portfolio extends React.Component {
         });
     }
 
+    handleRefreshButtonClick = () => {
+        this.getSecurities();
+    }
+
+    handleAddButtonClick = () => {
+        this.setState((prevState, props) => PortfolioHelpers.addSecurity(prevState, PortfolioHelpers.createSecurity()));
+    }
+
+    handleBalancePortfolioButtonClick = () => {
+
+    }
+
     render() {
-        const total = getTotalWithCash(this.state.securities, this.state.cash, 'mktValue');
+        const total = SecurityHelpers.getTotalWithCash(this.state.securities, this.state.cash, 'mktValue');
         return(
             <div className="Portfolio">
+
+                <SecurityGraphs/>
 
                 <div className="Portfolio-actions">
                     <button onClick={this.handleAddButtonClick}>Add Security</button>
                     <button onClick={this.handleRefreshButtonClick}>Refresh Quotes</button>
+                    <button onClick={this.handleBalancePortfolioButtonClick}>Balance Portfolio</button>
                 </div>
 
-                <SecurityGraphs/>
                 <SecurityList
                     securities={this.state.securities}
                     onSecurityChange={this.handleSecurityChange}
@@ -202,8 +141,9 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Cleanup to portfolio methods</li>
                     <li>Rebalance button</li>
+                    <li>Add styles</li>
+                    <li>Add graphs</li>
                 </ul>
             </div>
         )

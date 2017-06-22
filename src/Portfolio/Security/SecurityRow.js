@@ -1,9 +1,6 @@
 import React from 'react';
-
-// Components
+import * as SecurityHelpers from './SecurityHelpers';
 import { Format } from '../../Components';
-
-import { getPercentOf, multiplyValues } from './SecurityHelper';
 
 class SecurityRow extends React.Component {
 
@@ -30,12 +27,12 @@ class SecurityRow extends React.Component {
     }
 
     getPrice = () => {
-        return multiplyValues(this.props.security.cost, this.props.security.buyQty);
+        return SecurityHelpers.multiplyValues(this.props.security.cost, this.props.security.buyQty);
     }
 
     getPortPercentNew = () => {
         let price = this.getPrice();
-        return getPercentOf(this.props.security.mktValue + price, this.props.total);
+        return SecurityHelpers.getPercentOf(this.props.security.mktValue + price, this.props.total);
     }
 
     getSecurityStatus = () => {
@@ -48,7 +45,7 @@ class SecurityRow extends React.Component {
 
     render() {
         const security = this.props.security;
-        const securityPortPercent = getPercentOf(this.props.security.mktValue, this.props.total);
+        const securityPortPercent = SecurityHelpers.getPercentOf(this.props.security.mktValue, this.props.total);
         const price = this.getPrice();
         const securityPortPercentNew = this.getPortPercentNew();
         const securityStatus = this.getSecurityStatus();

@@ -1,9 +1,6 @@
 import React from 'react';
-
-// Components
+import * as SecurityHelpers from './SecurityHelpers';
 import { Format } from '../../Components';
-
-import { getPercentOf, getTotalofMultiplied } from './SecurityHelper';
 
 class CashRow extends React.Component {
 
@@ -19,14 +16,14 @@ class CashRow extends React.Component {
     }
 
     getPortPercentNew = () => {
-        let totalPrice = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
-        return getPercentOf(this.props.cash.mktValue - totalPrice, this.props.total);
+        let totalPrice = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
+        return SecurityHelpers.getPercentOf(this.props.cash.mktValue - totalPrice, this.props.total);
     }
 
     render() {
         const cash = this.props.cash;
-        const cashPortPercent = getPercentOf(this.props.cash.mktValue, this.props.total);
-        const priceTotal = getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
+        const cashPortPercent = SecurityHelpers.getPercentOf(this.props.cash.mktValue, this.props.total);
+        const priceTotal = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
         const cashPortPercentNew = this.getPortPercentNew();
         return(
             <tr className="SecurityList-row">
