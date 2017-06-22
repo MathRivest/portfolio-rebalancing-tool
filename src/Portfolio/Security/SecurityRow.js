@@ -18,6 +18,13 @@ class SecurityRow extends React.Component {
         });
     }
 
+    handleNameChange = (e) => {
+        this.props.onSecurityNameChange({
+            ...this.props.security,
+            [e.target.name]: e.target.value
+        });
+    }
+
     handleRemove = (e) => {
         this.props.onSecurityRemove(this.props.security);
     }
@@ -52,7 +59,7 @@ class SecurityRow extends React.Component {
                         type="text"
                         name="symbol"
                         value={security.symbol}
-                        onChange={this.handleChanges}/>
+                        onChange={this.handleNameChange}/>
                 </td>
                 <td>
                     {securityStatus} &nbsp;

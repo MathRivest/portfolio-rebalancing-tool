@@ -10,6 +10,7 @@ let SecurityList = (props) => {
             key={security.id}
             security={security}
             onSecurityChange={props.onSecurityChange}
+            onSecurityNameChange={props.onSecurityNameChange}
             onSecurityRemove={props.onSecurityRemove}
             total={props.total}/>
     );

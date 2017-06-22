@@ -11,7 +11,15 @@ class PortfolioSvc {
         let symbolList = _.join(symbols, ',');
         let url = format(this.baseUrl, symbolList);
         return axios.get(url).then((resp) => {
-            let data = resp.data.query.results.quote;
+            let data = null,
+                count = resp.data.query.count;
+            if(count > 1) {
+                data = resp.data.query.results.quote;
+            } else if(count === 1) {
+                data = [resp.data.query.results.quote];
+            } else {
+                data = [];
+            }
             // Pick stuff
             return data.map(security => {
                 return {

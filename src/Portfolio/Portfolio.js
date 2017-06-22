@@ -38,10 +38,14 @@ let removeSecurity = (prevState, security) => {
     };
 }
 
-let updateSecurity = (prevState, security) => {
+let updateSecurity = (prevState, security, partialSecurity) => {
     let updatedList = prevState.securities.map((i) => {
         if(i.id === security.id) {
-            i = security;
+            if(partialSecurity && partialSecurity.symbol === security.symbol) {
+                i = _.assign(i, partialSecurity);
+            } else {
+                i = security;
+            }
         }
         return i;
     });
@@ -158,6 +162,13 @@ class Portfolio extends React.Component {
         this.setState((prevState, props) => updateSecurity(prevState, security));
     }
 
+    handleSecurityNameChange = (security) => {
+        PortfolioService.getSecurities([security.symbol])
+            .then((resp) => {
+                this.setState((prevState, props) => updateSecurity(prevState, security, resp[0]));
+            });
+    }
+
     handleCashChange = (cash) => {
         this.setState({
             cash
@@ -178,6 +189,7 @@ class Portfolio extends React.Component {
                 <SecurityList
                     securities={this.state.securities}
                     onSecurityChange={this.handleSecurityChange}
+                    onSecurityNameChange={this.handleSecurityNameChange}
                     onSecurityRemove={this.handleSecurityRemove}
                     cash={this.state.cash}
                     onCashChange={this.handleCashChange}
@@ -186,8 +198,6 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Add loader</li>
-                    <li>Manage error from api</li>
                     <li>Handle on change</li>
                 </ul>
             </div>
