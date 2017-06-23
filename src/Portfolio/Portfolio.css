@@ -1,0 +1,7 @@
+.Portfolio {
+  margin: 36px auto;
+  width: 1024px;
+  padding: 0 36px; }
+  .Portfolio-actions {
+    display: flex;
+    justify-content: flex-end; }

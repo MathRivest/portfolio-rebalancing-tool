@@ -1,4 +1,5 @@
 import React from 'react';
+import './SecurityList.css';
 import SecurityListHeader from './SecurityListHeader';
 import SecurityRow from './SecurityRow';
 import CashRow from './CashRow';

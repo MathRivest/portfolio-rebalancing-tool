@@ -34,18 +34,28 @@ let getTotalofMultiplied = (securities, propertyA, propertyB) => {
 let getBalanceList = (securities, cash) => {
     let total = getTotalWithCash(securities, cash, 'mktValue');
     let moneyLeft = cash.mktValue;
-    let balancedList = _.map(securities, (security) => {
-        let amountInCashNeeded = ((total * security.portPercentTarget) / 100) - security.mktValue,
-            amountInUnitNeeded = Math.floor(amountInCashNeeded / security.cost);
-        moneyLeft = moneyLeft - (amountInUnitNeeded * security.cost);
-        security.buyQty = amountInUnitNeeded;
-        return security
-    });
-    return _.map(balancedList, (security) => {
-        while (moneyLeft > 0 && moneyLeft > security.cost) {
-            moneyLeft = moneyLeft - security.cost;
-            security.buyQty = security.buyQty + 1;
-        }
+    // let balancedList = _.map(securities, (security) => {
+    //     let amountInCashNeeded = ((total * security.portPercentTarget) / 100) - security.mktValue,
+    //         amountInUnitNeeded = Math.floor(amountInCashNeeded / security.cost);
+    //     if(amountInUnitNeeded > 0) {
+    //         moneyLeft = moneyLeft - (amountInUnitNeeded * security.cost);
+    //         security.buyQty = amountInUnitNeeded;
+    //     } else {
+    //         security.buyQty = 0;
+    //     }
+    //     return security
+    // });
+    // return _.map(securities, (security) => {
+    //     let price = multiplyValues(security.cost, security.buyQty);
+    //     let newPercent = getPercentOf(security.mktValue + price, total);
+
+    //     let lowerThanTarget = newPercent < security.portPercentTarget;
+    //     let enoughToBuy = moneyLeft > 0 && moneyLeft > security.cost;
+    //     console.log(lowerThanTarget, enoughToBuy);
+    //     while (enoughToBuy && lowerThanTarget) {
+    //         moneyLeft = moneyLeft - security.cost;
+    //         security.buyQty = security.buyQty + 1;
+    //     }
         return security
     });
 }

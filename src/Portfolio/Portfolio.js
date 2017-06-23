@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Portfolio.css';
 import PortfolioService from './PortfolioService';
 
 import * as PortfolioHelpers from './PortfolioHelpers';
@@ -25,7 +25,7 @@ class Portfolio extends React.Component {
                     id: PortfolioHelpers.guid(),
                     symbol: 'VCN.TO',
                     cost: 0,
-                    portPercentTarget: 25,
+                    portPercentTarget: 15,
                     mktValue: 3753.94,
                     buyQty: 0
                 },
@@ -33,7 +33,7 @@ class Portfolio extends React.Component {
                     id: PortfolioHelpers.guid(),
                     symbol: 'VAB.TO',
                     cost: 0,
-                    portPercentTarget: 20,
+                    portPercentTarget: 10,
                     mktValue: 3052.66,
                     buyQty: 0
                 },
@@ -41,7 +41,7 @@ class Portfolio extends React.Component {
                     id: PortfolioHelpers.guid(),
                     symbol: 'VDU.TO',
                     cost: 0,
-                    portPercentTarget: 20,
+                    portPercentTarget: 10,
                     mktValue: 3050.96,
                     buyQty: 0
                 },
@@ -51,6 +51,14 @@ class Portfolio extends React.Component {
                     cost: 0,
                     portPercentTarget: 10,
                     mktValue: 1659.68,
+                    buyQty: 0
+                },
+                {
+                    id: PortfolioHelpers.guid(),
+                    symbol: 'TSLA',
+                    cost: 0,
+                    portPercentTarget: 30,
+                    mktValue: 0,
                     buyQty: 0
                 }
             ],
@@ -142,9 +150,10 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
-                    <li>Rebalance button</li>
                     <li>Add styles</li>
+                    <li>https://purple.herokuapp.com/</li>
                     <li>Add graphs</li>
+                    <li>Redux?</li>
                 </ul>
             </div>
         )
