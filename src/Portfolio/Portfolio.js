@@ -150,8 +150,8 @@ class Portfolio extends React.Component {
                 <br/>
                 Portfolio todo:
                 <ul>
+                    <li>Add checkbox to ask to sell or not</li>
                     <li>Add styles</li>
-                    <li>https://purple.herokuapp.com/</li>
                     <li>Add graphs</li>
                     <li>Redux?</li>
                 </ul>
