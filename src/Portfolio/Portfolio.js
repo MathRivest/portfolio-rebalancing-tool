@@ -113,7 +113,7 @@ class Portfolio extends React.Component {
     }
 
     handleBalancePortfolioButtonClick = () => {
-        let balancedSecurities = SecurityHelpers.getBalanceList(this.state.securities);
+        let balancedSecurities = SecurityHelpers.getBalanceList(this.state.securities, this.state.cash);
         this.setState((prevState, props) => PortfolioHelpers.updateSecurities(prevState, balancedSecurities));
     }
 

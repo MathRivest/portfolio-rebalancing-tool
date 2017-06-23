@@ -31,10 +31,22 @@ let getTotalofMultiplied = (securities, propertyA, propertyB) => {
     }, 0);
 }
 
-let getBalanceList = (securities) => {
-
-    return securities.map((i) => {
-        i.buyQty = 5;
+let getBalanceList = (securities, cash) => {
+    let total = getTotalWithCash(securities, cash, 'mktValue');
+    let moneyLeft = cash.mktValue;
+    let balancedList = _.map(securities, (security) => {
+        let amountInCashNeeded = ((total * security.portPercentTarget) / 100) - security.mktValue,
+            amountInUnitNeeded = Math.floor(amountInCashNeeded / security.cost);
+        moneyLeft = moneyLeft - (amountInUnitNeeded * security.cost);
+        security.buyQty = amountInUnitNeeded;
+        return security
+    });
+    return _.map(balancedList, (security) => {
+        while (moneyLeft > 0 && moneyLeft > security.cost) {
+            moneyLeft = moneyLeft - security.cost;
+            security.buyQty = security.buyQty + 1;
+        }
+        return security
     });
 }
 
