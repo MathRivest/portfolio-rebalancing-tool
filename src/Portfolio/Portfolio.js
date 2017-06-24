@@ -57,7 +57,7 @@ class Portfolio extends React.Component {
                     id: PortfolioHelpers.guid(),
                     symbol: 'TSLA',
                     cost: 0,
-                    portPercentTarget: 30,
+                    portPercentTarget: 10,
                     mktValue: 0,
                     buyQty: 0
                 }
@@ -66,11 +66,14 @@ class Portfolio extends React.Component {
                 symbol: 'Cash',
                 mktValue: 2000,
                 portPercentTarget: 0
+            },
+            balancingConfiguration: {
+                buyOnly: true
             }
         }
     }
 
-    getSecurities = () => {
+    setSecurities = () => {
         const symbols = this.state.securities.map((security) => {
             return security.symbol;
         });
@@ -82,7 +85,7 @@ class Portfolio extends React.Component {
     }
 
     componentDidMount() {
-        this.getSecurities();
+        this.setSecurities();
     }
 
     handleSecurityRemove = (security) => {
@@ -113,7 +116,7 @@ class Portfolio extends React.Component {
     }
 
     handleRefreshButtonClick = () => {
-        this.getSecurities();
+        this.setSecurities();
     }
 
     handleAddButtonClick = () => {
@@ -121,8 +124,21 @@ class Portfolio extends React.Component {
     }
 
     handleBalancePortfolioButtonClick = () => {
-        let balancedSecurities = SecurityHelpers.getBalancedList(this.state.securities, this.state.cash);
+        const balancedSecurities = SecurityHelpers.getBalancedList(
+            this.state.balancingConfiguration,
+            this.state.securities,
+            this.state.cash
+        );
         this.setState((prevState, props) => PortfolioHelpers.updateSecurities(prevState, balancedSecurities));
+    }
+
+    handleBalancingConfigurationBuyOnlyChange = (e) => {
+        let balancingConfiguration = {
+            [e.target.name]: e.target.checked
+        };
+        this.setState({
+            balancingConfiguration: balancingConfiguration
+        });
     }
 
     render() {
@@ -136,6 +152,14 @@ class Portfolio extends React.Component {
                     <button onClick={this.handleAddButtonClick}>Add Security</button>
                     <button onClick={this.handleRefreshButtonClick}>Refresh Quotes</button>
                     <button onClick={this.handleBalancePortfolioButtonClick}>Balance Portfolio</button>
+                    <label htmlFor="wantToSell">
+                        <input
+                            type="checkbox"
+                            name="buyOnly"
+                            checked={this.state.balancingConfiguration.buyOnly}
+                            onChange={this.handleBalancingConfigurationBuyOnlyChange}/>
+                            Buy Only
+                    </label>
                 </div>
 
                 <SecurityList

@@ -24,7 +24,7 @@ class PortfolioSvc {
             return data.map(security => {
                 return {
                     symbol: security.symbol,
-                    cost: security.Ask
+                    cost: parseFloat(security.Ask)
                 }
             })
         });

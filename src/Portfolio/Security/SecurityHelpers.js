@@ -31,46 +31,66 @@ const getTotalofMultiplied = (securities, propertyA, propertyB) => {
     }, 0);
 }
 
-const balancedWithoutSell = (securities, total, moneyLeft) => {
-    return _.map(securities, (security) => {
-        security.buyQty = 0;
-        let price = multiplyValues(security.cost, security.buyQty);
-        let newPercent = getPercentOf(security.mktValue + price, total);
-        while ((newPercent < security.portPercentTarget) && (moneyLeft > security.cost)) {
-            moneyLeft = moneyLeft - security.cost;
-            security.buyQty = security.buyQty + 1;
-            price = multiplyValues(security.cost, security.buyQty);
-            newPercent = getPercentOf(security.mktValue + price, total);
-        }
-        return security
-    });
+const balancedBuyOnly = (securities, total, moneyLeft) => {
+    let sortedSecurities = _.chain(securities)
+        .orderBy(['cost'], ['desc'])
+        .map((security) => {
+            security.buyQty = 0;
+            let price = multiplyValues(security.cost, security.buyQty);
+            let newPercent = getPercentOf(security.mktValue + price, total);
+            while ((newPercent < security.portPercentTarget) && (moneyLeft > security.cost)) {
+                moneyLeft = moneyLeft - security.cost;
+                security.buyQty = security.buyQty + 1;
+                price = multiplyValues(security.cost, security.buyQty);
+                newPercent = getPercentOf(security.mktValue + price, total);
+            }
+            return security
+        })
+        .value();
+    return sortedSecurities;
 }
 
 const balancedWithSell = (securities, total, moneyLeft) => {
-    const balancedList = _.map(securities, (security) => {
-        let amountInCashNeeded = ((total * security.portPercentTarget) / 100) - security.mktValue,
-            amountInUnitNeeded = Math.floor(amountInCashNeeded / security.cost);
-        moneyLeft = moneyLeft - (amountInUnitNeeded * security.cost);
-        security.buyQty = amountInUnitNeeded;
-        return security
-    });
-    return _.map(balancedList, (security) => {
-        while(moneyLeft && moneyLeft >= security.cost) {
-            moneyLeft = moneyLeft - security.cost
-            security.buyQty++
+    let sortedSecurities = _.chain(securities)
+        .map((security) => {
+            security.buyQty = 0;
+            let amountInCashNeeded = ((total * security.portPercentTarget) / 100) - security.mktValue,
+                amountInUnitNeeded = Math.floor(amountInCashNeeded / security.cost);
+            moneyLeft = moneyLeft - (amountInUnitNeeded * security.cost);
+            security.buyQty = amountInUnitNeeded;
+            return security
+        })
+        .orderBy(['cost'], ['desc'])
+        .value();
+
+    let itemCost = 0;
+    let distribute = (securitiesToBalance) => {
+        _.forEach(securitiesToBalance, (i) => {
+            itemCost = i.cost;
+            if(moneyLeft >= itemCost) {
+                moneyLeft = moneyLeft - itemCost;
+                i.buyQty++
+            }
+        });
+    }
+
+    _.forEach(sortedSecurities, (security) => {
+        while(moneyLeft >= itemCost) {
+            distribute(sortedSecurities);
         }
     });
+
+    return sortedSecurities;
 }
 
-let getBalancedList = (securities, cash) => {
-    const wantToSell = false;
+const getBalancedList = (config, securities, cash) => {
     const total = getTotalWithCash(securities, cash, 'mktValue');
-    let moneyLeft = cash.mktValue;
+    const moneyLeft = cash.mktValue - (cash.portPercentTarget / 100 * total);
 
-    if(wantToSell) {
-        return balancedWithSell(securities, total, moneyLeft);
+    if(config.buyOnly) {
+        return balancedBuyOnly(securities, total, moneyLeft);
     } else {
-        return balancedWithoutSell(securities, total, moneyLeft);
+        return balancedWithSell(securities, total, moneyLeft);
     }
 }
 
