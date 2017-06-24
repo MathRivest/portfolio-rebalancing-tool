@@ -27,7 +27,11 @@ class TotalRow extends React.Component {
                     Total
                 </td>
                 <td></td>
-                <td>{portPercentTargetTotal}</td>
+                <td>
+                    <TargetIndicator val={portPercentTargetTotal} minVal={100}  maxVal={100}>
+                        {portPercentTargetTotal}
+                    </TargetIndicator>
+                </td>
                 <td><Format format="financial" value={mktValueTotal}/></td>
                 <td>{portPercentTotal}</td>
                 <td></td>
