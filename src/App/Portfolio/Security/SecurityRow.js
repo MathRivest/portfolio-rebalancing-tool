@@ -1,6 +1,6 @@
 import React from 'react';
 import * as SecurityHelpers from './SecurityHelpers';
-import { Format, Icon } from '../../Components';
+import { Format, Icon, Button } from '../../Components';
 
 class SecurityRow extends React.Component {
 
@@ -39,7 +39,7 @@ class SecurityRow extends React.Component {
         const security = this.props.security;
         const status = security.status;
         if(status && status.type === 'Failed') {
-            return status.type;
+            return <span className="u-vertical-middle"><Icon name="error" size="sm"/></span>;
         }
     }
 
@@ -91,13 +91,9 @@ class SecurityRow extends React.Component {
                 <td><Format format="financial" value={price}/></td>
                 <td>{securityPortPercentNew}</td>
                 <td className="SecurityList-row-cell--actions">
-                    <button
-                        className="Button Button--sm"
-                        onClick={this.handleRemove}>
-                        <span className="Button-icon">
-                            <Icon name="delete_sweep" size="sm"/>
-                        </span>
-                    </button>
+                    <Button size="sm"
+                        iconName="delete_sweep"
+                        onClick={this.handleRemove}/>
                 </td>
             </tr>
         )

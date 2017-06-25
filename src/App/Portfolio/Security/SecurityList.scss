@@ -4,29 +4,24 @@
     border-collapse: collapse;
     font-size: 14px;
     margin-bottom: 24px;
-    tr {
-        td, th {
-            height: 30px;
-            padding: 8px;
-            line-height: 1.42857;
-            border-top: 1px solid #e7ebf3;
-            text-align: right;
-        }
-        th {
-            font-weight: 400;
-            color: #596981;
-        }
-        td {
-        }
+    td, th {
+        height: 30px;
+        padding: 8px;
+        line-height: 1.42857;
+        border-top: 1px solid #e7ebf3;
+        text-align: right;
     }
+    th {
+        font-weight: 400;
+        color: #596981;
+    }
+    td {}
 
     thead {
-        tr {
-            th {
-                vertical-align: bottom;
-                border-top: 0;
-                border-bottom: 1px solid #CFD7E6;
-            }
+        th {
+            vertical-align: bottom;
+            border-top: 0;
+            border-bottom: 1px solid #CFD7E6;
         }
     }
     tbody {
@@ -62,25 +57,29 @@
     input[type=number]::-webkit-inner-spin-button {
         -webkit-appearance: none;
     }
-}
 
-.SecurityList-row {
-    &-cell--actions {
-        text-align: center;
-        width: 40px;
-    }
-    &-cell--left {
-        text-align: left;
-        input {
-            text-align: left;
+
+    & &-row {
+        &-cell--actions {
+            text-align: right;
+            width: 40px;
         }
-    }
-    &-cell--center {
-        text-align: center;
-    }
-    &-cell--symbol{
-        width: 96px;
-        text-align: left;
+        &-cell--left {
+            text-align: left;
+            input {
+                text-align: left;
+            }
+        }
+        &-cell--center {
+            text-align: center;
+        }
+        &-cell--symbol{
+            width: 96px;
+            text-align: left;
+            input {
+                text-align: left;
+            }
+        }
     }
 }
 

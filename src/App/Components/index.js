@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import Icon from './Icon/Icon';
+import Button from './Button/Button';
 
 let Format = (props) => {
     let formattedValue;
@@ -14,4 +15,4 @@ let Format = (props) => {
     )
 }
 
-export { Format, Icon };
+export { Format, Icon, Button };

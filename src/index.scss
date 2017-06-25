@@ -1,7 +1,5 @@
 @import 'Styles/normalize';
-
-$color-brand: #79589F;
-$color-primary: #3F3F44;
+@import 'Styles/variables';
 
 body {
     margin: 0;
@@ -15,53 +13,6 @@ body {
     }
 }
 
-.Button {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding: 6px 12px;
-    border: none;
-    background-color: transparent;
-    font-size: 14px;
-    line-height: 18px;
-    color: $color-brand;
-    cursor: pointer;
-    &:focus {
-        outline: none;
-    }
-    &:hover {
-        color: $color-primary;
-    }
-
-    &-icon {
-
-    }
-
-    &-icon + &-text {
-        margin-left: 4px;
-    }
-
-    + .Button {
-        margin-left: 12px;
-    }
-
-    &--sm {
-        padding: 5px 10px;
-        font-size: 13px;
-    }
-}
-
-.Button--default {
-    background: #fff;
-    border: 1px solid rgba($color-brand, .6);
-    border-radius: 3px;
-    &:hover {
-        background: #FAF7FD;
-        color: $color-brand;
-    }
-}
-
-
 .Checkbox {
     display: inline-block;
     font-size: 12px;
@@ -72,4 +23,10 @@ body {
     input {
         margin-right: 4px;
     }
+}
+
+
+.u-vertical-middle {
+    display: inline-block;
+    vertical-align: middle;
 }

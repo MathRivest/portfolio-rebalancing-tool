@@ -1,0 +1,53 @@
+@import '../../../Styles/variables';
+
+.Button {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 6px 12px;
+    border: none;
+    background-color: transparent;
+    font-size: 14px;
+    line-height: 18px;
+    color: $color-brand;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        color: $color-primary;
+    }
+
+    &-icon {
+
+    }
+
+    &-icon + &-text {
+        margin-left: 4px;
+    }
+
+    + .Button {
+        margin-left: 12px;
+    }
+
+    &--sm {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+}
+
+.Button--default {
+    background: #fff;
+    border: 1px solid rgba($color-brand, .6);
+    border-radius: 3px;
+    &:hover {
+        background: #FAF7FD;
+        color: $color-brand;
+    }
+}

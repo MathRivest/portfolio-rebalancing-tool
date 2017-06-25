@@ -1,0 +1,34 @@
+.Button {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 6px 12px;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  line-height: 18px;
+  color: #79589F;
+  cursor: pointer;
+  transition-property: background-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out; }
+  .Button:focus {
+    outline: none; }
+  .Button:hover {
+    color: #3F3F44; }
+  .Button-icon + .Button-text {
+    margin-left: 4px; }
+  .Button + .Button {
+    margin-left: 12px; }
+  .Button--sm {
+    padding: 5px 10px;
+    font-size: 13px; }
+
+.Button--default {
+  background: #fff;
+  border: 1px solid rgba(121, 88, 159, 0.6);
+  border-radius: 3px; }
+  .Button--default:hover {
+    background: #FAF7FD;
+    color: #79589F; }

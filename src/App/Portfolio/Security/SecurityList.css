@@ -3,16 +3,16 @@
   border-collapse: collapse;
   font-size: 14px;
   margin-bottom: 24px; }
-  .SecurityList tr td, .SecurityList tr th {
+  .SecurityList td, .SecurityList th {
     height: 30px;
     padding: 8px;
     line-height: 1.42857;
     border-top: 1px solid #e7ebf3;
     text-align: right; }
-  .SecurityList tr th {
+  .SecurityList th {
     font-weight: 400;
     color: #596981; }
-  .SecurityList thead tr th {
+  .SecurityList thead th {
     vertical-align: bottom;
     border-top: 0;
     border-bottom: 1px solid #CFD7E6; }
@@ -37,22 +37,20 @@
       border-color: #79589F; }
   .SecurityList input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none; }
-
-.SecurityList-row-cell--actions {
-  text-align: center;
-  width: 40px; }
-
-.SecurityList-row-cell--left {
-  text-align: left; }
-  .SecurityList-row-cell--left input {
+  .SecurityList .SecurityList-row-cell--actions {
+    text-align: right;
+    width: 40px; }
+  .SecurityList .SecurityList-row-cell--left {
     text-align: left; }
-
-.SecurityList-row-cell--center {
-  text-align: center; }
-
-.SecurityList-row-cell--symbol {
-  width: 96px;
-  text-align: left; }
+    .SecurityList .SecurityList-row-cell--left input {
+      text-align: left; }
+  .SecurityList .SecurityList-row-cell--center {
+    text-align: center; }
+  .SecurityList .SecurityList-row-cell--symbol {
+    width: 96px;
+    text-align: left; }
+    .SecurityList .SecurityList-row-cell--symbol input {
+      text-align: left; }
 
 .TargetIndicator.TargetIndicator--danger {
   color: red; }

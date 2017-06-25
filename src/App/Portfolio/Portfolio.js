@@ -7,7 +7,7 @@ import * as SecurityHelpers from './Security/SecurityHelpers';
 
 import SecurityList from './Security/SecurityList';
 import SecurityGraphs from './Security/SecurityGraphs';
-import { Icon } from '../Components';
+import { Icon, Button } from '../Components';
 
 class Portfolio extends React.Component {
     constructor(props) {
@@ -143,28 +143,31 @@ class Portfolio extends React.Component {
 
                 <ul className="Portfolio-actions">
                     <li>
-                        <button className="Button Button--default Button--sm" onClick={this.handleAddButtonClick}>
-                            <span className="Button-icon">
-                                <Icon name="add" size="sm"/>
-                            </span>
-                            <span className="Button-text">Add Security</span>
-                        </button>
+                        <Button
+                            style="default"
+                            size="sm"
+                            iconName="add"
+                            onClick={this.handleAddButtonClick}>
+                            Add security
+                        </Button>
                     </li>
                     <li>
-                        <button className="Button Button--default Button--sm" onClick={this.handleRefreshButtonClick}>
-                            <span className="Button-icon">
-                                <Icon name="refresh" size="sm"/>
-                            </span>
-                            <span className="Button-text">Refresh Quotes</span>
-                        </button>
+                        <Button
+                            style="default"
+                            size="sm"
+                            iconName="refresh"
+                            onClick={this.handleRefreshButtonClick}>
+                            Refresh quotes
+                        </Button>
                     </li>
                     <li>
-                        <button className="Button Button--default Button--sm" onClick={this.handleBalancePortfolioButtonClick}>
-                            <span className="Button-icon">
-                                <Icon name="donut_large" size="sm"/>
-                            </span>
-                            <span className="Button-text">Balance</span>
-                        </button>
+                        <Button
+                            style="default"
+                            size="sm"
+                            iconName="donut_large"
+                            onClick={this.handleBalancePortfolioButtonClick}>
+                            Balance
+                        </Button>
                     </li>
                     {/*<li>
                         <div className="Checkbox">
