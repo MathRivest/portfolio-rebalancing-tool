@@ -36,17 +36,31 @@ const balancedBuyOnly = (securities, total, moneyLeft) => {
         .orderBy(['cost'], ['desc'])
         .map((security) => {
             security.buyQty = 0;
-            let price = multiplyValues(security.cost, security.buyQty);
-            let newPercent = getPercentOf(security.mktValue + price, total);
-            while ((newPercent < security.portPercentTarget) && (moneyLeft > security.cost)) {
-                moneyLeft = moneyLeft - security.cost;
-                security.buyQty = security.buyQty + 1;
-                price = multiplyValues(security.cost, security.buyQty);
-                newPercent = getPercentOf(security.mktValue + price, total);
-            }
             return security
         })
         .value();
+
+    let itemCost, price, newPercent = 0;
+    let distribute = (securitiesToBalance) => {
+        _.forEach(securitiesToBalance, (i) => {
+            itemCost = i.cost;
+            if(moneyLeft >= itemCost) {
+                moneyLeft = moneyLeft - itemCost;
+                i.buyQty++
+                price = multiplyValues(i.cost, i.buyQty);
+                newPercent = getPercentOf(i.mktValue + price, total);
+            }
+        });
+    }
+
+    _.forEach(sortedSecurities, (security) => {
+        price = multiplyValues(security.cost, security.buyQty);
+        newPercent = getPercentOf(security.mktValue + price, total);
+        while ((newPercent < security.portPercentTarget) && (moneyLeft > security.cost)) {
+            distribute(sortedSecurities);
+        }
+    });
+
     return sortedSecurities;
 }
 
