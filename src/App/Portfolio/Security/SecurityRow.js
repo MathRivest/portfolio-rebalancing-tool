@@ -1,6 +1,6 @@
 import React from 'react';
 import * as SecurityHelpers from './SecurityHelpers';
-import { Format } from '../../Components';
+import { Format, Icon } from '../../Components';
 
 class SecurityRow extends React.Component {
 
@@ -51,7 +51,7 @@ class SecurityRow extends React.Component {
         const securityStatus = this.getSecurityStatus();
         return(
             <tr className="SecurityList-row">
-                <td className="SecurityList-row-cell--left">
+                <td className="SecurityList-row-cell--symbol">
                     <input
                         type="text"
                         name="symbol"
@@ -90,8 +90,14 @@ class SecurityRow extends React.Component {
                 </td>
                 <td><Format format="financial" value={price}/></td>
                 <td>{securityPortPercentNew}</td>
-                <td className="SecurityList-row-cell--center">
-                    <button onClick={this.handleRemove}>Remove</button>
+                <td className="SecurityList-row-cell--actions">
+                    <button
+                        className="Button Button--sm"
+                        onClick={this.handleRemove}>
+                        <span className="Button-icon">
+                            <Icon name="delete_sweep" size="sm"/>
+                        </span>
+                    </button>
                 </td>
             </tr>
         )

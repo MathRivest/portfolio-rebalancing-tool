@@ -143,7 +143,7 @@ class Portfolio extends React.Component {
 
                 <ul className="Portfolio-actions">
                     <li>
-                        <button className="Button Button--small" onClick={this.handleAddButtonClick}>
+                        <button className="Button Button--default Button--sm" onClick={this.handleAddButtonClick}>
                             <span className="Button-icon">
                                 <Icon name="add" size="sm"/>
                             </span>
@@ -151,12 +151,22 @@ class Portfolio extends React.Component {
                         </button>
                     </li>
                     <li>
-                        <button className="Button Button--small" onClick={this.handleRefreshButtonClick}>Refresh Quotes</button>
+                        <button className="Button Button--default Button--sm" onClick={this.handleRefreshButtonClick}>
+                            <span className="Button-icon">
+                                <Icon name="refresh" size="sm"/>
+                            </span>
+                            <span className="Button-text">Refresh Quotes</span>
+                        </button>
                     </li>
                     <li>
-                        <button className="Button Button--small" onClick={this.handleBalancePortfolioButtonClick}>Balance Portfolio</button>
+                        <button className="Button Button--default Button--sm" onClick={this.handleBalancePortfolioButtonClick}>
+                            <span className="Button-icon">
+                                <Icon name="donut_large" size="sm"/>
+                            </span>
+                            <span className="Button-text">Balance</span>
+                        </button>
                     </li>
-                    <li>
+                    {/*<li>
                         <div className="Checkbox">
                             <label htmlFor="buyOnly">
                                 <input
@@ -168,7 +178,7 @@ class Portfolio extends React.Component {
                                     Buy Only
                             </label>
                         </div>
-                    </li>
+                    </li>*/}
                 </ul>
 
                 <SecurityList

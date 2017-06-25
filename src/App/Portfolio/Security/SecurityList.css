@@ -23,7 +23,7 @@
   .SecurityList tfoot tr {
     background-color: #fafbfc; }
   .SecurityList input {
-    max-width: 80px;
+    max-width: 84px;
     font-size: 12px;
     box-sizing: border-box;
     text-align: right;
@@ -37,12 +37,22 @@
       border-color: #79589F; }
   .SecurityList input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none; }
-  .SecurityList .SecurityList-row-cell--left {
+
+.SecurityList-row-cell--actions {
+  text-align: center;
+  width: 40px; }
+
+.SecurityList-row-cell--left {
+  text-align: left; }
+  .SecurityList-row-cell--left input {
     text-align: left; }
-    .SecurityList .SecurityList-row-cell--left input {
-      text-align: left; }
-  .SecurityList .SecurityList-row-cell--center {
-    text-align: center; }
+
+.SecurityList-row-cell--center {
+  text-align: center; }
+
+.SecurityList-row-cell--symbol {
+  width: 96px;
+  text-align: left; }
 
 .TargetIndicator.TargetIndicator--danger {
   color: red; }

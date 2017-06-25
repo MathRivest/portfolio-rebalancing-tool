@@ -1,6 +1,7 @@
 @import 'Styles/normalize';
 
 $color-brand: #79589F;
+$color-primary: #3F3F44;
 
 body {
     margin: 0;
@@ -8,7 +9,10 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    color: #3F3F44;
+    color: $color-primary;
+    * {
+        box-sizing: border-box;
+    }
 }
 
 .Button {
@@ -16,9 +20,8 @@ body {
     align-items: center;
     text-align: center;
     padding: 6px 12px;
-    background: #fff;
-    border: 1px solid rgba($color-brand, .6);
-    border-radius: 3px;
+    border: none;
+    background-color: transparent;
     font-size: 14px;
     line-height: 18px;
     color: $color-brand;
@@ -27,24 +30,34 @@ body {
         outline: none;
     }
     &:hover {
-        background: #FAF7FD;
+        color: $color-primary;
     }
 
     &-icon {
-        margin-right: 4px;
+
     }
 
-    &-text {
-
+    &-icon + &-text {
+        margin-left: 4px;
     }
 
     + .Button {
         margin-left: 12px;
     }
 
-    &--small {
+    &--sm {
         padding: 5px 10px;
         font-size: 13px;
+    }
+}
+
+.Button--default {
+    background: #fff;
+    border: 1px solid rgba($color-brand, .6);
+    border-radius: 3px;
+    &:hover {
+        background: #FAF7FD;
+        color: $color-brand;
     }
 }
 
