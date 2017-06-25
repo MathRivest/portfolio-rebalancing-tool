@@ -5,5 +5,10 @@
     &-actions {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+        list-style: none;
+        li {
+            margin-left: 12px;
+        }
     }
 }

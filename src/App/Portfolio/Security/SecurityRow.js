@@ -56,7 +56,8 @@ class SecurityRow extends React.Component {
                         type="text"
                         name="symbol"
                         value={security.symbol}
-                        onChange={this.handleNameChange}/>
+                        onChange={this.handleNameChange}
+                        style={{width: '7em'}}/>
                 </td>
                 <td>
                     {securityStatus} &nbsp;
@@ -67,6 +68,7 @@ class SecurityRow extends React.Component {
                         type="number"
                         name="portPercentTarget"
                         value={security.portPercentTarget}
+                        style={{width: '4em'}}
                         onChange={this.handleChanges}/>
                 </td>
                 <td>
@@ -74,6 +76,7 @@ class SecurityRow extends React.Component {
                         type="number"
                         name="mktValue"
                         value={security.mktValue}
+                        style={{width: '7em'}}
                         onChange={this.handleChanges}/>
                 </td>
                 <td>{securityPortPercent}</td>
@@ -82,6 +85,7 @@ class SecurityRow extends React.Component {
                         type="number"
                         name="buyQty"
                         value={security.buyQty}
+                        style={{width: '4em'}}
                         onChange={this.handleChanges}/>
                 </td>
                 <td><Format format="financial" value={price}/></td>

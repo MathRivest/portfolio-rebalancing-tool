@@ -4,7 +4,7 @@ class SecurityListHeader extends React.Component {
     render() {
         return(
             <tr className="SecurityListHeader">
-                <th>Symbol</th>
+                <th className="SecurityList-row-cell--left">Symbol</th>
                 <th>Cost ($)</th>
                 <th>Target (%)</th>
                 <th>Mkt Val ($)</th>

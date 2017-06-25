@@ -7,6 +7,7 @@ import * as SecurityHelpers from './Security/SecurityHelpers';
 
 import SecurityList from './Security/SecurityList';
 import SecurityGraphs from './Security/SecurityGraphs';
+import { Icon } from '../Components';
 
 class Portfolio extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class Portfolio extends React.Component {
                     id: PortfolioHelpers.guid(),
                     symbol: 'VCN.TO',
                     cost: 0,
-                    portPercentTarget: 15,
+                    portPercentTarget: 25,
                     mktValue: 3753.94,
                     buyQty: 0
                 },
@@ -33,7 +34,7 @@ class Portfolio extends React.Component {
                     id: PortfolioHelpers.guid(),
                     symbol: 'VAB.TO',
                     cost: 0,
-                    portPercentTarget: 10,
+                    portPercentTarget: 20,
                     mktValue: 3052.66,
                     buyQty: 0
                 },
@@ -41,7 +42,7 @@ class Portfolio extends React.Component {
                     id: PortfolioHelpers.guid(),
                     symbol: 'VDU.TO',
                     cost: 0,
-                    portPercentTarget: 10,
+                    portPercentTarget: 20,
                     mktValue: 3050.96,
                     buyQty: 0
                 },
@@ -51,14 +52,6 @@ class Portfolio extends React.Component {
                     cost: 0,
                     portPercentTarget: 10,
                     mktValue: 1659.68,
-                    buyQty: 0
-                },
-                {
-                    id: PortfolioHelpers.guid(),
-                    symbol: 'TSLA',
-                    cost: 0,
-                    portPercentTarget: 10,
-                    mktValue: 0,
                     buyQty: 0
                 }
             ],
@@ -148,19 +141,35 @@ class Portfolio extends React.Component {
 
                 <SecurityGraphs/>
 
-                <div className="Portfolio-actions">
-                    <button onClick={this.handleAddButtonClick}>Add Security</button>
-                    <button onClick={this.handleRefreshButtonClick}>Refresh Quotes</button>
-                    <button onClick={this.handleBalancePortfolioButtonClick}>Balance Portfolio</button>
-                    <label htmlFor="wantToSell">
-                        <input
-                            type="checkbox"
-                            name="buyOnly"
-                            checked={this.state.balancingConfiguration.buyOnly}
-                            onChange={this.handleBalancingConfigurationBuyOnlyChange}/>
-                            Buy Only
-                    </label>
-                </div>
+                <ul className="Portfolio-actions">
+                    <li>
+                        <button className="Button Button--small" onClick={this.handleAddButtonClick}>
+                            <span className="Button-icon">
+                                <Icon name="add" size="sm"/>
+                            </span>
+                            <span className="Button-text">Add Security</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button className="Button Button--small" onClick={this.handleRefreshButtonClick}>Refresh Quotes</button>
+                    </li>
+                    <li>
+                        <button className="Button Button--small" onClick={this.handleBalancePortfolioButtonClick}>Balance Portfolio</button>
+                    </li>
+                    <li>
+                        <div className="Checkbox">
+                            <label htmlFor="buyOnly">
+                                <input
+                                    id="buyOnly"
+                                    type="checkbox"
+                                    name="buyOnly"
+                                    checked={this.state.balancingConfiguration.buyOnly}
+                                    onChange={this.handleBalancingConfigurationBuyOnlyChange}/>
+                                    Buy Only
+                            </label>
+                        </div>
+                    </li>
+                </ul>
 
                 <SecurityList
                     securities={this.state.securities}
@@ -170,15 +179,6 @@ class Portfolio extends React.Component {
                     cash={this.state.cash}
                     onCashChange={this.handleCashChange}
                     total={total}/>
-
-                <br/>
-                Portfolio todo:
-                <ul>
-                    <li>Add checkbox to ask to sell or not</li>
-                    <li>Add styles</li>
-                    <li>Add graphs</li>
-                    <li>Redux?</li>
-                </ul>
             </div>
         )
     }

@@ -13,6 +13,13 @@ class App extends Component {
           <h2>Portfolio Rebalancing Tool</h2>
         </div>
         <Portfolio/>
+
+        Portfolio todo:
+        <ul>
+            <li>Add Button component and all icons</li>
+            <li>Add graphs</li>
+            <li>Redux?</li>
+        </ul>
       </div>
     );
   }

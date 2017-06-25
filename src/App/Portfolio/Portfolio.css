@@ -4,4 +4,8 @@
   padding: 0 36px; }
   .Portfolio-actions {
     display: flex;
-    justify-content: flex-end; }
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none; }
+    .Portfolio-actions li {
+      margin-left: 12px; }
