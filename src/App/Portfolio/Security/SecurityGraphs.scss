@@ -1,0 +1,8 @@
+.SecurityGraphs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    &-graph {
+        height: 250px;
+    }
+}

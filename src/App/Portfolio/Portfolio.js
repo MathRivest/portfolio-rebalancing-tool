@@ -7,7 +7,7 @@ import * as SecurityHelpers from './Security/SecurityHelpers';
 
 import SecurityList from './Security/SecurityList';
 import SecurityGraphs from './Security/SecurityGraphs';
-import { Icon, Button } from '../Components';
+import { Button } from '../Components';
 
 class Portfolio extends React.Component {
     constructor(props) {
@@ -139,12 +139,12 @@ class Portfolio extends React.Component {
         return(
             <div className="Portfolio">
 
-                <SecurityGraphs/>
+                <SecurityGraphs securities={this.state.securities}/>
 
                 <ul className="Portfolio-actions">
                     <li>
                         <Button
-                            style="default"
+                            variant="default"
                             size="sm"
                             iconName="add"
                             onClick={this.handleAddButtonClick}>
@@ -153,7 +153,7 @@ class Portfolio extends React.Component {
                     </li>
                     <li>
                         <Button
-                            style="default"
+                            variant="default"
                             size="sm"
                             iconName="refresh"
                             onClick={this.handleRefreshButtonClick}>
@@ -162,7 +162,7 @@ class Portfolio extends React.Component {
                     </li>
                     <li>
                         <Button
-                            style="default"
+                            variant="default"
                             size="sm"
                             iconName="donut_large"
                             onClick={this.handleBalancePortfolioButtonClick}>
