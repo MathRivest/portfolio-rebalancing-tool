@@ -144,12 +144,6 @@ class Portfolio extends React.Component {
         const total = SecurityHelpers.getTotalWithCash(this.state.securities, this.state.cash, 'mktValue');
         return(
             <div className="Portfolio">
-
-                <SecurityGraphs
-                    securities={this.state.securities}
-                    cash={this.state.cash}
-                    total={total}/>
-
                 <ul className="Portfolio-actions">
                     <li>
                         <Button
@@ -209,6 +203,11 @@ class Portfolio extends React.Component {
                     onSecurityRemove={this.handleSecurityRemove}
                     cash={this.state.cash}
                     onCashChange={this.handleCashChange}
+                    total={total}/>
+
+                <SecurityGraphs
+                    securities={this.state.securities}
+                    cash={this.state.cash}
                     total={total}/>
             </div>
         )

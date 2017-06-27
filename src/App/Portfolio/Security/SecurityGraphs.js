@@ -9,17 +9,18 @@ class SecurityGraphs extends React.Component {
     graphConfig = () => {
         const labels = _.map(this.assets, 'symbol');
         const data = _.map(this.assets, 'portPercentTarget');
-        const backgroundColor = _.map(this.assets, (asset, index) => {
-            let opacity = (index + 1) / this.assets.length;
-            return 'rgba(121, 88, 159, ' + opacity + ')';
-        });
+        const backgroundColor = (modifier = 1.5) => {
+            return _.map(this.assets, (asset) => {
+                return asset.displayColor;
+            });
+        };
         return  {
             baseData: {
                 labels: labels,
                 datasets: [
                     {
                         label: 'Target',
-                        backgroundColor: backgroundColor,
+                        backgroundColor: backgroundColor(),
                         borderWidth: 2,
                         hoverBackgroundColor: 'rgba(121, 88, 159, 1)',
                         hoverBorderColor: '#ffffff',
@@ -27,7 +28,7 @@ class SecurityGraphs extends React.Component {
                     },
                     {
                         label: '',
-                        backgroundColor: backgroundColor,
+                        backgroundColor: backgroundColor(),
                         borderWidth: 2,
                         hoverBackgroundColor: 'rgba(121, 88, 159, 1)',
                         hoverBorderColor: '#ffffff',
@@ -39,7 +40,10 @@ class SecurityGraphs extends React.Component {
                 maintainAspectRatio: false,
                 title: {
                     display: true,
-                    text: 'Target'
+                    fontSize: 14,
+                    fontColor: '#596981',
+                    fontStyle: '400',
+                    padding: 18
                 },
                 legend: {
                     display: false
