@@ -14,7 +14,8 @@ class App extends Component {
 
                 Portfolio todo:
                 <ul>
-                    <li>Add graphs</li>
+                    <li>Fix graph redraw</li>
+                    <li>Add color list</li>
                 </ul>
             </div>
         );
