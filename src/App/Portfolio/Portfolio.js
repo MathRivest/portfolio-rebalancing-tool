@@ -139,7 +139,10 @@ class Portfolio extends React.Component {
         return(
             <div className="Portfolio">
 
-                <SecurityGraphs securities={this.state.securities}/>
+                <SecurityGraphs
+                    securities={this.state.securities}
+                    cash={this.state.cash}
+                    total={total}/>
 
                 <ul className="Portfolio-actions">
                     <li>
@@ -155,7 +158,7 @@ class Portfolio extends React.Component {
                         <Button
                             variant="default"
                             size="sm"
-                            iconName="refresh"
+                            iconName="update"
                             onClick={this.handleRefreshButtonClick}>
                             Refresh quotes
                         </Button>
@@ -167,6 +170,15 @@ class Portfolio extends React.Component {
                             iconName="donut_large"
                             onClick={this.handleBalancePortfolioButtonClick}>
                             Balance
+                        </Button>
+                    </li>
+                    <li>
+                        <Button
+                            variant="default"
+                            size="sm"
+                            iconName="undo"
+                            onClick={this.handleClearButtonClick}>
+                            Clear Buy
                         </Button>
                     </li>
                     {/*<li>

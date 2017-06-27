@@ -36,6 +36,7 @@ class CashRow extends React.Component {
                         type="number"
                         name="portPercentTarget"
                         value={cash.portPercentTarget}
+                        style={{width: '4em'}}
                         onChange={this.handleChanges}/>
                 </td>
                 <td>

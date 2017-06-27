@@ -1,60 +1,85 @@
 import React from 'react';
 import _ from 'lodash';
 import './SecurityGraphs.css';
-import {Doughnut} from 'react-chartjs-2';
+import * as SecurityHelpers from './SecurityHelpers';
+import { Doughnut } from 'react-chartjs-2';
 
 class SecurityGraphs extends React.Component {
-
-    baseData = {
-        labels: null,
-        datasets: [
-            {
-                backgroundColor: null,
-                borderWidth: 2,
-                hoverBackgroundColor: 'rgba(121, 88, 159, 1)',
-                hoverBorderColor: '#ffffff',
-                data: null
-            }
-        ]
-    };
-
-    baseOptions = {
-        maintainAspectRatio: false,
-        title: {
-            display: true,
-            text: 'Portfolio Target'
-        },
-        legend: {
-            display: false
-        }
-    };
-
-    render() {
-        this.baseData.labels = _.map(this.props.securities, 'symbol');
-        this.baseData.datasets[0].data = _.map(this.props.securities, 'portPercentTarget');
-        this.baseData.datasets[0].backgroundColor = _.map(this.props.securities, (i, k) => {
-            let opacity = (k + 1) / this.props.securities.length;
+    assets = [];
+    graphConfig = () => {
+        const labels = _.map(this.assets, 'symbol');
+        const data = _.map(this.assets, 'portPercentTarget');
+        const backgroundColor = _.map(this.assets, (asset, index) => {
+            let opacity = (index + 1) / this.assets.length;
             return 'rgba(121, 88, 159, ' + opacity + ')';
         });
+        return  {
+            baseData: {
+                labels: labels,
+                datasets: [
+                    {
+                        backgroundColor: backgroundColor,
+                        borderWidth: 2,
+                        hoverBackgroundColor: 'rgba(121, 88, 159, 1)',
+                        hoverBorderColor: '#ffffff',
+                        data: data
+                    },
+                    {
+                        backgroundColor: backgroundColor,
+                        borderWidth: 2,
+                        hoverBackgroundColor: 'rgba(121, 88, 159, 1)',
+                        hoverBorderColor: '#ffffff',
+                        data: data
+                    }
+                ]
+            },
+            baseOptions: {
+                maintainAspectRatio: false,
+                title: {
+                    display: true,
+                    text: 'Target'
+                },
+                legend: {
+                    display: false
+                }
+            }
+        }
+    }
 
-        const portPercentTargetChartData = _.clone(this.baseData);
-        const portPercentTargetChartOptions = _.clone(this.baseOptions);
+    render() {
+        this.assets = [...this.props.securities, this.props.cash];
+
+        // Current Graph
+        const portPercentChartData = this.graphConfig().baseData;
+        const portPercentChartOptions = this.graphConfig().baseOptions;
+        portPercentChartOptions.title.text = 'Target(out) vs Current(in)';
+        portPercentChartData.datasets[1].data = _.map(this.assets, (asset) => {
+            return SecurityHelpers.getPercentOf(asset.mktValue, this.props.total);
+        });
+
+        // New Graph
+        const portPercentNewChartData = this.graphConfig().baseData;
+        const portPercentNewChartOptions = this.graphConfig().baseOptions;
+        portPercentNewChartOptions.title.text = 'Target(out) vs New(in)'
+        portPercentNewChartData.datasets[1].data = _.map(this.props.securities, (security) => {
+            let price = SecurityHelpers.multiplyValues(security.cost, security.buyQty);
+            return SecurityHelpers.getPercentOf(security.mktValue + price, this.props.total);
+        });
+        const totalPrice = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
+        const cashLeft = SecurityHelpers.getPercentOf(this.props.cash.mktValue - totalPrice, this.props.total);
+        portPercentNewChartData.datasets[1].data.push(cashLeft);
+        console.log('RENDERING..')
         return(
             <div className="SecurityGraphs">
                 <div className="SecurityGraphs-graph">
                     <Doughnut
-                        data={portPercentTargetChartData}
-                        options={portPercentTargetChartOptions}/>
+                        data={portPercentChartData}
+                        options={portPercentChartOptions}/>
                 </div>
                 <div className="SecurityGraphs-graph">
                     <Doughnut
-                        data={portPercentTargetChartData}
-                        options={portPercentTargetChartOptions}/>
-                </div>
-                <div className="SecurityGraphs-graph">
-                    <Doughnut
-                        data={portPercentTargetChartData}
-                        options={portPercentTargetChartOptions}/>
+                        data={portPercentNewChartData}
+                        options={portPercentNewChartOptions}/>
                 </div>
             </div>
         )

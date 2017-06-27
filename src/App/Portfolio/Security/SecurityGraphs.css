@@ -1,6 +1,7 @@
 .SecurityGraphs {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 0 72px;
   margin-bottom: 48px; }
   .SecurityGraphs-graph {
     height: 250px; }
