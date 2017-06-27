@@ -77,8 +77,13 @@ class Portfolio extends React.Component {
             });
     }
 
+    setDisplayColors = () => {
+        this.setState((prevState, props) => PortfolioHelpers.setDisplayColors(prevState));
+    }
+
     componentDidMount() {
         this.setSecurities();
+        this.setDisplayColors();
     }
 
     handleSecurityRemove = (security) => {
@@ -114,6 +119,7 @@ class Portfolio extends React.Component {
 
     handleAddButtonClick = () => {
         this.setState((prevState, props) => PortfolioHelpers.addSecurity(prevState, PortfolioHelpers.createSecurity()));
+        this.setDisplayColors();
     }
 
     handleBalancePortfolioButtonClick = () => {

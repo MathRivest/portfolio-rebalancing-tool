@@ -74,12 +74,21 @@
             text-align: center;
         }
         &-cell--symbol{
-            width: 96px;
             text-align: left;
             input {
                 text-align: left;
             }
         }
+    }
+
+    &-colorBlock {
+        width: 10px;
+        height: 10px;
+        border: 1px solid currentColor;
+        background: currentColor;
+        display: inline-block;
+        margin-right: 8px;
+        color: #CFD7E6;
     }
 }
 

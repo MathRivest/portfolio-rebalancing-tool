@@ -28,6 +28,9 @@ class CashRow extends React.Component {
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--left">
+                    <div
+                        className="SecurityList-colorBlock"
+                        style={{color: cash.displayColor}}></div>
                     {cash.symbol}
                 </td>
                 <td></td>

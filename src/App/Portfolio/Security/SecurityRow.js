@@ -52,6 +52,9 @@ class SecurityRow extends React.Component {
         return(
             <tr className="SecurityList-row">
                 <td className="SecurityList-row-cell--symbol">
+                    <div
+                        className="SecurityList-colorBlock"
+                        style={{color: security.displayColor}}></div>
                     <input
                         type="text"
                         name="symbol"

@@ -47,10 +47,17 @@
   .SecurityList .SecurityList-row-cell--center {
     text-align: center; }
   .SecurityList .SecurityList-row-cell--symbol {
-    width: 96px;
     text-align: left; }
     .SecurityList .SecurityList-row-cell--symbol input {
       text-align: left; }
+  .SecurityList-colorBlock {
+    width: 10px;
+    height: 10px;
+    border: 1px solid currentColor;
+    background: currentColor;
+    display: inline-block;
+    margin-right: 8px;
+    color: #CFD7E6; }
 
 .TargetIndicator.TargetIndicator--danger {
   color: red; }
