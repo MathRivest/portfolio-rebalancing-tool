@@ -18,6 +18,7 @@ class SecurityGraphs extends React.Component {
                 labels: labels,
                 datasets: [
                     {
+                        label: 'Target',
                         backgroundColor: backgroundColor,
                         borderWidth: 2,
                         hoverBackgroundColor: 'rgba(121, 88, 159, 1)',
@@ -25,6 +26,7 @@ class SecurityGraphs extends React.Component {
                         data: data
                     },
                     {
+                        label: '',
                         backgroundColor: backgroundColor,
                         borderWidth: 2,
                         hoverBackgroundColor: 'rgba(121, 88, 159, 1)',
@@ -53,6 +55,7 @@ class SecurityGraphs extends React.Component {
         const portPercentChartData = this.graphConfig().baseData;
         const portPercentChartOptions = this.graphConfig().baseOptions;
         portPercentChartOptions.title.text = 'Target(out) vs Current(in)';
+        portPercentChartData.datasets[1].label = 'Current';
         portPercentChartData.datasets[1].data = _.map(this.assets, (asset) => {
             return SecurityHelpers.getPercentOf(asset.mktValue, this.props.total);
         });
@@ -61,14 +64,14 @@ class SecurityGraphs extends React.Component {
         const portPercentNewChartData = this.graphConfig().baseData;
         const portPercentNewChartOptions = this.graphConfig().baseOptions;
         portPercentNewChartOptions.title.text = 'Target(out) vs New(in)'
+        portPercentNewChartData.datasets[1].label = 'New';
         portPercentNewChartData.datasets[1].data = _.map(this.props.securities, (security) => {
-            let price = SecurityHelpers.multiplyValues(security.cost, security.buyQty);
+            const price = SecurityHelpers.multiplyValues(security.cost, security.buyQty);
             return SecurityHelpers.getPercentOf(security.mktValue + price, this.props.total);
         });
         const totalPrice = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
         const cashLeft = SecurityHelpers.getPercentOf(this.props.cash.mktValue - totalPrice, this.props.total);
         portPercentNewChartData.datasets[1].data.push(cashLeft);
-        console.log('RENDERING..')
         return(
             <div className="SecurityGraphs">
                 <div className="SecurityGraphs-graph">
