@@ -54,7 +54,7 @@ class SecurityRow extends React.Component {
                 <td className="SecurityList-row-cell--symbol">
                     <div
                         className="SecurityList-colorBlock"
-                        style={{color: security.displayColor}}></div>
+                        style={{color: 'rgba(' + security.displayColor  + ', 1)'}}></div>
                     <input
                         type="text"
                         name="symbol"
