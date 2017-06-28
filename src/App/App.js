@@ -15,8 +15,12 @@ class App extends Component {
 
                 Portfolio todo:
                 <ul>
-                    <li>Fix graph redraw</li>
-                    <li>Add color list</li>
+                    <li>Add clear button</li>
+                    <li>Add error tooltip</li>
+                    <li>Filter cols</li>
+                    <li>Current stock trend (up or down)</li>
+                    <li>Adjust header</li>
+                    <li>Make intro banner</li>
                 </ul>
             </div>
         );

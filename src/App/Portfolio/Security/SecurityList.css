@@ -47,6 +47,7 @@
   .SecurityList .SecurityList-row-cell--center {
     text-align: center; }
   .SecurityList .SecurityList-row-cell--symbol {
+    width: 118px;
     text-align: left; }
     .SecurityList .SecurityList-row-cell--symbol input {
       text-align: left; }
