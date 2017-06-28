@@ -119,7 +119,7 @@ let updateSecurities = (prevState, partialSecurities) => {
     };
 }
 
-export {
+export default {
     guid,
     colorList,
     setDisplayColors,

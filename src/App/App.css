@@ -3,11 +3,12 @@
   height: 80px; }
 
 .App-header {
-  background-color: #222;
-  padding: 12px 20px;
+  background-color: #79589F;
+  padding: 18px 24px;
   color: white; }
   .App-header h2 {
-    font-weight: 400; }
+    font-weight: 400;
+    margin: 0; }
 
 @keyframes App-logo-spin {
   from {

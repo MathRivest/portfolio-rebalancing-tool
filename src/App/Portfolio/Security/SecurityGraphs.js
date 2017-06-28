@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import './SecurityGraphs.css';
-import * as SecurityHelpers from './SecurityHelpers';
+import SecurityHelpers from './SecurityHelpers';
 import { Doughnut } from 'react-chartjs-2';
 
 class SecurityGraphs extends React.Component {

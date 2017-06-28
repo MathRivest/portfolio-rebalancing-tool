@@ -1,3 +1,5 @@
+@import '../Styles/variables';
+
 .App {
     &-logo {
         animation: App-logo-spin infinite 20s linear;
@@ -5,11 +7,12 @@
 
     }
     &-header {
-        background-color: #222;
-        padding: 12px 20px;
+        background-color: $color-brand;
+        padding: 18px 24px;
         color: white;
         h2 {
             font-weight: 400;
+            margin: 0;
         }
     }
 }

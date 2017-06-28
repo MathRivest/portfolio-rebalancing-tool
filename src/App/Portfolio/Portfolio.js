@@ -1,9 +1,10 @@
 import React from 'react';
+import _ from 'lodash';
 import './Portfolio.css';
 import PortfolioService from './PortfolioService';
 
-import * as PortfolioHelpers from './PortfolioHelpers';
-import * as SecurityHelpers from './Security/SecurityHelpers';
+import PortfolioHelpers from './PortfolioHelpers';
+import SecurityHelpers from './Security/SecurityHelpers';
 
 import SecurityList from './Security/SecurityList';
 import SecurityGraphs from './Security/SecurityGraphs';
@@ -129,6 +130,13 @@ class Portfolio extends React.Component {
             this.state.cash
         );
         this.setState((prevState, props) => PortfolioHelpers.updateSecurities(prevState, balancedSecurities));
+    }
+
+    handleClearButtonClick = () => {
+        const clearedSecurities = _.map(this.state.securities, (security) => {
+            security.buyQty = 0;
+        });
+        this.setState((prevState, props) => PortfolioHelpers.updateSecurities(prevState, clearedSecurities));
     }
 
     handleBalancingConfigurationBuyOnlyChange = (e) => {

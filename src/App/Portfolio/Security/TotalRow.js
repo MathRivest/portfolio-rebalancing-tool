@@ -1,5 +1,5 @@
 import React from 'react';
-import * as SecurityHelpers from './SecurityHelpers';
+import SecurityHelpers from './SecurityHelpers';
 import { Format } from '../../Components';
 
 let TargetIndicator = (props) => {

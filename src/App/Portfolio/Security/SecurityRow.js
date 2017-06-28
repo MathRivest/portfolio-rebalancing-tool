@@ -1,5 +1,5 @@
 import React from 'react';
-import * as SecurityHelpers from './SecurityHelpers';
+import SecurityHelpers from './SecurityHelpers';
 import { Format, Icon, Button } from '../../Components';
 
 class SecurityRow extends React.Component {

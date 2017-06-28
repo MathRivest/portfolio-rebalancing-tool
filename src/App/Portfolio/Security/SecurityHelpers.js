@@ -101,4 +101,4 @@ const getBalancedList = (config, securities, cash) => {
     }
 }
 
-export { multiplyValues, getTotalWithCash, getPercentOf, getTotalofMultiplied, getBalancedList };
+export default { multiplyValues, getTotalWithCash, getPercentOf, getTotalofMultiplied, getBalancedList };
