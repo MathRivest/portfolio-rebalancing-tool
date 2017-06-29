@@ -39,7 +39,7 @@ class SecurityRow extends React.Component {
         const security = this.props.security;
         const status = security.status;
         if(status && status.type === 'Failed') {
-            return <span className="u-vertical-middle"><Icon name="error" size="sm"/></span>;
+            return <span className="u-vertical-middle u-pointer" data-title={security.status.message}><Icon name="error" size="sm"/></span>;
         }
     }
 
@@ -62,7 +62,7 @@ class SecurityRow extends React.Component {
                         onChange={this.handleNameChange}
                         style={{width: '7em'}}/>
                 </td>
-                <td>
+                <td style={{width: '8em'}}>
                     {securityStatus} &nbsp;
                     <Format format="financial" value={security.cost}/>
                 </td>
