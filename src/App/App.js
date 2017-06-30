@@ -15,7 +15,6 @@ class App extends Component {
 
                 Portfolio todo:
                 <ul>
-                    <li>Add error tooltip</li>
                     <li>Filter cols</li>
                     <li>Accounts concept</li>
                     <li>Current stock trend (up or down)</li>
