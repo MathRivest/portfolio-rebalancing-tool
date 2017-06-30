@@ -8,24 +8,14 @@ import TotalRow from './TotalRow';
 
 
 class SecurityList extends React.Component {
-    // filter = 'mktValue';
-    // order = 'desc';
+    constructor(props) {
+        super(props);
+        this.filter = null;
+        this.order = null;
+    }
 
-
-    // filteredList = _.chain(this.defaultList)
-    //     .orderBy([this.filter], [this.order])
-    //     .value();
-
-    // getList = () => {
-    //     if(this.filter) {
-    //         return this.defaultList;
-    //     } else {
-    //         return this.defaultList;
-    //     }
-    // };
-
-    render() {
-        let defaultList = this.props.securities.map((security) =>
+    makeList = (securities) => {
+         return securities.map((security) =>
             <SecurityRow
                 key={security.id}
                 security={security}
@@ -34,12 +24,37 @@ class SecurityList extends React.Component {
                 onSecurityRemove={this.props.onSecurityRemove}
                 total={this.props.total}/>
         );
+    }
+
+    getFilteredList = () => {
+        if(this.filter) {
+            let filteredSecurities = _.chain(this.props.securities)
+                .orderBy([this.filter], [this.order])
+                .value();
+            return this.makeList(filteredSecurities);
+        } else {
+            return this.makeList(this.props.securities);
+        }
+    };
+
+    setFilters = (filter, order) => {
+        this.filter = filter;
+        this.order = order;
+    }
+
+    render() {
+        let list = this.getFilteredList();
+        let handleFilterChange = (filter, order) => {
+            this.setFilters(filter, order);
+            list = this.getFilteredList();
+        }
+
         return (
             <div>
                 <table className="SecurityList">
-                    <thead><SecurityListHeader /></thead>
+                    <thead><SecurityListHeader onFilterChange={handleFilterChange}  /></thead>
                     <tbody>
-                        {defaultList}
+                        {list}
                     </tbody>
                     <tfoot>
                         <CashRow
