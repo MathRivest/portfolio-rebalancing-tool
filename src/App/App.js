@@ -18,7 +18,8 @@ class App extends Component {
                 <ul>
                     <li>Fix last delete</li>
                     <li>Fix set color on add</li>
-                    <li>Adjust header</li>
+                    <li>Make accounts collapsible</li>
+                    <li>Adjust account header</li>
                     <li>Make intro banner</li>
                 </ul>
             </div>
