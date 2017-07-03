@@ -1,0 +1,25 @@
+.Accounts {
+
+}
+
+.Account {
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+    }
+    &-title {
+        margin: 0;
+    }
+    &-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        li {
+            margin-left: 12px;
+        }
+    }
+}

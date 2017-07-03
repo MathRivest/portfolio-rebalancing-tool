@@ -1,0 +1,17 @@
+.Account-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px; }
+
+.Account-title {
+  margin: 0; }
+
+.Account-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  margin: 0; }
+  .Account-actions li {
+    margin-left: 12px; }

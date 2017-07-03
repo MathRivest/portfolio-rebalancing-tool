@@ -17,7 +17,6 @@ class SecurityList extends React.Component {
     }
 
     makeList = (securities) => {
-        console.log(securities);
          return securities.map((security) =>
             <SecurityRow
                 key={security.id}

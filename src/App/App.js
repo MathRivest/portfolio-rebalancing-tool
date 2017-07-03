@@ -11,13 +11,13 @@ class App extends Component {
                 <div className="App-header">
                     <h2>Portfolio Rebalancing Tool</h2>
                 </div>
+
                 <Portfolio/>
 
                 Portfolio todo:
                 <ul>
-                    <li>Filter cols</li>
-                    <li>Accounts concept</li>
-                    <li>Current stock trend (up or down)</li>
+                    <li>Fix last delete</li>
+                    <li>Fix set color on add</li>
                     <li>Adjust header</li>
                     <li>Make intro banner</li>
                 </ul>
