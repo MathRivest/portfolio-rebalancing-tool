@@ -10,11 +10,14 @@ import TotalRow from './TotalRow';
 class SecurityList extends React.Component {
     constructor(props) {
         super(props);
-        this.filter = null;
-        this.order = null;
+        this.state = {
+            filter: null,
+            order: null
+        }
     }
 
     makeList = (securities) => {
+        console.log(securities);
          return securities.map((security) =>
             <SecurityRow
                 key={security.id}
@@ -27,32 +30,26 @@ class SecurityList extends React.Component {
     }
 
     getFilteredList = () => {
-        if(this.filter) {
-            let filteredSecurities = _.chain(this.props.securities)
-                .orderBy([this.filter], [this.order])
-                .value();
+        if(this.state.filter) {
+            let filteredSecurities = _.orderBy(this.props.securities, [this.state.filter], [this.state.order]);
             return this.makeList(filteredSecurities);
         } else {
             return this.makeList(this.props.securities);
         }
     };
 
-    setFilters = (filter, order) => {
-        this.filter = filter;
-        this.order = order;
+    handleFilterChange = (state) => {
+        this.setState(state);
     }
 
     render() {
         let list = this.getFilteredList();
-        let handleFilterChange = (filter, order) => {
-            this.setFilters(filter, order);
-            list = this.getFilteredList();
-        }
-
         return (
             <div>
                 <table className="SecurityList">
-                    <thead><SecurityListHeader onFilterChange={handleFilterChange}  /></thead>
+                    <thead>
+                        <SecurityListHeader onFilterChange={this.handleFilterChange}/>
+                    </thead>
                     <tbody>
                         {list}
                     </tbody>

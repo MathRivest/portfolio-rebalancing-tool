@@ -6,14 +6,13 @@
   .SecurityList td, .SecurityList th {
     height: 45px;
     padding: 8px;
-    line-height: 1.42857;
+    line-height: 24px;
     border-top: 1px solid #e7ebf3;
     text-align: right; }
   .SecurityList th {
     font-weight: 400;
     color: #596981; }
   .SecurityList thead th {
-    vertical-align: bottom;
     border-top: 0;
     border-bottom: 1px solid #CFD7E6; }
   .SecurityList tbody + tbody td {
@@ -62,3 +61,18 @@
 
 .TargetIndicator.TargetIndicator--danger {
   color: red; }
+
+.SecurityListHeader-itemSortable {
+  padding-right: 18px;
+  cursor: pointer; }
+  .SecurityListHeader-itemSortable:hover .SecurityListHeader-arrow {
+    opacity: 1; }
+    .SecurityListHeader-itemSortable:hover .SecurityListHeader-arrow--hidden {
+      opacity: 0.6; }
+
+.SecurityListHeader-arrow {
+  display: inline-block;
+  vertical-align: middle;
+  transition: opacity 100ms ease-in; }
+  .SecurityListHeader-arrow--hidden {
+    opacity: 0.2; }

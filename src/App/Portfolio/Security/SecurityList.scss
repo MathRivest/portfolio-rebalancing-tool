@@ -7,7 +7,7 @@
     td, th {
         height: 45px;
         padding: 8px;
-        line-height: 1.42857;
+        line-height: 24px;
         border-top: 1px solid #e7ebf3;
         text-align: right;
     }
@@ -19,7 +19,6 @@
 
     thead {
         th {
-            vertical-align: bottom;
             border-top: 0;
             border-bottom: 1px solid #CFD7E6;
         }
@@ -97,4 +96,31 @@
 
 .TargetIndicator.TargetIndicator--danger {
   color: red;
+}
+
+
+.SecurityListHeader {
+    th {
+
+    }
+    &-itemSortable {
+        padding-right: 18px;
+        cursor: pointer;
+        &:hover {
+            .SecurityListHeader-arrow {
+                opacity: 1;
+                &--hidden {
+                    opacity: 0.6
+                }
+            }
+        }
+    }
+    &-arrow {
+        display: inline-block;
+        vertical-align: middle;
+        transition: opacity 100ms ease-in;
+        &--hidden {
+            opacity: 0.2
+        }
+    }
 }
