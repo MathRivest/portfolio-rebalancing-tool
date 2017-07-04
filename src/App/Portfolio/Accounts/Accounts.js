@@ -45,17 +45,14 @@ class Account extends React.Component {
     }
 
     handleSecurityRemove = (security) => {
+        let listObj = AccountHelpers.removeSecurity(this.props.account, security);
+        if(listObj.securities.length === 0) {
+            listObj = AccountHelpers.addSecurity(listObj, AccountHelpers.createSecurity());
+        }
         this.handleAccountChange({
             ...this.props.account,
-            ...AccountHelpers.removeSecurity(this.props.account, security)
+            ...listObj
         });
-
-        // if(this.props.account.length === 1) {
-        //     this.handleAccountChange({
-        //         ...this.props.account,
-        //         ...AccountHelpers.addSecurity(this.props.account, AccountHelpers.createSecurity())
-        //     });
-        // }
     }
 
     handleSecurityChange = (security) => {
