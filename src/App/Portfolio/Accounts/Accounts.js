@@ -84,11 +84,15 @@ class Account extends React.Component {
     }
 
     handleAddButtonClick = () => {
+        let stateObj = {
+            ...this.props.account,
+            ...AccountHelpers.addSecurity(this.props.account, AccountHelpers.createSecurity()),
+        }
+        stateObj = AccountHelpers.setDisplayColors(stateObj);
         this.handleAccountChange({
             ...this.props.account,
-            ...AccountHelpers.addSecurity(this.props.account, AccountHelpers.createSecurity())
+            ...stateObj
         });
-        //this.setDisplayColors();
     }
 
     handleBalancePortfolioButtonClick = () => {

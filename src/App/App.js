@@ -16,8 +16,6 @@ class App extends Component {
 
                 Portfolio todo:
                 <ul>
-                    <li>Fix last delete</li>
-                    <li>Fix set color on add</li>
                     <li>Make accounts collapsible</li>
                     <li>Adjust account header</li>
                     <li>Make intro banner</li>
