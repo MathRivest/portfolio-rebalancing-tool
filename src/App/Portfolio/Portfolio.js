@@ -62,7 +62,8 @@ class Portfolio extends React.Component {
                         symbol: 'Cash',
                         mktValue: 2000,
                         portPercentTarget: 0
-                    }
+                    },
+                    closed: false
                 },
                 {
                     id: 2,
@@ -113,7 +114,8 @@ class Portfolio extends React.Component {
                         symbol: 'Cash',
                         mktValue: 2000,
                         portPercentTarget: 0
-                    }
+                    },
+                    closed: true
                 }
             ],
             securities: [

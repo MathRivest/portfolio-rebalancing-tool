@@ -6,7 +6,8 @@ import Icon from '../Icon/Icon';
 let Button = (props) => {
     let sizeClass = props.size ? ' Button--' + props.size : '',
         variantClass = props.variant ? ' Button--' + props.variant : '',
-        buttonIcon = props.iconName ? <span className="Button-icon"><Icon size="sm" name={props.iconName}/></span> : '';
+        buttonIconSize = props.iconSize ? props.iconSize : 'sm',
+        buttonIcon = props.iconName ? <span className="Button-icon"><Icon size={buttonIconSize} name={props.iconName}/></span> : '';
     return (
         <button
             className={'Button' + variantClass + sizeClass}

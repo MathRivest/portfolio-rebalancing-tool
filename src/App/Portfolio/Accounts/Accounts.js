@@ -126,14 +126,45 @@ class Account extends React.Component {
         });
     }
 
+    handleToggleAccount = () => {
+        this.handleAccountChange({
+            ...this.props.account,
+            closed: !this.props.account.closed
+        });
+    }
+
+    displayAccountContent = () => {
+        return this.props.account.closed ? { display: 'none' } :  null;
+    }
+
+    accountContent = () => {
+        const total = SecurityHelpers.getTotalWithCash(this.props.account.securities, this.props.account.cash, 'mktValue');
+        return (
+            <div className="Account-content" style={this.displayAccountContent()}>
+                <SecurityList
+                    securities={this.props.account.securities}
+                    onSecurityChange={this.handleSecurityChange}
+                    onSecurityNameChange={this.handleSecurityNameChange}
+                    onSecurityRemove={this.handleSecurityRemove}
+                    cash={this.props.account.cash}
+                    onCashChange={this.handleCashChange}
+                    total={total}/>
+
+                <SecurityGraphs
+                    securities={this.props.account.securities}
+                    cash={this.props.account.cash}
+                    total={total}/>
+            </div>
+        )
+    }
+
     render() {
         const account = this.props.account;
-        const total = SecurityHelpers.getTotalWithCash(account.securities, account.cash, 'mktValue');
         return (
             <div className="Account">
                 <div className="Account-header">
                     <h2 className="Account-title">{account.name}</h2>
-                    <ul className="Account-actions">
+                    <ul className="Account-actions" style={this.displayAccountContent()}>
                         <li>
                             <Button
                                 variant="default"
@@ -184,21 +215,13 @@ class Account extends React.Component {
                             </div>
                         </li>*/}
                     </ul>
+                    <Button
+                        iconName={account.closed ? 'expand_more': 'expand_less'}
+                        iconSize="lg"
+                        onClick={this.handleToggleAccount}/>
                 </div>
 
-                <SecurityList
-                    securities={account.securities}
-                    onSecurityChange={this.handleSecurityChange}
-                    onSecurityNameChange={this.handleSecurityNameChange}
-                    onSecurityRemove={this.handleSecurityRemove}
-                    cash={account.cash}
-                    onCashChange={this.handleCashChange}
-                    total={total}/>
-
-                <SecurityGraphs
-                    securities={account.securities}
-                    cash={account.cash}
-                    total={total}/>
+                {this.accountContent()}
             </div>
         )
     }

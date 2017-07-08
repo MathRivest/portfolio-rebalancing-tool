@@ -1,17 +1,28 @@
-.Account-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px; }
+.Accounts:last-child {
+  margin-bottom: 0; }
 
-.Account-title {
-  margin: 0; }
-
-.Account-actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  list-style: none;
-  margin: 0; }
-  .Account-actions li {
-    margin-left: 12px; }
+.Account {
+  background: white;
+  padding: 12px 24px;
+  margin-bottom: 24px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); }
+  .Account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .Account-header > :last-child {
+      margin-right: -18px; }
+  .Account-title {
+    margin: 0; }
+  .Account-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    margin-left: auto; }
+    .Account-actions li {
+      margin-left: 12px; }
+  .Account-content {
+    margin-top: 12px; }

@@ -1,14 +1,15 @@
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px; }
-
-.App-header {
-  background-color: #79589F;
-  padding: 18px 24px;
-  color: white; }
-  .App-header h2 {
-    font-weight: 400;
-    margin: 0; }
+.App {
+  background: #f5f5f5; }
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px; }
+  .App-header {
+    background-color: #79589F;
+    padding: 18px 24px;
+    color: white; }
+    .App-header h2 {
+      font-weight: 400;
+      margin: 0; }
 
 @keyframes App-logo-spin {
   from {

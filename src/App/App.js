@@ -16,8 +16,10 @@ class App extends Component {
 
                 Portfolio todo:
                 <ul>
-                    <li>Make accounts collapsible</li>
-                    <li>Adjust account header</li>
+                    <li>Add account</li>
+                    <li>Name account</li>
+                    <li>Delete account</li>
+                    <li>Use rechart instead</li>
                     <li>Make intro banner</li>
                 </ul>
             </div>
