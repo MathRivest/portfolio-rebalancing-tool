@@ -1,10 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 import './Portfolio.css';
-import PortfolioService from './PortfolioService';
 
 import PortfolioHelpers from './PortfolioHelpers';
-import SecurityHelpers from './Security/SecurityHelpers';
 
 import Accounts from './Accounts/Accounts';
 
