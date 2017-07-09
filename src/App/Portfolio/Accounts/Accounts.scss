@@ -20,7 +20,33 @@
         }
     }
     &-title {
+        flex: 1 1 auto;
         margin: 0;
+        display: flex;
+        align-items: center;
+        input {
+            flex: 1 0 auto;
+            border-color: transparent;
+            padding: 6px 0;
+            margin-right: 6px;
+            &:focus {
+                border-top-color: transparent;
+                border-right-color: transparent;
+                border-left-color: transparent;
+            }
+            &:hover {
+                border-top-color: transparent;
+                border-right-color: transparent;
+                border-left-color: transparent;
+                + * {
+                    opacity: 1;
+                }
+            }
+        }
+
+        > :last-child {
+            opacity: 0;
+        }
     }
     &-actions {
         display: flex;

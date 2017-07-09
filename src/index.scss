@@ -56,3 +56,18 @@ body {
     background: rgba(#222, 0.8);
     color: #ffffff;
 }
+
+input {
+    border: 1px solid #CFD7E6;
+    transition: border-color 200ms ease-in;
+    ::placeholder {
+        color: #dedede;
+    }
+    &:focus {
+        outline: 0;
+        border-color: #79589F;
+    }
+    &:hover {
+        border-color: #79589F;
+    }
+}

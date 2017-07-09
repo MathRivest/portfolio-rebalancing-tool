@@ -14,7 +14,27 @@
     .Account-header > :last-child {
       margin-right: -18px; }
   .Account-title {
-    margin: 0; }
+    flex: 1 1 auto;
+    margin: 0;
+    display: flex;
+    align-items: center; }
+    .Account-title input {
+      flex: 1 0 auto;
+      border-color: transparent;
+      padding: 6px 0;
+      margin-right: 6px; }
+      .Account-title input:focus {
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-left-color: transparent; }
+      .Account-title input:hover {
+        border-top-color: transparent;
+        border-right-color: transparent;
+        border-left-color: transparent; }
+        .Account-title input:hover + * {
+          opacity: 1; }
+    .Account-title > :last-child {
+      opacity: 0; }
   .Account-actions {
     display: flex;
     justify-content: flex-end;

@@ -10,7 +10,7 @@ import SecurityHelpers from '../Security/SecurityHelpers';
 import SecurityList from '../Security/SecurityList';
 import SecurityGraphs from '../Security/SecurityGraphs';
 
-import { Button } from '../../Components';
+import { Button, Icon } from '../../Components';
 
 class Account extends React.Component {
 
@@ -45,14 +45,21 @@ class Account extends React.Component {
     }
 
     handleSecurityRemove = (security) => {
-        let listObj = AccountHelpers.removeSecurity(this.props.account, security);
-        if(listObj.securities.length === 0) {
-            listObj = AccountHelpers.addSecurity(listObj, AccountHelpers.createSecurity());
-        }
-        this.handleAccountChange({
+        let account = {
             ...this.props.account,
-            ...listObj
-        });
+            ...AccountHelpers.removeSecurity(this.props.account, security)
+        };
+        if(account.securities.length === 0) {
+            account = {
+                ...account,
+                ...AccountHelpers.addSecurity(account, AccountHelpers.createSecurity())
+            };
+            account = {
+                ...account,
+                ...AccountHelpers.setDisplayColors(account)
+            };
+        }
+        this.handleAccountChange(account);
     }
 
     handleSecurityChange = (security) => {
@@ -133,6 +140,13 @@ class Account extends React.Component {
         });
     }
 
+    handleAccountFormChanges = (e) => {
+        this.handleAccountChange({
+            ...this.props.account,
+            [e.target.name]: e.target.value
+        });
+    }
+
     displayAccountContent = () => {
         return this.props.account.closed ? { display: 'none' } :  null;
     }
@@ -163,7 +177,17 @@ class Account extends React.Component {
         return (
             <div className="Account">
                 <div className="Account-header">
-                    <h2 className="Account-title">{account.name}</h2>
+                    <h2 className="Account-title">
+                        <input
+                            type="text"
+                            name="name"
+                            value={account.name}
+                            placeholder="Enter account name..."
+                            onChange={this.handleAccountFormChanges}/>
+                        <Icon
+                            name="mode_edit"
+                            size="sm"/>
+                    </h2>
                     <ul className="Account-actions" style={this.displayAccountContent()}>
                         <li>
                             <Button
