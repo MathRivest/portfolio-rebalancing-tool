@@ -14,12 +14,13 @@ class App extends Component {
 
                 <Portfolio/>
 
-                Portfolio todo:
+                <h1>Todo:</h1>
                 <ul>
-                    <li>Add account</li>
                     <li>Delete account</li>
+                    <li>Add button styles</li>
+                    <li>Prevent too many rendering</li>
                     <li>Use rechart instead</li>
-                    <li>Make intro banner</li>
+                    <li>Make intro banner / Onboarding</li>
                 </ul>
             </div>
         );

@@ -2,6 +2,11 @@
     &:last-child {
         margin-bottom: 0;
     }
+    &-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 24px;
+    }
 }
 
 .Account {
@@ -26,6 +31,7 @@
         align-items: center;
         input {
             flex: 1 0 auto;
+            max-width: 320px;
             border-color: transparent;
             padding: 6px 0;
             margin-right: 6px;

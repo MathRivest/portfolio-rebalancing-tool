@@ -3,13 +3,17 @@ import _ from 'lodash';
 
 import './Accounts.css';
 
+// Services
 import PortfolioService from '../PortfolioService';
+
+// Helpers
 import AccountHelpers from './AccountHelpers';
 import SecurityHelpers from '../Security/SecurityHelpers';
 
+// Components
+import AccountsActions from './AccountsActions';
 import SecurityList from '../Security/SecurityList';
 import SecurityGraphs from '../Security/SecurityGraphs';
-
 import { Button, Icon } from '../../Components';
 
 class Account extends React.Component {
@@ -174,6 +178,7 @@ class Account extends React.Component {
 
     render() {
         const account = this.props.account;
+        const accountContent = this.accountContent();
         return (
             <div className="Account">
                 <div className="Account-header">
@@ -245,7 +250,7 @@ class Account extends React.Component {
                         onClick={this.handleToggleAccount}/>
                 </div>
 
-                {this.accountContent()}
+                {accountContent}
             </div>
         )
     }
@@ -261,7 +266,10 @@ class Accounts extends React.Component {
     render() {
         const list = this.makeList();
         return (
-            <div>{list}</div>
+            <div className="Accounts">
+                <AccountsActions onAccountAdd={this.props.onAccountAdd}/>
+                {list}
+            </div>
         )
     }
 }

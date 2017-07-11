@@ -61,7 +61,7 @@ class Portfolio extends React.Component {
                         mktValue: 2000,
                         portPercentTarget: 0
                     },
-                    closed: false
+                    closed: true
                 },
                 {
                     id: 2,
@@ -114,7 +114,7 @@ class Portfolio extends React.Component {
                         portPercentTarget: 0
                     },
                     closed: true
-                }
+                },
             ],
             securities: [
                 {
@@ -170,7 +170,6 @@ class Portfolio extends React.Component {
     }
 
     handleAccountChange = (updatedAccount) => {
-
         this.setState((prevState, props) => {
             const updatedAccounts = _.map(prevState.accounts, (account) => {
                 if(account.id === updatedAccount.id) {
@@ -184,12 +183,17 @@ class Portfolio extends React.Component {
         });
     }
 
+    handleAccountAdd = () => {
+        this.setState((prevState, props) => PortfolioHelpers.addAccount(prevState, PortfolioHelpers.createAccount()));
+    }
+
     render() {
         return(
             <div className="Portfolio">
-
-                <Accounts accounts={this.state.accounts} onAccountChange={this.handleAccountChange}/>
-
+                <Accounts
+                    accounts={this.state.accounts}
+                    onAccountChange={this.handleAccountChange}
+                    onAccountAdd={this.handleAccountAdd}/>
             </div>
         )
     }

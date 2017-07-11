@@ -1,6 +1,11 @@
 .Accounts:last-child {
   margin-bottom: 0; }
 
+.Accounts-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px; }
+
 .Account {
   background: white;
   padding: 12px 24px;
@@ -20,6 +25,7 @@
     align-items: center; }
     .Account-title input {
       flex: 1 0 auto;
+      max-width: 320px;
       border-color: transparent;
       padding: 6px 0;
       margin-right: 6px; }
