@@ -151,14 +151,86 @@ class Account extends React.Component {
         });
     }
 
-    displayAccountContent = () => {
-        return this.props.account.closed ? { display: 'none' } :  null;
+    handleRemoveButtonClick = (e) => {
+        this.props.onAccountRemove(this.props.account);
+    }
+
+    accountActions = () => {
+        if(this.props.account.closed) {
+            return false;
+        }
+
+        return (
+            <ul className="Account-actions">
+                <li>
+                    <Button
+                        variant="default"
+                        size="sm"
+                        iconName="add"
+                        onClick={this.handleAddButtonClick}>
+                        Add security
+                    </Button>
+                </li>
+                <li>
+                    <Button
+                        variant="default"
+                        size="sm"
+                        iconName="update"
+                        onClick={this.handleRefreshButtonClick}>
+                        Refresh quotes
+                    </Button>
+                </li>
+                <li>
+                    <Button
+                        variant="default"
+                        size="sm"
+                        iconName="donut_large"
+                        onClick={this.handleBalancePortfolioButtonClick}>
+                        Balance
+                    </Button>
+                </li>
+                <li>
+                    <Button
+                        variant="default"
+                        size="sm"
+                        iconName="undo"
+                        onClick={this.handleClearButtonClick}>
+                        Clear buy
+                    </Button>
+                </li>
+                <li>
+                    <Button
+                        variant="default"
+                        size="sm"
+                        iconName="delete"
+                        onClick={this.handleRemoveButtonClick}>
+                        Delete account
+                    </Button>
+                </li>
+                {/*<li>
+                    <div className="Checkbox">
+                        <label htmlFor="buyOnly">
+                            <input
+                                id="buyOnly"
+                                type="checkbox"
+                                name="buyOnly"
+                                checked={this.state.balancingConfiguration.buyOnly}
+                                onChange={this.handleBalancingConfigurationBuyOnlyChange}/>
+                                Buy Only
+                        </label>
+                    </div>
+                </li>*/}
+            </ul>
+        )
     }
 
     accountContent = () => {
+        if(this.props.account.closed) {
+            return false;
+        }
         const total = SecurityHelpers.getTotalWithCash(this.props.account.securities, this.props.account.cash, 'mktValue');
         return (
-            <div className="Account-content" style={this.displayAccountContent()}>
+            <div className="Account-content">
                 <SecurityList
                     securities={this.props.account.securities}
                     onSecurityChange={this.handleSecurityChange}
@@ -178,6 +250,7 @@ class Account extends React.Component {
 
     render() {
         const account = this.props.account;
+        const accountActions = this.accountActions();
         const accountContent = this.accountContent();
         return (
             <div className="Account">
@@ -193,63 +266,13 @@ class Account extends React.Component {
                             name="mode_edit"
                             size="sm"/>
                     </h2>
-                    <ul className="Account-actions" style={this.displayAccountContent()}>
-                        <li>
-                            <Button
-                                variant="default"
-                                size="sm"
-                                iconName="add"
-                                onClick={this.handleAddButtonClick}>
-                                Add security
-                            </Button>
-                        </li>
-                        <li>
-                            <Button
-                                variant="default"
-                                size="sm"
-                                iconName="update"
-                                onClick={this.handleRefreshButtonClick}>
-                                Refresh quotes
-                            </Button>
-                        </li>
-                        <li>
-                            <Button
-                                variant="default"
-                                size="sm"
-                                iconName="donut_large"
-                                onClick={this.handleBalancePortfolioButtonClick}>
-                                Balance
-                            </Button>
-                        </li>
-                        <li>
-                            <Button
-                                variant="default"
-                                size="sm"
-                                iconName="undo"
-                                onClick={this.handleClearButtonClick}>
-                                Clear Buy
-                            </Button>
-                        </li>
-                        {/*<li>
-                            <div className="Checkbox">
-                                <label htmlFor="buyOnly">
-                                    <input
-                                        id="buyOnly"
-                                        type="checkbox"
-                                        name="buyOnly"
-                                        checked={this.state.balancingConfiguration.buyOnly}
-                                        onChange={this.handleBalancingConfigurationBuyOnlyChange}/>
-                                        Buy Only
-                                </label>
-                            </div>
-                        </li>*/}
-                    </ul>
+
                     <Button
                         iconName={account.closed ? 'expand_more': 'expand_less'}
                         iconSize="lg"
                         onClick={this.handleToggleAccount}/>
                 </div>
-
+                {accountActions}
                 {accountContent}
             </div>
         )
@@ -259,7 +282,7 @@ class Account extends React.Component {
 class Accounts extends React.Component {
     makeList = () => {
          return this.props.accounts.map((account) =>
-            <Account key={account.id} account={account} onAccountChange={this.props.onAccountChange}/>
+            <Account key={account.id} account={account} onAccountChange={this.props.onAccountChange} onAccountRemove={this.props.onAccountRemove}/>
         );
     }
 
@@ -267,7 +290,7 @@ class Accounts extends React.Component {
         const list = this.makeList();
         return (
             <div className="Accounts">
-                <AccountsActions onAccountAdd={this.props.onAccountAdd}/>
+                <AccountsActions onAccountAdd={this.props.onAccountAdd} onAccountRemove={this.props.onAccountRemove}/>
                 {list}
             </div>
         )

@@ -46,9 +46,6 @@
     justify-content: flex-end;
     align-items: center;
     list-style: none;
-    margin: 0;
-    margin-left: auto; }
+    margin: 12px 0; }
     .Account-actions li {
       margin-left: 12px; }
-  .Account-content {
-    margin-top: 12px; }

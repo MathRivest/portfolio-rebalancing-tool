@@ -53,7 +53,18 @@ class SecurityGraphs extends React.Component {
         }
     }
 
+    shouldRender = () => {
+        let hasPercentTotal = SecurityHelpers.getTotalWithCash(this.props.securities, this.props.cash, 'portPercentTarget') > 0,
+            hasTotal = this.props.total > 0;
+        return hasPercentTotal || hasTotal;
+    }
+
     render() {
+
+        if(!this.shouldRender()) {
+            return false
+        }
+
         this.assets = [...this.props.securities, this.props.cash];
 
         // Current Graph

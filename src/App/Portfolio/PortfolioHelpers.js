@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import AccountHelpers from './Accounts/AccountHelpers';
 
 let guid = () => {
@@ -32,8 +33,18 @@ let addAccount = (prevState, account) => {
     }
 }
 
+let removeAccount = (prevState, account) => {
+    let updatedList = _.filter(prevState.accounts, item => {
+        return item.id !== account.id;
+    });
+    return {
+        accounts: updatedList
+    };
+}
+
 export default {
     guid,
     createAccount,
-    addAccount
+    addAccount,
+    removeAccount
 };
