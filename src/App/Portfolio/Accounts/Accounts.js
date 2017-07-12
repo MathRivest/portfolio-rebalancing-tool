@@ -155,7 +155,7 @@ class Account extends React.Component {
         this.props.onAccountRemove(this.props.account);
     }
 
-    accountActions = () => {
+    accountContentActions = () => {
         if(this.props.account.closed) {
             return false;
         }
@@ -198,15 +198,6 @@ class Account extends React.Component {
                         Clear buy
                     </Button>
                 </li>
-                <li>
-                    <Button
-                        variant="default"
-                        size="sm"
-                        iconName="delete"
-                        onClick={this.handleRemoveButtonClick}>
-                        Delete account
-                    </Button>
-                </li>
                 {/*<li>
                     <div className="Checkbox">
                         <label htmlFor="buyOnly">
@@ -229,28 +220,42 @@ class Account extends React.Component {
             return false;
         }
         const total = SecurityHelpers.getTotalWithCash(this.props.account.securities, this.props.account.cash, 'mktValue');
+        const accountContentActions = this.accountContentActions();
         return (
-            <div className="Account-content">
-                <SecurityList
-                    securities={this.props.account.securities}
-                    onSecurityChange={this.handleSecurityChange}
-                    onSecurityNameChange={this.handleSecurityNameChange}
-                    onSecurityRemove={this.handleSecurityRemove}
-                    cash={this.props.account.cash}
-                    onCashChange={this.handleCashChange}
-                    total={total}/>
+            <div>
+                <div className="Account-content">
+                    {accountContentActions}
+                    <SecurityList
+                        securities={this.props.account.securities}
+                        onSecurityChange={this.handleSecurityChange}
+                        onSecurityNameChange={this.handleSecurityNameChange}
+                        onSecurityRemove={this.handleSecurityRemove}
+                        cash={this.props.account.cash}
+                        onCashChange={this.handleCashChange}
+                        total={total}/>
 
-                <SecurityGraphs
-                    securities={this.props.account.securities}
-                    cash={this.props.account.cash}
-                    total={total}/>
+                    <SecurityGraphs
+                        securities={this.props.account.securities}
+                        cash={this.props.account.cash}
+                        total={total}/>
+                </div>
+                <ul className="Account-actions">
+                    <li>
+                        <Button
+                            variant="default"
+                            size="sm"
+                            iconName="delete"
+                            onClick={this.handleRemoveButtonClick}>
+                            Delete account
+                        </Button>
+                    </li>
+                </ul>
             </div>
         )
     }
 
     render() {
         const account = this.props.account;
-        const accountActions = this.accountActions();
         const accountContent = this.accountContent();
         return (
             <div className="Account">
@@ -272,7 +277,6 @@ class Account extends React.Component {
                         iconSize="lg"
                         onClick={this.handleToggleAccount}/>
                 </div>
-                {accountActions}
                 {accountContent}
             </div>
         )

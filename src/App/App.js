@@ -16,9 +16,8 @@ class App extends Component {
 
                 <h1>Todo:</h1>
                 <ul>
-                    <li>Add button styles</li>
-                    <li>Prevent too many rendering</li>
                     <li>Use rechart instead</li>
+                    <li>Prevent too many rendering</li>
                     <li>Make intro banner / Onboarding</li>
                 </ul>
             </div>

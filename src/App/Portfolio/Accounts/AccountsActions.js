@@ -6,7 +6,7 @@ class AccountsActions extends React.Component {
         return (
             <div className="Accounts-actions">
                 <Button
-                    variant="default"
+                    variant="primary"
                     iconName="add"
                     size="lg"
                     onClick={this.props.onAccountAdd}>

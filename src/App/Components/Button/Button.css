@@ -10,9 +10,9 @@
   line-height: 18px;
   color: #79589F;
   cursor: pointer;
-  transition-property: background-color, color;
-  transition-duration: 200ms;
-  transition-timing-function: ease-out; }
+  transition-property: background-color, color, opacity;
+  transition-duration: 100ms;
+  transition-timing-function: ease-in; }
   .Button:focus {
     outline: none; }
   .Button:hover {
@@ -30,5 +30,14 @@
   border: 1px solid rgba(121, 88, 159, 0.6);
   border-radius: 3px; }
   .Button--default:hover {
-    background: #FAF7FD;
+    background: #f7f1ff;
     color: #79589F; }
+
+.Button--primary {
+  background: #79589F;
+  border: 1px solid #79589F;
+  border-radius: 3px;
+  color: #fff; }
+  .Button--primary:hover {
+    opacity: 0.8;
+    color: #fff; }

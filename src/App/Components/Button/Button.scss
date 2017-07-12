@@ -12,9 +12,9 @@
     line-height: 18px;
     color: $color-brand;
     cursor: pointer;
-    transition-property: background-color, color;
-    transition-duration: 200ms;
-    transition-timing-function: ease-out;
+    transition-property: background-color, color, opacity;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in;
 
     &:focus {
         outline: none;
@@ -47,7 +47,18 @@
     border: 1px solid rgba($color-brand, .6);
     border-radius: 3px;
     &:hover {
-        background: #FAF7FD;
+        background: #f7f1ff;
         color: $color-brand;
+    }
+}
+
+.Button--primary {
+    background: $color-brand;
+    border: 1px solid $color-brand;
+    border-radius: 3px;
+    color: #fff;
+    &:hover {
+        opacity: 0.8;
+        color: #fff;
     }
 }
