@@ -1,14 +1,5 @@
 import _ from 'lodash';
-
-let guid = () => {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-}
+import uuid from 'uuid/v1';
 
 const colorList = [
     '217,217,217',
@@ -50,7 +41,7 @@ const setDisplayColors = (prevState) => {
 
 let createSecurity = () => {
     return {
-        id: guid(),
+        id: uuid(),
         symbol: '',
         cost: 0,
         portPercentTarget: 0,

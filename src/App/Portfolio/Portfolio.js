@@ -1,5 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
+import uuid from 'uuid/v1';
+
 import './Portfolio.css';
 
 import PortfolioHelpers from './PortfolioHelpers';
@@ -16,7 +18,7 @@ class Portfolio extends React.Component {
                 //     name: 'Account 1',
                 //     securities: [
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VUN.TO',
                 //             cost: 0,
                 //             portPercentTarget: 25,
@@ -24,7 +26,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VCN.TO',
                 //             cost: 0,
                 //             portPercentTarget: 25,
@@ -32,7 +34,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VAB.TO',
                 //             cost: 0,
                 //             portPercentTarget: 20,
@@ -40,7 +42,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VDU.TO',
                 //             cost: 0,
                 //             portPercentTarget: 20,
@@ -48,7 +50,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'ZRE.TO',
                 //             cost: 0,
                 //             portPercentTarget: 10,
@@ -68,7 +70,7 @@ class Portfolio extends React.Component {
                 //     name: 'Account 2',
                 //     securities: [
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VUN.TO',
                 //             cost: 0,
                 //             portPercentTarget: 25,
@@ -76,7 +78,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VCN.TO',
                 //             cost: 0,
                 //             portPercentTarget: 25,
@@ -84,7 +86,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VAB.TO',
                 //             cost: 0,
                 //             portPercentTarget: 20,
@@ -92,7 +94,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'VDU.TO',
                 //             cost: 0,
                 //             portPercentTarget: 20,
@@ -100,7 +102,7 @@ class Portfolio extends React.Component {
                 //             buyQty: 0
                 //         },
                 //         {
-                //             id: PortfolioHelpers.guid(),
+                //             id: uuid(),
                 //             symbol: 'ZRE.TO',
                 //             cost: 0,
                 //             portPercentTarget: 10,
