@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import './Balancer.css';
 
-import { Format } from '../../Components';
+import { TargetIndicator } from '../../Components';
 
 class Balancer extends React.Component {
 
@@ -15,6 +15,25 @@ class Balancer extends React.Component {
             .uniqBy('symbol')
             .filter('cost')
             .value();
+    }
+
+    makeHeader = () => {
+        return (
+            <tr>
+                <th className="DataTable-row-cell--left">
+                    Symbol
+                </th>
+                <th>
+                    Target (%)
+                </th>
+                <th>
+                    Current (%)
+                </th>
+                <th>
+                    New (%)
+                </th>
+            </tr>
+        )
     }
 
     makeList = () => {
@@ -33,26 +52,47 @@ class Balancer extends React.Component {
                         style={{width: '4em'}}
                         onChange={this.handleChanges}/>
                 </td>
+                <td>
+                    20
+                </td>
+                <td>
+                    20
+                </td>
             </tr>
         );
     }
 
+    makeFooter = () => {
+        return (
+            <tr>
+                <td className="DataTable-row-cell--left">Total</td>
+                <td>
+                    <TargetIndicator val={99} minVal={100}  maxVal={100}>
+                        {99}
+                    </TargetIndicator>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        )
+    }
+
     render() {
+        const header = this.makeHeader();
         const list = this.makeList();
+        const footer = this.makeFooter();
         return (
             <div className="Balancer">
                 <table className="DataTable">
                     <thead>
-                        <tr>
-                            <th className="DataTable-row-cell--left">
-                                Symbol
-                            </th>
-                            <th>Target</th>
-                        </tr>
+                        {header}
                     </thead>
                     <tbody>
                         {list}
                     </tbody>
+                    <tfoot>
+                        {footer}
+                    </tfoot>
                 </table>
             </div>
         )

@@ -73,7 +73,7 @@ class Portfolio extends React.Component {
                     securities: [
                         {
                             id: uuid(),
-                            symbol: 'VUN.TO',
+                            symbol: 'ZAG.TO',
                             cost: 0,
                             portPercentTarget: 25,
                             mktValue: 1879.96,
@@ -81,7 +81,7 @@ class Portfolio extends React.Component {
                         },
                         {
                             id: uuid(),
-                            symbol: 'VCN.TO',
+                            symbol: 'XAW.TO',
                             cost: 0,
                             portPercentTarget: 25,
                             mktValue: 1680.80,

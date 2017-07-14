@@ -16,7 +16,10 @@ class App extends Component {
 
                 <h1>Todo:</h1>
                 <ul>
-                    <li>Balancer - security targets</li>
+                    <li>Balancer current and new</li>
+                    <li>Balancer total target, current, new</li>
+                    <li>Set uniq securities state</li>
+                    <li>Remove individual target</li>
                     <li>Balancer - balance All</li>
                     <ul>
                         <li>Order by price desc</li>
