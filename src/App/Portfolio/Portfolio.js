@@ -136,6 +136,7 @@ class Portfolio extends React.Component {
                 return account;
             });
             const uniqSecurities = _.chain(updatedAccounts)
+                .concat(prevState.securities)
                 .flatMap((n) => {
                     return n.securities;
                 })
