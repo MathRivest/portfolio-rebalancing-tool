@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from '../../Components';
+import { Button } from '../Components';
 
-class AccountsActions extends React.Component {
+class PortfolioActions extends React.Component {
     render() {
         return (
-            <div className="Accounts-actions">
+            <div className="Portfolio-actions">
                 <Button
                     variant="primary"
                     iconName="add"
@@ -17,4 +17,4 @@ class AccountsActions extends React.Component {
     }
 }
 
-export default AccountsActions;
+export default PortfolioActions;

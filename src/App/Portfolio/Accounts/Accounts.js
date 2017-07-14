@@ -11,7 +11,6 @@ import AccountHelpers from './AccountHelpers';
 import SecurityHelpers from '../Security/SecurityHelpers';
 
 // Components
-import AccountsActions from './AccountsActions';
 import SecurityList from '../Security/SecurityList';
 import SecurityGraphs from '../Security/SecurityGraphs';
 import { Button, Icon } from '../../Components';
@@ -260,7 +259,7 @@ class Account extends React.Component {
         return (
             <div className="Account">
                 <div className="Account-header">
-                    <h2 className="Account-title">
+                    <div className="Account-title">
                         <input
                             type="text"
                             name="name"
@@ -270,7 +269,7 @@ class Account extends React.Component {
                         <Icon
                             name="mode_edit"
                             size="sm"/>
-                    </h2>
+                    </div>
 
                     <Button
                         iconName={account.closed ? 'expand_more': 'expand_less'}
@@ -294,7 +293,6 @@ class Accounts extends React.Component {
         const list = this.makeList();
         return (
             <div className="Accounts">
-                <AccountsActions onAccountAdd={this.props.onAccountAdd} onAccountRemove={this.props.onAccountRemove}/>
                 {list}
             </div>
         )

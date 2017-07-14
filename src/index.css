@@ -389,6 +389,29 @@ template {
 [hidden] {
   display: none; }
 
+input {
+  max-width: 84px;
+  font-size: 12px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  height: 28px;
+  padding: 2px 12px; }
+
+input[type=number] {
+  text-align: right; }
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none; }
+
+.Checkbox {
+  display: inline-block;
+  font-size: 12px;
+  color: #596981; }
+  .Checkbox label[for] {
+    cursor: pointer; }
+  .Checkbox input {
+    margin-right: 4px; }
+
 body {
   margin: 0;
   padding: 0;
@@ -400,14 +423,54 @@ body {
   body * {
     box-sizing: border-box; }
 
-.Checkbox {
-  display: inline-block;
-  font-size: 12px;
-  color: #596981; }
-  .Checkbox label[for] {
-    cursor: pointer; }
-  .Checkbox input {
-    margin-right: 4px; }
+h1, h2, h3, h4 {
+  margin: 0; }
+
+.DataTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-bottom: 24px; }
+  .DataTable td, .DataTable th {
+    height: 45px;
+    padding: 8px;
+    line-height: 24px;
+    border-top: 1px solid #e7ebf3;
+    text-align: right; }
+  .DataTable th {
+    font-weight: 400;
+    color: #596981; }
+  .DataTable thead th {
+    border-top: 0;
+    border-bottom: 1px solid #CFD7E6; }
+  .DataTable tbody + tbody td {
+    border-top: 1px solid #CFD7E6; }
+  .DataTable tbody tr:hover {
+    background-color: #fafbfc; }
+  .DataTable tfoot tr {
+    background-color: #fafbfc; }
+  .DataTable .DataTable-row-cell--actions {
+    text-align: right;
+    width: 40px; }
+  .DataTable .DataTable-row-cell--left {
+    text-align: left; }
+    .DataTable .DataTable-row-cell--left input {
+      text-align: left; }
+  .DataTable .DataTable-row-cell--center {
+    text-align: center; }
+  .DataTable .DataTable-row-cell--symbol {
+    width: 118px;
+    text-align: left; }
+    .DataTable .DataTable-row-cell--symbol input {
+      text-align: left; }
+  .DataTable-colorBlock {
+    width: 10px;
+    height: 10px;
+    border: 1px solid currentColor;
+    background: currentColor;
+    display: inline-block;
+    margin-right: 8px;
+    color: #CFD7E6; }
 
 .u-vertical-middle {
   display: inline-block;

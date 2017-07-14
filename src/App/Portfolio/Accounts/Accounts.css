@@ -1,16 +1,11 @@
 .Accounts:last-child {
   margin-bottom: 0; }
 
-.Accounts-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 24px; }
-
 .Account {
   background: white;
   padding: 12px 24px;
   margin-bottom: 24px;
-  border-radius: 3px;
+  border-radius: 2px;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12); }
   .Account-header {
     display: flex;
@@ -27,8 +22,10 @@
       flex: 1 0 auto;
       max-width: 320px;
       border-color: transparent;
-      padding: 6px 0;
-      margin-right: 6px; }
+      padding: 12px 0;
+      margin-right: 6px;
+      font-size: 18px;
+      height: 36px; }
       .Account-title input:focus {
         border-top-color: transparent;
         border-right-color: transparent;

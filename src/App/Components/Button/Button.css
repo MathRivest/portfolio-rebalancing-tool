@@ -8,7 +8,7 @@
   background-color: transparent;
   font-size: 14px;
   line-height: 18px;
-  color: #79589F;
+  color: #111111;
   cursor: pointer;
   transition-property: background-color, color, opacity;
   transition-duration: 100ms;
@@ -27,16 +27,16 @@
 
 .Button--default {
   background: #fff;
-  border: 1px solid rgba(121, 88, 159, 0.6);
-  border-radius: 3px; }
+  border: 1px solid rgba(17, 17, 17, 0.6);
+  border-radius: 2px; }
   .Button--default:hover {
-    background: #f7f1ff;
-    color: #79589F; }
+    background: rgba(17, 17, 17, 0.03);
+    color: #111111; }
 
 .Button--primary {
-  background: #79589F;
-  border: 1px solid #79589F;
-  border-radius: 3px;
+  background: #111111;
+  border: 1px solid #111111;
+  border-radius: 2px;
   color: #fff; }
   .Button--primary:hover {
     opacity: 0.8;

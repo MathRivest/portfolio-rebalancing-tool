@@ -1,102 +1,11 @@
-
 .SecurityList {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    margin-bottom: 24px;
-    td, th {
-        height: 45px;
-        padding: 8px;
-        line-height: 24px;
-        border-top: 1px solid #e7ebf3;
-        text-align: right;
-    }
-    th {
-        font-weight: 400;
-        color: #596981;
-    }
-    td {}
-
-    thead {
-        th {
-            border-top: 0;
-            border-bottom: 1px solid #CFD7E6;
-        }
-    }
-    tbody {
-        + tbody td {
-            border-top: 1px solid #CFD7E6;
-        }
-        tr:hover {
-            background-color: #fafbfc;
-        }
-    }
-    tfoot {
-        tr {
-            background-color: #fafbfc;
-        }
-    }
-
-    input {
-        max-width: 84px;
-        font-size: 12px;
-        box-sizing: border-box;
-        text-align: right;
-        border-radius: 3px;
-        height: 28px;
-        padding: 2px 12px;
-    }
-
-    input[type=number]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
-
-
-    & &-row {
-        &-cell--actions {
-            text-align: right;
-            width: 40px;
-        }
-        &-cell--left {
-            text-align: left;
-            input {
-                text-align: left;
-            }
-        }
-        &-cell--center {
-            text-align: center;
-        }
-        &-cell--symbol{
-            width: 118px;
-            text-align: left;
-            input {
-                text-align: left;
-            }
-        }
-    }
-
-    &-colorBlock {
-        width: 10px;
-        height: 10px;
-        border: 1px solid currentColor;
-        background: currentColor;
-        display: inline-block;
-        margin-right: 8px;
-        color: #CFD7E6;
-    }
 }
-
-
 
 .TargetIndicator.TargetIndicator--danger {
-  color: red;
+  color: red; // TODO: change error color
 }
 
-
 .SecurityListHeader {
-    th {
-
-    }
     &-itemSortable {
         padding-right: 18px;
         cursor: pointer;

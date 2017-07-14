@@ -44,8 +44,8 @@ class SecurityList extends React.Component {
     render() {
         let list = this.getFilteredList();
         return (
-            <div>
-                <table className="SecurityList">
+            <div className="SecurityList">
+                <table className="DataTable">
                     <thead>
                         <SecurityListHeader onFilterChange={this.handleFilterChange}/>
                     </thead>

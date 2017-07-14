@@ -26,10 +26,10 @@ class CashRow extends React.Component {
         const priceTotal = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
         const cashPortPercentNew = this.getPortPercentNew();
         return(
-            <tr className="SecurityList-row">
-                <td className="SecurityList-row-cell--left">
+            <tr className="DataTable-row">
+                <td className="DataTable-row-cell--left">
                     <div
-                        className="SecurityList-colorBlock"
+                        className="DataTable-colorBlock"
                         style={{color: cash.displayColor}}></div>
                     {cash.symbol}
                 </td>

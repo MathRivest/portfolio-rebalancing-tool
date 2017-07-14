@@ -22,8 +22,8 @@ class TotalRow extends React.Component {
         const priceTotal = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
         const cashLeft = this.props.cash.mktValue - priceTotal;
         return(
-            <tr className="SecurityList-row">
-                <td className="SecurityList-row-cell--left">
+            <tr className="DataTable-row">
+                <td className="DataTable-row-cell--left">
                     Total
                 </td>
                 <td></td>

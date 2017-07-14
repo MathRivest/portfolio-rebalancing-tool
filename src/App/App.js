@@ -16,7 +16,15 @@ class App extends Component {
 
                 <h1>Todo:</h1>
                 <ul>
-                    <li>Use rechart instead</li>
+                    <li>Balancer - security targets</li>
+                    <li>Balancer - balance All</li>
+                    <ul>
+                        <li>Order by price desc</li>
+                        <li>for each security</li>
+                        <li>if sumOfSameSecurity lower than target && hasMoneyLeft</li>
+                        <li>add one</li>
+                    </ul>
+                    <li>Redo charts with recharts</li>
                     <li>Prevent too many rendering</li>
                     <li>Make intro banner / Onboarding</li>
                 </ul>

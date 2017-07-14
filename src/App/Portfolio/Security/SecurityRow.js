@@ -50,10 +50,10 @@ class SecurityRow extends React.Component {
         const securityPortPercentNew = this.getPortPercentNew();
         const securityStatus = this.getSecurityStatus();
         return(
-            <tr className="SecurityList-row">
-                <td className="SecurityList-row-cell--symbol">
+            <tr className="DataTable-row">
+                <td className="DataTable-row-cell--symbol">
                     <div
-                        className="SecurityList-colorBlock"
+                        className="DataTable-colorBlock"
                         style={{color: 'rgba(' + security.displayColor  + ', 1)'}}></div>
                     <input
                         type="text"
@@ -93,7 +93,7 @@ class SecurityRow extends React.Component {
                 </td>
                 <td><Format format="financial" value={price}/></td>
                 <td>{securityPortPercentNew}</td>
-                <td className="SecurityList-row-cell--actions">
+                <td className="DataTable-row-cell--actions">
                     <Button size="sm"
                         iconName="delete_sweep"
                         onClick={this.handleRemove}/>

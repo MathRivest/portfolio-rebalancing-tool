@@ -42,7 +42,7 @@ class SecurityListHeader extends React.Component {
             <tr className="SecurityListHeader">
                 <th
                     onClick={() => this.handleHeaderClick('symbol')}
-                    className="SecurityList-row-cell--left SecurityListHeader-itemSortable">
+                    className="DataTable-row-cell--left SecurityListHeader-itemSortable">
                     Symbol
                     <FilterArrow order={this.order} filter={this.filter} name={'symbol'}/>
                 </th>
