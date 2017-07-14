@@ -65,7 +65,7 @@ class Account extends React.Component {
         this.handleAccountChange(account);
     }
 
-    handleSecurityChange = (security) => {
+    handleAccountSecurityChange = (security) => {
         this.handleAccountChange({
             ...this.props.account,
             ...AccountHelpers.updateSecurity(this.props.account, security)
@@ -226,7 +226,7 @@ class Account extends React.Component {
                     {accountContentActions}
                     <SecurityList
                         securities={this.props.account.securities}
-                        onSecurityChange={this.handleSecurityChange}
+                        onSecurityChange={this.handleAccountSecurityChange}
                         onSecurityNameChange={this.handleSecurityNameChange}
                         onSecurityRemove={this.handleSecurityRemove}
                         cash={this.props.account.cash}
@@ -285,7 +285,11 @@ class Account extends React.Component {
 class Accounts extends React.Component {
     makeList = () => {
          return this.props.accounts.map((account) =>
-            <Account key={account.id} account={account} onAccountChange={this.props.onAccountChange} onAccountRemove={this.props.onAccountRemove}/>
+            <Account
+                key={account.id}
+                account={account}
+                onAccountChange={this.props.onAccountChange}
+                onAccountRemove={this.props.onAccountRemove}/>
         );
     }
 

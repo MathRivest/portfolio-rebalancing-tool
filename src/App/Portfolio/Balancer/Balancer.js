@@ -6,15 +6,14 @@ import './Balancer.css';
 import { TargetIndicator } from '../../Components';
 
 class Balancer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            securities: []
+        }
+    }
 
-    uniqSecurities = () => {
-        return _.chain(this.props.accounts)
-            .flatMap((n) => {
-                return n.securities;
-            })
-            .uniqBy('symbol')
-            .filter('cost')
-            .value();
+    componentDidMount() {
     }
 
     makeHeader = () => {
@@ -37,7 +36,7 @@ class Balancer extends React.Component {
     }
 
     makeList = () => {
-        let securities = this.uniqSecurities();
+        let securities = this.props.securities;
         return securities.map((security) =>
             <tr key={security.id}>
                 <td className="DataTable-row-cell--left">

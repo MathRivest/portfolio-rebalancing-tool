@@ -15,114 +15,115 @@ class Portfolio extends React.Component {
         super(props);
         this.state = {
             accounts: [
-                {
-                    id: 1,
-                    name: 'TFSA - Questrade',
-                    securities: [
-                        {
-                            id: uuid(),
-                            symbol: 'VUN.TO',
-                            cost: 0,
-                            portPercentTarget: 25,
-                            mktValue: 3716.20,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'VCN.TO',
-                            cost: 0,
-                            portPercentTarget: 25,
-                            mktValue: 3728.32,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'VAB.TO',
-                            cost: 0,
-                            portPercentTarget: 20,
-                            mktValue: 2997.20,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'VDU.TO',
-                            cost: 0,
-                            portPercentTarget: 20,
-                            mktValue: 3944.48,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'ZRE.TO',
-                            cost: 0,
-                            portPercentTarget: 10,
-                            mktValue: 1612.12,
-                            buyQty: 0
-                        }
-                    ],
-                    cash: {
-                        symbol: 'Cash',
-                        mktValue: 3000,
-                        portPercentTarget: 0
-                    },
-                    closed: false
-                },
-                {
-                    id: 2,
-                    name: 'RRSP - Questrade',
-                    securities: [
-                        {
-                            id: uuid(),
-                            symbol: 'ZAG.TO',
-                            cost: 0,
-                            portPercentTarget: 25,
-                            mktValue: 1879.96,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'XAW.TO',
-                            cost: 0,
-                            portPercentTarget: 25,
-                            mktValue: 1680.80,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'VAB.TO',
-                            cost: 0,
-                            portPercentTarget: 20,
-                            mktValue: 1270.00,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'VDU.TO',
-                            cost: 0,
-                            portPercentTarget: 20,
-                            mktValue: 1706.46,
-                            buyQty: 0
-                        },
-                        {
-                            id: uuid(),
-                            symbol: 'ZRE.TO',
-                            cost: 0,
-                            portPercentTarget: 10,
-                            mktValue: 589.80,
-                            buyQty: 0
-                        }
-                    ],
-                    cash: {
-                        symbol: 'Cash',
-                        mktValue: 1000,
-                        portPercentTarget: 0
-                    },
-                    closed: true
-                }
+                // {
+                //     id: 1,
+                //     name: 'TFSA - Questrade',
+                //     securities: [
+                //         {
+                //             id: uuid(),
+                //             symbol: 'VUN.TO',
+                //             cost: 0,
+                //             portPercentTarget: 25,
+                //             mktValue: 3716.20,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'VCN.TO',
+                //             cost: 0,
+                //             portPercentTarget: 25,
+                //             mktValue: 3728.32,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'VAB.TO',
+                //             cost: 0,
+                //             portPercentTarget: 20,
+                //             mktValue: 2997.20,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'VDU.TO',
+                //             cost: 0,
+                //             portPercentTarget: 20,
+                //             mktValue: 3944.48,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'ZRE.TO',
+                //             cost: 0,
+                //             portPercentTarget: 10,
+                //             mktValue: 1612.12,
+                //             buyQty: 0
+                //         }
+                //     ],
+                //     cash: {
+                //         symbol: 'Cash',
+                //         mktValue: 3000,
+                //         portPercentTarget: 0
+                //     },
+                //     closed: false
+                // },
+                // {
+                //     id: 2,
+                //     name: 'RRSP - Questrade',
+                //     securities: [
+                //         {
+                //             id: uuid(),
+                //             symbol: 'ZAG.TO',
+                //             cost: 0,
+                //             portPercentTarget: 25,
+                //             mktValue: 1879.96,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'XAW.TO',
+                //             cost: 0,
+                //             portPercentTarget: 25,
+                //             mktValue: 1680.80,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'VAB.TO',
+                //             cost: 0,
+                //             portPercentTarget: 20,
+                //             mktValue: 1270.00,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'VDU.TO',
+                //             cost: 0,
+                //             portPercentTarget: 20,
+                //             mktValue: 1706.46,
+                //             buyQty: 0
+                //         },
+                //         {
+                //             id: uuid(),
+                //             symbol: 'ZRE.TO',
+                //             cost: 0,
+                //             portPercentTarget: 10,
+                //             mktValue: 589.80,
+                //             buyQty: 0
+                //         }
+                //     ],
+                //     cash: {
+                //         symbol: 'Cash',
+                //         mktValue: 1000,
+                //         portPercentTarget: 0
+                //     },
+                //     closed: true
+                // }
             ],
             balancingConfiguration: {
                 buyOnly: true
-            }
+            },
+            securities: []
         }
     }
 
@@ -134,8 +135,16 @@ class Portfolio extends React.Component {
                 }
                 return account;
             });
+            const uniqSecurities = _.chain(updatedAccounts)
+                .flatMap((n) => {
+                    return n.securities;
+                })
+                .uniqBy('symbol')
+                .filter('cost')
+                .value();
             return {
-                accounts: updatedAccounts
+                accounts: updatedAccounts,
+                securities: uniqSecurities
             }
         });
     }
@@ -145,7 +154,6 @@ class Portfolio extends React.Component {
     }
 
     handleAccountRemove = (account) => {
-        console.log('removing...', account)
         this.setState((prevState, props) => PortfolioHelpers.removeAccount(prevState, account));
     }
 
@@ -168,7 +176,7 @@ class Portfolio extends React.Component {
                     <div className="Portfolio-header">
                         <h3>Targets</h3>
                     </div>
-                    <Balancer accounts={this.state.accounts}/>
+                    <Balancer accounts={this.state.accounts} securities={this.state.securities}/>
                 </div>
             </div>
         )
