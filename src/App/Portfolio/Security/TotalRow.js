@@ -4,7 +4,7 @@ import { Format, TargetIndicator } from '../../Components';
 
 class TotalRow extends React.Component {
     render() {
-        const mktValueTotal = SecurityHelpers.getTotalWithCash(this.props.securities, this.props.cash, 'mktValue');
+        const mktValueTotal = SecurityHelpers.getTotalWithCash(this.props.securities, this.props.cash.mktValue, 'mktValue');
         const priceTotal = SecurityHelpers.getTotalofMultiplied(this.props.securities, 'cost', 'buyQty');
         const cashLeft = this.props.cash.mktValue - priceTotal;
         return(

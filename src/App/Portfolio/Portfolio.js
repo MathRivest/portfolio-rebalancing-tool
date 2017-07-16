@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
-import uuid from 'uuid/v1';
+
+import Mock from './PortfolioMock.js';
 
 import './Portfolio.css';
 
@@ -8,6 +9,8 @@ import PortfolioHelpers from './PortfolioHelpers';
 import PortfolioActions from './PortfolioActions';
 
 import Accounts from './Accounts/Accounts';
+import AccountHelpers from './Accounts/AccountHelpers';
+
 import Balancer from './Balancer/Balancer';
 
 class Portfolio extends React.Component {
@@ -15,116 +18,17 @@ class Portfolio extends React.Component {
         super(props);
         this.state = {
             accounts: [
-                // {
-                //     id: 1,
-                //     name: 'TFSA - Questrade',
-                //     securities: [
-                //         {
-                //             id: uuid(),
-                //             symbol: 'VUN.TO',
-                //             cost: 0,
-                //             portPercentTarget: 25,
-                //             mktValue: 3716.20,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'VCN.TO',
-                //             cost: 0,
-                //             portPercentTarget: 25,
-                //             mktValue: 3728.32,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'VAB.TO',
-                //             cost: 0,
-                //             portPercentTarget: 20,
-                //             mktValue: 2997.20,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'VDU.TO',
-                //             cost: 0,
-                //             portPercentTarget: 20,
-                //             mktValue: 3944.48,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'ZRE.TO',
-                //             cost: 0,
-                //             portPercentTarget: 10,
-                //             mktValue: 1612.12,
-                //             buyQty: 0
-                //         }
-                //     ],
-                //     cash: {
-                //         symbol: 'Cash',
-                //         mktValue: 3000,
-                //         portPercentTarget: 0
-                //     },
-                //     closed: false
-                // },
-                // {
-                //     id: 2,
-                //     name: 'RRSP - Questrade',
-                //     securities: [
-                //         {
-                //             id: uuid(),
-                //             symbol: 'ZAG.TO',
-                //             cost: 0,
-                //             portPercentTarget: 25,
-                //             mktValue: 1879.96,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'XAW.TO',
-                //             cost: 0,
-                //             portPercentTarget: 25,
-                //             mktValue: 1680.80,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'VAB.TO',
-                //             cost: 0,
-                //             portPercentTarget: 20,
-                //             mktValue: 1270.00,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'VDU.TO',
-                //             cost: 0,
-                //             portPercentTarget: 20,
-                //             mktValue: 1706.46,
-                //             buyQty: 0
-                //         },
-                //         {
-                //             id: uuid(),
-                //             symbol: 'ZRE.TO',
-                //             cost: 0,
-                //             portPercentTarget: 10,
-                //             mktValue: 589.80,
-                //             buyQty: 0
-                //         }
-                //     ],
-                //     cash: {
-                //         symbol: 'Cash',
-                //         mktValue: 1000,
-                //         portPercentTarget: 0
-                //     },
-                //     closed: true
-                // }
             ],
             balancingConfiguration: {
                 buyOnly: true
-            },
-            securities: []
+            }
         }
+    }
+
+    componentDidMount() {
+        _.forEach(Mock.accounts, (account) => {
+            this.handleAccountAdd(account);
+        });
     }
 
     handleAccountChange = (updatedAccount) => {
@@ -135,23 +39,32 @@ class Portfolio extends React.Component {
                 }
                 return account;
             });
-            const uniqSecurities = _.chain(updatedAccounts)
-                .concat(prevState.securities)
-                .flatMap((n) => {
-                    return n.securities;
-                })
-                .uniqBy('symbol')
-                .filter('cost')
-                .value();
             return {
-                accounts: updatedAccounts,
-                securities: uniqSecurities
+                accounts: updatedAccounts
             }
         });
     }
 
-    handleAccountAdd = () => {
-        this.setState((prevState, props) => PortfolioHelpers.addAccount(prevState, PortfolioHelpers.createAccount()));
+    handleBalancePortfolioButtonClick = () => {
+        // const balancedSecurities = SecurityHelpers.getBalancedList(
+        //     {buyOnly: true},
+        //     this.props.account.securities,
+        //     this.props.account.cash
+        // );
+        // this.handleAccountChange({
+        //     ...this.props.account,
+        //     ...AccountHelpers.updateSecurities(this.props.account, balancedSecurities)
+        // });
+    }
+
+    handleAccountAdd = (account) => {
+        let newAccount;
+        if(account) {
+            newAccount = account;
+        } else {
+            newAccount = PortfolioHelpers.createAccount()
+        }
+        this.setState((prevState, props) => PortfolioHelpers.addAccount(prevState, newAccount));
     }
 
     handleAccountRemove = (account) => {
@@ -177,7 +90,10 @@ class Portfolio extends React.Component {
                     <div className="Portfolio-header">
                         <h3>Targets</h3>
                     </div>
-                    <Balancer accounts={this.state.accounts} securities={this.state.securities}/>
+                    <Balancer
+                        accounts={this.state.accounts}
+                        securities={this.state.securities}
+                        onAccountChange={this.handleAccountChange}/>
                 </div>
             </div>
         )

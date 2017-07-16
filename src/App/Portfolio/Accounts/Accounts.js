@@ -73,6 +73,11 @@ class Account extends React.Component {
     }
 
     handleSecurityNameChange = (security) => {
+        // TODO: Change this to update symbol first then get cost
+        // this.handleAccountChange({
+        //     ...this.props.account,
+        //     ...AccountHelpers.updateSecurity(this.props.account, security)
+        // });
         PortfolioService.getSecurities([security.symbol])
             .then((resp) => {
                 this.handleAccountChange({
@@ -102,18 +107,6 @@ class Account extends React.Component {
         this.handleAccountChange({
             ...this.props.account,
             ...stateObj
-        });
-    }
-
-    handleBalancePortfolioButtonClick = () => {
-        const balancedSecurities = SecurityHelpers.getBalancedList(
-            {buyOnly: true},
-            this.props.account.securities,
-            this.props.account.cash
-        );
-        this.handleAccountChange({
-            ...this.props.account,
-            ...AccountHelpers.updateSecurities(this.props.account, balancedSecurities)
         });
     }
 
@@ -218,7 +211,7 @@ class Account extends React.Component {
         if(this.props.account.closed) {
             return false;
         }
-        const total = SecurityHelpers.getTotalWithCash(this.props.account.securities, this.props.account.cash, 'mktValue');
+        const total = SecurityHelpers.getTotalWithCash(this.props.account.securities, this.props.account.cash.mktValue, 'mktValue');
         const accountContentActions = this.accountContentActions();
         return (
             <div>
@@ -233,10 +226,10 @@ class Account extends React.Component {
                         onCashChange={this.handleCashChange}
                         total={total}/>
 
-                    <SecurityGraphs
+                    {/*<SecurityGraphs
                         securities={this.props.account.securities}
                         cash={this.props.account.cash}
-                        total={total}/>
+                        total={total}/>*/}
                 </div>
                 <ul className="Account-actions">
                     <li>

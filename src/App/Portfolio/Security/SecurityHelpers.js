@@ -16,7 +16,7 @@ const multiplyValues = (multiplier, multiplicand) => {
 }
 
 const getTotalWithCash = (securities, cash, property) => {
-    return sumList(_.map(securities, property), cash[property]);
+    return sumList(_.map(securities, property), cash);
 }
 
 const getPercentOf = (val, total) => {
@@ -91,7 +91,7 @@ const balancedWithSell = (securities, total, moneyLeft) => {
 }
 
 const getBalancedList = (config, securities, cash) => {
-    const total = getTotalWithCash(securities, cash, 'mktValue');
+    const total = getTotalWithCash(securities, cash.mktValue, 'mktValue');
     const moneyLeft = cash.mktValue - (cash.portPercentTarget / 100 * total);
 
     if(config.buyOnly) {
