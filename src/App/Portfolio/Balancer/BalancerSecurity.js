@@ -1,7 +1,5 @@
 import React from 'react';
 
-import SecurityHelpers from '../Security/SecurityHelpers';
-
 class BalancerSecurity extends React.Component {
 
     handleChanges = (e) => {
@@ -17,12 +15,18 @@ class BalancerSecurity extends React.Component {
 
     render() {
         const security = this.props.security;
-        //const securityPortPercent = SecurityHelpers.getPercentOf(this.props.security.mktValue, this.props.total);
+        const sumOfPortPercent = this.props.sumOfPortPercent;
 
         return (
             <tr key={security.id}>
                 <td className="DataTable-row-cell--left">
                     {security.symbol}
+                </td>
+                <td>
+                    {sumOfPortPercent}
+                </td>
+                <td>
+                    20
                 </td>
 
                 <td>
@@ -32,12 +36,6 @@ class BalancerSecurity extends React.Component {
                         value={security.portPercentTarget}
                         style={{width: '4em'}}
                         onChange={this.handleChanges}/>
-                </td>
-                <td>
-                    20
-                </td>
-                <td>
-                    20
                 </td>
             </tr>
         )

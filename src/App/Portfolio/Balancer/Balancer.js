@@ -11,11 +11,15 @@ import AccountHelpers from '../Accounts/AccountHelpers';
 import { TargetIndicator } from '../../Components';
 
 class Balancer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            securities: []
-        }
+    handleSecurityChange = (security) => {
+        _.forEach(this.props.accounts, (account) => {
+            if(_.find(account.securities, {'id': security.id})) {
+                this.props.onAccountChange({
+                    ...account,
+                    ...AccountHelpers.updateSecurity(account, security)
+                });
+            }
+        });
     }
 
     getAllSecurities = () => {
@@ -38,54 +42,53 @@ class Balancer extends React.Component {
         }, 0);
     }
 
+    getSumOfSecurity = (symbol, prop) => {
+        return  _.reduce(this.props.accounts, (sum, account) => {
+            let security = _.find(account.securities, {'symbol': symbol});
+            return security ? sum + security[prop] : sum;
+        }, 0);
+    }
+
     getSumTotal = () => {
-        const totalCash = this.getSumCash('portPercentTarget');
-        return SecurityHelpers.getTotalWithCash(this.getAllSecurities(), totalCash, 'mktValue');
+        return SecurityHelpers.getTotalWithCash(this.getAllSecurities(), this.getSumCash('portPercentTarget'), 'mktValue');
     }
 
     getPortPercentTargetTotal = () => {
-        const totalCash = this.getSumCash('portPercentTarget');
-        return SecurityHelpers.getTotalWithCash(this.getAllFilteredSecurities(), totalCash, 'portPercentTarget');
-    }
-
-    handleSecurityChange = (security) => {
-        _.forEach(this.props.accounts, (account) => {
-            if(_.find(account.securities, {'id': security.id})) {
-                this.props.onAccountChange({
-                    ...account,
-                    ...AccountHelpers.updateSecurity(account, security)
-                });
-            }
-        });
+        return SecurityHelpers.getTotalWithCash(this.getAllFilteredSecurities(), this.getSumCash('portPercentTarget'), 'portPercentTarget');
     }
 
     makeList = () => {
         let securities = this.getAllFilteredSecurities(),
             total = this.getSumTotal();
-        return securities.map((security) =>
-            <BalancerSecurity
-                key={security.id}
-                security={security}
-                onSecurityChange={this.handleSecurityChange}
-                total={total}/>
+
+        return securities.map((security) => {
+            const sumOfSecurityMktValue = this.getSumOfSecurity(security.symbol, 'mktValue');
+            const sumOfPortPercent = SecurityHelpers.getPercentOf(sumOfSecurityMktValue, total);
+            return (
+                <BalancerSecurity
+                    key={security.id}
+                    security={security}
+                    onSecurityChange={this.handleSecurityChange}
+                    sumOfPortPercent={sumOfPortPercent}/>
+            )
+        }
         );
     }
 
     makeFooter = () => {
 
         const portPercentTargetTotal = this.getPortPercentTargetTotal();
-        console.log(this.getSumTotal());
 
         return (
             <tr>
                 <td className="DataTable-row-cell--left">Total</td>
+                <td></td>
+                <td></td>
                 <td>
                     <TargetIndicator val={portPercentTargetTotal} minVal={100}  maxVal={100}>
                         {portPercentTargetTotal}
                     </TargetIndicator>
                 </td>
-                <td></td>
-                <td></td>
             </tr>
         )
     }
@@ -102,13 +105,13 @@ class Balancer extends React.Component {
                                 Symbol
                             </th>
                             <th>
-                                Target (%)
-                            </th>
-                            <th>
                                 Current (%)
                             </th>
                             <th>
                                 New (%)
+                            </th>
+                            <th>
+                                Target (%)
                             </th>
                         </tr>
                     </thead>
