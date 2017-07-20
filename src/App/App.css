@@ -5,7 +5,10 @@
 .App-header {
   background-color: #111111;
   padding: 18px 24px;
-  color: white; }
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
   .App-header h2 {
     font-weight: 400;
     margin: 0; }

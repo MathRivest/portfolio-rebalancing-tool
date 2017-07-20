@@ -10,6 +10,9 @@
         background-color: $color-brand;
         padding: 18px 24px;
         color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         h2 {
             font-weight: 400;
             margin: 0;

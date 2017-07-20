@@ -1,33 +1,38 @@
 import React from 'react';
 
-class BalancerSecurity extends React.Component {
+class BalancerCash extends React.Component {
 
     handleChanges = (e) => {
         let newValue = e.target.value;
         if(e.target.type === 'number') {
             newValue = parseFloat(newValue) || '';
         }
-        this.props.onSecurityChange({
-            ...this.props.security,
-            [e.target.name]: newValue
+        this.props.onCashChange({
+            ...this.props.account,
+            ...{
+                cash: {
+                    ...this.props.account.cash,
+                    [e.target.name]: newValue
+                }
+            }
         });
     }
 
     render() {
-        const security = this.props.security;
+        const cash = this.props.account.cash;
         const portPercent = this.props.portPercent;
         const newPortPercent = this.props.newPortPercent;
 
         return (
-            <tr key={security.id}>
+            <tr>
                 <td className="DataTable-row-cell--left">
-                    {security.symbol}
+                    Cash
                 </td>
                 <td>
                     <input
                         type="number"
                         name="portPercentTarget"
-                        value={security.portPercentTarget}
+                        value={cash.portPercentTarget}
                         style={{width: '4em'}}
                         onChange={this.handleChanges}/>
                 </td>
@@ -42,4 +47,4 @@ class BalancerSecurity extends React.Component {
     }
 }
 
-export default BalancerSecurity;
+export default BalancerCash;

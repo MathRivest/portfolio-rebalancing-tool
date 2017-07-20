@@ -2,26 +2,17 @@ import React from 'react';
 import _ from 'lodash';
 
 import './Balancer.css';
+import BalancerHeader from './BalancerHeader';
 import BalancerSecurity from './BalancerSecurity';
+import BalancerCash from './BalancerCash';
 
-import SecurityHelpers from '../Security/SecurityHelpers';
 import AccountHelpers from '../Accounts/AccountHelpers';
+import SecurityHelpers from '../Security/SecurityHelpers';
 
 
 import { TargetIndicator } from '../../Components';
 
 class Balancer extends React.Component {
-    handleSecurityChange = (security) => {
-        _.forEach(this.props.accounts, (account) => {
-            if(_.find(account.securities, {'id': security.id})) {
-                this.props.onAccountChange({
-                    ...account,
-                    ...AccountHelpers.updateSecurity(account, security)
-                });
-            }
-        });
-    }
-
     getAllSecurities = () => {
         return _.chain(this.props.accounts)
             .flatMap((n) => {
@@ -50,76 +41,117 @@ class Balancer extends React.Component {
     }
 
     getSumTotal = () => {
-        return SecurityHelpers.getTotalWithCash(this.getAllSecurities(), this.getSumCash('portPercentTarget'), 'mktValue');
+        return SecurityHelpers.getTotalWithCash(
+            this.getAllSecurities(),
+            this.getSumCash('mktValue'),
+            'mktValue'
+        );
     }
 
-    getPortPercentTargetTotal = () => {
-        return SecurityHelpers.getTotalWithCash(this.getAllFilteredSecurities(), this.getSumCash('portPercentTarget'), 'portPercentTarget');
+    handleSecurityChange = (security) => {
+        _.forEach(this.props.accounts, (account) => {
+            if(_.find(account.securities, {'id': security.id})) {
+                this.props.onAccountChange({
+                    ...account,
+                    ...AccountHelpers.updateSecurity(account, security)
+                });
+            }
+        });
     }
 
     makeList = () => {
         let securities = this.getAllFilteredSecurities(),
-            total = this.getSumTotal();
+            total = this.getSumTotal(),
+            sumOfSecurityMktValue,
+            sumOfPortPercent,
+            price,
+            newPortPercent;
 
         return securities.map((security) => {
-            const sumOfSecurityMktValue = this.getSumOfSecurity(security.symbol, 'mktValue');
-            const sumOfPortPercent = SecurityHelpers.getPercentOf(sumOfSecurityMktValue, total);
+            sumOfSecurityMktValue = this.getSumOfSecurity(security.symbol, 'mktValue');
+            sumOfPortPercent = SecurityHelpers.getPercentOf(sumOfSecurityMktValue, total);
+            price = SecurityHelpers.multiplyValues(
+                security.cost,
+                this.getSumOfSecurity(security.symbol, 'buyQty')
+            );
+            newPortPercent = SecurityHelpers.getPercentOf(
+                this.getSumOfSecurity(security.symbol, 'mktValue') + price,
+                total
+            );
+
             return (
                 <BalancerSecurity
                     key={security.id}
                     security={security}
                     onSecurityChange={this.handleSecurityChange}
-                    sumOfPortPercent={sumOfPortPercent}/>
+                    portPercent={sumOfPortPercent}
+                    newPortPercent={newPortPercent}/>
             )
+        });
+    }
+
+    makeCashRow = () => {
+        if(this.props.accounts.length === 0) {
+            return null;
         }
+
+        const account = _.head(this.props.accounts);
+
+        const total = this.getSumTotal();
+        const sumOfPortPercent = SecurityHelpers.getPercentOf(this.getSumCash('mktValue'), total);
+
+        const totalPrice = SecurityHelpers.getTotalofMultiplied(this.getAllSecurities(), 'cost', 'buyQty');
+        const newSumPortPercent = SecurityHelpers.getPercentOf(this.getSumCash('mktValue') - totalPrice, total);
+
+        return (
+            <BalancerCash
+                account={account}
+                onCashChange={this.props.onAccountChange}
+                portPercent={sumOfPortPercent}
+                newPortPercent={newSumPortPercent}/>
         );
     }
 
-    makeFooter = () => {
+    getPortPercentTargetTotal = () => {
+        return SecurityHelpers.getTotalWithCash(
+            this.getAllFilteredSecurities(),
+            this.getSumCash('portPercentTarget'),
+            'portPercentTarget'
+        );
+    }
 
+    makeTotalRow = () => {
         const portPercentTargetTotal = this.getPortPercentTargetTotal();
-
         return (
             <tr>
                 <td className="DataTable-row-cell--left">Total</td>
-                <td></td>
-                <td></td>
                 <td>
                     <TargetIndicator val={portPercentTargetTotal} minVal={100}  maxVal={100}>
                         {portPercentTargetTotal}
                     </TargetIndicator>
                 </td>
+                <td></td>
+                <td></td>
             </tr>
         )
     }
 
     render() {
         const list = this.makeList();
-        const footer = this.makeFooter();
+        const cashRow = this.makeCashRow();
+        const totalRow = this.makeTotalRow();
         return (
             <div className="Balancer">
                 <table className="DataTable">
                     <thead>
-                        <tr>
-                            <th className="DataTable-row-cell--left">
-                                Symbol
-                            </th>
-                            <th>
-                                Current (%)
-                            </th>
-                            <th>
-                                New (%)
-                            </th>
-                            <th>
-                                Target (%)
-                            </th>
-                        </tr>
+
                     </thead>
                     <tbody>
                         {list}
                     </tbody>
                     <tfoot>
-                        {footer}
+                        {cashRow}
+                        {totalRow}
                     </tfoot>
                 </table>
             </div>
