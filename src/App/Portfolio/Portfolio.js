@@ -25,9 +25,9 @@ class Portfolio extends React.Component {
     }
 
     componentDidMount() {
-        _.forEach(Mock.accounts, (account) => {
-            this.handleAccountAdd(account);
-        });
+        // _.forEach(Mock.accounts, (account) => {
+        //     this.handleAccountAdd(account);
+        // });
     }
 
     handleAccountChange = (updatedAccount) => {
@@ -63,6 +63,7 @@ class Portfolio extends React.Component {
         } else {
             newAccount = PortfolioHelpers.createAccount()
         }
+        console.log(newAccount);
         this.setState((prevState, props) => PortfolioHelpers.addAccount(prevState, newAccount));
     }
 

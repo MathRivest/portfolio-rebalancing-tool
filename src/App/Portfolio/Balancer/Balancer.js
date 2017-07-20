@@ -144,7 +144,7 @@ class Balancer extends React.Component {
             <div className="Balancer">
                 <table className="DataTable">
                     <thead>
-
+                        <BalancerHeader/>
                     </thead>
                     <tbody>
                         {list}
