@@ -58,12 +58,11 @@ class Portfolio extends React.Component {
 
     handleAccountAdd = (account) => {
         let newAccount;
-        if(account) {
+        if(account && account.id) {
             newAccount = account;
         } else {
             newAccount = PortfolioHelpers.createAccount()
         }
-        console.log(newAccount);
         this.setState((prevState, props) => PortfolioHelpers.addAccount(prevState, newAccount));
     }
 
