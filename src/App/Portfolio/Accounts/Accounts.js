@@ -176,15 +176,6 @@ class Account extends React.Component {
                     <Button
                         variant="default"
                         size="sm"
-                        iconName="donut_large"
-                        onClick={this.handleBalancePortfolioButtonClick}>
-                        Balance
-                    </Button>
-                </li>
-                <li>
-                    <Button
-                        variant="default"
-                        size="sm"
                         iconName="undo"
                         onClick={this.handleClearButtonClick}>
                         Clear buy

@@ -18,6 +18,11 @@
         display: flex;
         justify-content: flex-end;
         width: 100%;
+        margin: 0;
+        li {
+            list-style: none;
+            margin-left: 12px;
+        }
     }
 
     &-accounts {

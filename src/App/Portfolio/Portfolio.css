@@ -13,7 +13,11 @@
   .Portfolio-actions {
     display: flex;
     justify-content: flex-end;
-    width: 100%; }
+    width: 100%;
+    margin: 0; }
+    .Portfolio-actions li {
+      list-style: none;
+      margin-left: 12px; }
   .Portfolio-accounts {
     max-width: 70%;
     padding-right: 24px;

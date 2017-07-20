@@ -17,7 +17,6 @@ class App extends Component {
 
                 <h1>Todo:</h1>
                 <ul>
-                    <li>Balancer cash row</li>
                     <li>Balancer - balance All</li>
                     <ul>
                         <li>Order by price desc</li>
@@ -25,6 +24,7 @@ class App extends Component {
                         <li>if sumOfSameSecurity lower than target && hasMoneyLeft</li>
                         <li>add one</li>
                     </ul>
+                    <li>Disable buy when % is not correct</li>
                     <li>Limit buyQty to not go negative</li>
                     <li>Redo charts with recharts</li>
                     <li>Prevent too many rendering</li>

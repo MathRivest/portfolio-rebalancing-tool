@@ -44,7 +44,7 @@ class Portfolio extends React.Component {
         });
     }
 
-    handleBalancePortfolioButtonClick = () => {
+    handlePortfolioBalance = () => {
         // const balancedSecurities = SecurityHelpers.getBalancedList(
         //     {buyOnly: true},
         //     this.props.account.securities,
@@ -77,7 +77,9 @@ class Portfolio extends React.Component {
                 <div className="Portfolio-accounts">
                     <div className="Portfolio-header">
                         <h3>Accounts</h3>
-                        <PortfolioActions onAccountAdd={this.handleAccountAdd}/>
+                        <PortfolioActions
+                            onAccountAdd={this.handleAccountAdd}
+                            onAccountsBalance={this.handlePortfolioBalance}/>
                     </div>
                     <Accounts
                         accounts={this.state.accounts}
