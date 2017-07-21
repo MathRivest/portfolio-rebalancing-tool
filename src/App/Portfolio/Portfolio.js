@@ -25,9 +25,9 @@ class Portfolio extends React.Component {
     }
 
     componentDidMount() {
-        // _.forEach(Mock.accounts, (account) => {
-        //     this.handleAccountAdd(account);
-        // });
+        _.forEach(Mock.accounts, (account) => {
+            this.handleAccountAdd(account);
+        });
     }
 
     handleAccountChange = (updatedAccount) => {

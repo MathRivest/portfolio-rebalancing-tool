@@ -58,6 +58,7 @@ class SecurityListHeader extends React.Component {
                     Mkt Val ($)
                     <FilterArrow order={this.order} filter={this.filter} name={'mktValue'}/>
                 </th>
+                <th>Current (%)</th>
                 <th
                     onClick={() => this.handleHeaderClick('buyQty')}
                     className="SecurityListHeader-itemSortable">
@@ -65,6 +66,7 @@ class SecurityListHeader extends React.Component {
                     <FilterArrow order={this.order} filter={this.filter} name={'buyQty'}/>
                 </th>
                 <th>Price ($)</th>
+                <th>New (%)</th>
                 <th></th>
             </tr>
         )

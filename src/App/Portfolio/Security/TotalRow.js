@@ -15,11 +15,13 @@ class TotalRow extends React.Component {
                 <td></td>
                 <td><Format format="financial" value={mktValueTotal}/></td>
                 <td></td>
+                <td></td>
                 <td>
                     <TargetIndicator val={cashLeft} minVal={0}>
                         <Format format="financial" value={cashLeft}/>
                     </TargetIndicator>
                 </td>
+                <td></td>
                 <td></td>
             </tr>
         )
