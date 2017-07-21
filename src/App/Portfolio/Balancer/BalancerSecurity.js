@@ -5,7 +5,7 @@ class BalancerSecurity extends React.Component {
     handleChanges = (e) => {
         let newValue = e.target.value;
         if(e.target.type === 'number') {
-            newValue = parseFloat(newValue) || '';
+            newValue = parseFloat(newValue) || 0;
         }
         this.props.onSecurityChange({
             ...this.props.security,
@@ -26,6 +26,8 @@ class BalancerSecurity extends React.Component {
                 <td>
                     <input
                         type="number"
+                        min="0"
+                        max="100"
                         name="portPercentTarget"
                         value={security.portPercentTarget}
                         style={{width: '4em'}}

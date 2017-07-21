@@ -29,7 +29,7 @@ class Balancer extends React.Component {
 
     getSumCash = (prop) => {
         return _.reduce(this.props.accounts, (sum, account) => {
-            return sum + (account.cash[prop] ? account.cash[prop] : 0);
+            return sum + account.cash[prop];
         }, 0);
     }
 

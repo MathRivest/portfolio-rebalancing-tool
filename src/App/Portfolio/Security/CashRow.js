@@ -7,7 +7,7 @@ class CashRow extends React.Component {
     handleChanges = (e) => {
         let newValue = e.target.value;
         if(e.target.type === 'number') {
-            newValue = parseFloat(newValue) || '';
+            newValue = parseFloat(newValue) || 0;
         }
         this.props.onCashChange({
             ...this.props.cash,
@@ -38,6 +38,7 @@ class CashRow extends React.Component {
                 <td>
                     <input
                         type="number"
+                        min="0"
                         name="mktValue"
                         value={cash.mktValue}
                         onChange={this.handleChanges}/>

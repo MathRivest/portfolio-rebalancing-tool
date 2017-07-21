@@ -5,7 +5,7 @@ class BalancerCash extends React.Component {
     handleChanges = (e) => {
         let newValue = e.target.value;
         if(e.target.type === 'number') {
-            newValue = parseFloat(newValue) || '';
+            newValue = parseFloat(newValue) || 0;
         }
         this.props.onCashChange({
             ...this.props.account,
@@ -31,6 +31,8 @@ class BalancerCash extends React.Component {
                 <td>
                     <input
                         type="number"
+                        min="0"
+                        max="100"
                         name="portPercentTarget"
                         value={cash.portPercentTarget}
                         style={{width: '4em'}}
