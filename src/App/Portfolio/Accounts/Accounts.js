@@ -13,7 +13,7 @@ import SecurityHelpers from '../Security/SecurityHelpers';
 // Components
 import SecurityList from '../Security/SecurityList';
 import SecurityGraphs from '../Security/SecurityGraphs';
-import { Button, Icon } from '../../Components';
+import { Button, Icon, Card } from '../../Components';
 
 class Account extends React.Component {
 
@@ -181,19 +181,6 @@ class Account extends React.Component {
                         Clear buy
                     </Button>
                 </li>
-                {/*<li>
-                    <div className="Checkbox">
-                        <label htmlFor="buyOnly">
-                            <input
-                                id="buyOnly"
-                                type="checkbox"
-                                name="buyOnly"
-                                checked={this.state.balancingConfiguration.buyOnly}
-                                onChange={this.handleBalancingConfigurationBuyOnlyChange}/>
-                                Buy Only
-                        </label>
-                    </div>
-                </li>*/}
             </ul>
         )
     }
@@ -269,11 +256,13 @@ class Account extends React.Component {
 class Accounts extends React.Component {
     makeList = () => {
          return this.props.accounts.map((account) =>
-            <Account
-                key={account.id}
-                account={account}
-                onAccountChange={this.props.onAccountChange}
-                onAccountRemove={this.props.onAccountRemove}/>
+            <Card>
+                <Account
+                    key={account.id}
+                    account={account}
+                    onAccountChange={this.props.onAccountChange}
+                    onAccountRemove={this.props.onAccountRemove}/>
+            </Card>
         );
     }
 

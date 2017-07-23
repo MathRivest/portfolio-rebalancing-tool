@@ -9,7 +9,7 @@ import BalancerCash from './BalancerCash';
 import AccountHelpers from '../Accounts/AccountHelpers';
 import SecurityHelpers from '../Security/SecurityHelpers';
 
-import { Button } from '../../Components';
+import { Button, Card } from '../../Components';
 
 
 import { TargetIndicator } from '../../Components';
@@ -228,7 +228,7 @@ class Balancer extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div className="Balancer-content">
+                <Card>
                     <table className="DataTable">
                         <thead>
                             <BalancerHeader/>
@@ -241,7 +241,7 @@ class Balancer extends React.Component {
                             {totalRow}
                         </tfoot>
                     </table>
-                </div>
+                </Card>
             </div>
         )
     }
