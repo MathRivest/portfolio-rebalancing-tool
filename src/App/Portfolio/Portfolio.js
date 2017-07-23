@@ -44,16 +44,10 @@ class Portfolio extends React.Component {
         });
     }
 
-    handlePortfolioBalance = () => {
-        // const balancedSecurities = SecurityHelpers.getBalancedList(
-        //     {buyOnly: true},
-        //     this.props.account.securities,
-        //     this.props.account.cash
-        // );
-        // this.handleAccountChange({
-        //     ...this.props.account,
-        //     ...AccountHelpers.updateSecurities(this.props.account, balancedSecurities)
-        // });
+    handleAccountsChange = (updatedAccounts) => {
+        this.setState({
+            accounts: updatedAccounts
+        });
     }
 
     handleAccountAdd = (account) => {
@@ -78,8 +72,7 @@ class Portfolio extends React.Component {
                     <div className="Portfolio-header">
                         <h3>Accounts</h3>
                         <PortfolioActions
-                            onAccountAdd={this.handleAccountAdd}
-                            onAccountsBalance={this.handlePortfolioBalance}/>
+                            onAccountAdd={this.handleAccountAdd}/>
                     </div>
                     <Accounts
                         accounts={this.state.accounts}
@@ -88,13 +81,11 @@ class Portfolio extends React.Component {
                         onAccountRemove={this.handleAccountRemove}/>
                 </div>
                 <div className="Portfolio-balancer">
-                    <div className="Portfolio-header">
-                        <h3>Targets</h3>
-                    </div>
                     <Balancer
                         accounts={this.state.accounts}
                         securities={this.state.securities}
-                        onAccountChange={this.handleAccountChange}/>
+                        onAccountChange={this.handleAccountChange}
+                        onAccountsChange={this.handleAccountsChange}/>
                 </div>
             </div>
         )

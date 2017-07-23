@@ -24,6 +24,9 @@
   .Button--sm {
     padding: 5px 10px;
     font-size: 13px; }
+  .Button[disabled] {
+    opacity: 0.4;
+    pointer-events: none; }
 
 .Button--default {
   background: #fff;

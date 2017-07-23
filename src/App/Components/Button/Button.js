@@ -11,7 +11,8 @@ let Button = (props) => {
     return (
         <button
             className={'Button' + variantClass + sizeClass}
-            onClick={props.onClick}>
+            onClick={props.onClick}
+            disabled={props.disabled}>
             {buttonIcon}
             <span className="Button-text">{props.children}</span>
         </button>

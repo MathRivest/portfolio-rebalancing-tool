@@ -40,6 +40,11 @@
         padding: 5px 10px;
         font-size: 13px;
     }
+
+    &[disabled] {
+        opacity: 0.4;
+        pointer-events: none;
+    }
 }
 
 .Button--default {

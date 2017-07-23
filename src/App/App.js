@@ -17,15 +17,9 @@ class App extends Component {
 
                 <h1>Todo:</h1>
                 <ul>
-                    <li>Balancer - balance All</li>
-                    <ul>
-                        <li>Order by price desc</li>
-                        <li>for each security</li>
-                        <li>if sumOfSameSecurity lower than target && hasMoneyLeft</li>
-                        <li>add one</li>
-                    </ul>
-                    <li>Disable buy when % is not correct</li>
+                    <li>Externalise cards</li>
                     <li>Limit buyQty to not go negative</li>
+                    <li>Redo color per unique security</li>
                     <li>Redo charts with recharts</li>
                     <li>Prevent too many rendering</li>
                     <li>Make intro banner / Onboarding</li>

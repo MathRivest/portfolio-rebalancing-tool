@@ -14,15 +14,6 @@ class PortfolioActions extends React.Component {
                         Add account
                     </Button>
                 </li>
-                <li>
-                    <Button
-                        variant="primary"
-                        iconName="donut_large"
-                        size="lg"
-                        onClick={this.props.onAccountsBalance}>
-                        Balance
-                    </Button>
-                </li>
             </ul>
         )
     }

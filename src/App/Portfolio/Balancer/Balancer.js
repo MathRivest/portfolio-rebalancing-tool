@@ -9,6 +9,8 @@ import BalancerCash from './BalancerCash';
 import AccountHelpers from '../Accounts/AccountHelpers';
 import SecurityHelpers from '../Security/SecurityHelpers';
 
+import { Button } from '../../Components';
+
 
 import { TargetIndicator } from '../../Components';
 
@@ -65,7 +67,7 @@ class Balancer extends React.Component {
             sumOfSecurityMktValue,
             sumOfPortPercent,
             price,
-            newPortPercent;
+            newSumOfPortPercent;
 
         return securities.map((security) => {
             sumOfSecurityMktValue = this.getSumOfSecurity(security.symbol, 'mktValue');
@@ -74,7 +76,7 @@ class Balancer extends React.Component {
                 security.cost,
                 this.getSumOfSecurity(security.symbol, 'buyQty')
             );
-            newPortPercent = SecurityHelpers.getPercentOf(
+            newSumOfPortPercent = SecurityHelpers.getPercentOf(
                 this.getSumOfSecurity(security.symbol, 'mktValue') + price,
                 total
             );
@@ -85,7 +87,7 @@ class Balancer extends React.Component {
                     security={security}
                     onSecurityChange={this.handleSecurityChange}
                     portPercent={sumOfPortPercent}
-                    newPortPercent={newPortPercent}/>
+                    newPortPercent={newSumOfPortPercent}/>
             )
         });
     }
@@ -136,24 +138,110 @@ class Balancer extends React.Component {
         )
     }
 
+    getAccountBySecurityId = (accounts, id) => {
+        return _.find(this.props.accounts, _.flow(
+            _.property('securities'),
+            _.partialRight(_.some, { id: id })
+        ));
+    }
+
+    balanceAccounts = () => {
+        const accounts = [...this.props.accounts];
+        const allSecurities = _.orderBy(this.getAllSecurities(), ['cost'], ['desc']);
+
+        const total = this.getSumTotal();
+
+        let totalPriceInAccount,
+            priceSumOfSecurity,
+            newSumOfPortPercent,
+            sameSecurities,
+            symbolPortPercentTarget,
+            itemAccount,
+            moneyLeftInAccount;
+
+        const updateValues = (item) => {
+            itemAccount = this.getAccountBySecurityId(accounts, item.id);
+            priceSumOfSecurity = SecurityHelpers.multiplyValues(
+                item.cost,
+                this.getSumOfSecurity(item.symbol, 'buyQty')
+            );
+            newSumOfPortPercent = SecurityHelpers.getPercentOf(
+                this.getSumOfSecurity(item.symbol, 'mktValue') + priceSumOfSecurity,
+                total
+            );
+            totalPriceInAccount = SecurityHelpers.getTotalofMultiplied(itemAccount.securities, 'cost', 'buyQty');
+            moneyLeftInAccount = itemAccount.cash.mktValue - totalPriceInAccount;
+        }
+
+        const distribute = (item) => {
+            _.forEach(sameSecurities, (j) => {
+                updateValues(item);
+                if(moneyLeftInAccount >= item.cost) {
+                    item.buyQty++
+                    updateValues(item);
+                }
+            });
+        }
+
+        // Balance portfolio
+        _.forEach(allSecurities, (i) => {
+            sameSecurities = _.filter(allSecurities, {'symbol': i.symbol});
+            symbolPortPercentTarget = _.find(sameSecurities, (o) => {
+                return o.portPercentTarget > 0;
+            }).portPercentTarget;
+            updateValues(i);
+            while((newSumOfPortPercent < symbolPortPercentTarget) && (moneyLeftInAccount >= i.cost)) {
+                distribute(i);
+            }
+        });
+
+        let updatedAccounts = accounts;
+
+        return updatedAccounts
+    }
+
+    handleAccountsBalanceButton = () => {
+        const balancedAccounts = this.balanceAccounts();
+        this.props.onAccountsChange(balancedAccounts);
+    }
+
     render() {
         const list = this.makeList();
         const cashRow = this.makeCashRow();
         const totalRow = this.makeTotalRow();
+
+        const canBalance = this.getPortPercentTargetTotal() === 100;
         return (
             <div className="Balancer">
-                <table className="DataTable">
-                    <thead>
-                        <BalancerHeader/>
-                    </thead>
-                    <tbody>
-                        {list}
-                    </tbody>
-                    <tfoot>
-                        {cashRow}
-                        {totalRow}
-                    </tfoot>
-                </table>
+                <div className="Balancer-header">
+                    <h3>Targets</h3>
+                    <ul className="Balancer-actions">
+                        <li>
+                            <Button
+                                variant="primary"
+                                iconName="donut_large"
+                                size="lg"
+                                onClick={this.handleAccountsBalanceButton}
+                                disabled={!canBalance}>
+                                Balance
+                            </Button>
+                        </li>
+                    </ul>
+                </div>
+                <div className="Balancer-content">
+                    <table className="DataTable">
+                        <thead>
+                            <BalancerHeader/>
+                        </thead>
+                        <tbody>
+                            {list}
+                        </tbody>
+                        <tfoot>
+                            {cashRow}
+                            {totalRow}
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         )
     }
