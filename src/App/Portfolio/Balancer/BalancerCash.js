@@ -26,6 +26,9 @@ class BalancerCash extends React.Component {
         return (
             <tr>
                 <td className="DataTable-row-cell--left">
+                    <div
+                        className="DataTable-colorBlock"
+                        style={{color: 'rgba(' + cash.displayColor  + ', 1)'}}></div>
                     Cash
                 </td>
                 <td>

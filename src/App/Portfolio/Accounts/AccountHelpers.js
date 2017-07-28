@@ -1,44 +1,6 @@
 import _ from 'lodash';
 import uuid from 'uuid/v1';
 
-const colorList = [
-    '217,217,217',
-    '128,85,252',
-    //'180,79,252',
-    '223,56,253',
-    //'255,39,235',
-    '252,75,135',
-    //'245,75,82',
-    '252,101,41',
-    //'250,142,34',
-    '252,219,41',
-    //'251,254,47',
-    '140,253,42',
-    //'4,252,58',
-    '19,219,144',
-    //'41,234,233',
-    '47,200,253',
-    //'76,128,252',
-    '128,85,252',
-    //'180,79,252',
-    '223,56,253',
-    //'255,39,235',
-    '252,75,135'
-];
-
-const setDisplayColors = (prevState) => {
-    return {
-        securities: _.map(prevState.securities, (security, index) => {
-            security.displayColor = colorList[index + 1];
-            return security;
-        }),
-        cash: {
-            ...prevState.cash,
-            displayColor:  colorList[0]
-        }
-    }
-}
-
 let createSecurity = () => {
     return {
         id: uuid(),
@@ -111,8 +73,6 @@ let updateSecurities = (prevState, partialSecurities) => {
 }
 
 export default {
-    colorList,
-    setDisplayColors,
     createSecurity,
     addSecurity,
     removeSecurity,

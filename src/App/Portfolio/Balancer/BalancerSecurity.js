@@ -21,6 +21,9 @@ class BalancerSecurity extends React.Component {
         return (
             <tr key={security.id}>
                 <td className="DataTable-row-cell--left">
+                    <div
+                        className="DataTable-colorBlock"
+                        style={{color: 'rgba(' + security.displayColor  + ', 1)'}}></div>
                     {security.symbol}
                 </td>
                 <td>

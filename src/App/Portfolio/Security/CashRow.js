@@ -31,7 +31,7 @@ class CashRow extends React.Component {
                 <td className="DataTable-row-cell--left">
                     <div
                         className="DataTable-colorBlock"
-                        style={{color: cash.displayColor}}></div>
+                        style={{color: 'rgba(' + cash.displayColor  + ', 1)'}}></div>
                     {cash.symbol}
                 </td>
                 <td></td>

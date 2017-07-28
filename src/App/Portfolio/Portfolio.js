@@ -17,10 +17,7 @@ class Portfolio extends React.Component {
         super(props);
         this.state = {
             accounts: [
-            ],
-            balancingConfiguration: {
-                buyOnly: true
-            }
+            ]
         }
     }
 
@@ -42,6 +39,7 @@ class Portfolio extends React.Component {
                 accounts: updatedAccounts
             }
         });
+        this.setState((prevState, props) => PortfolioHelpers.setDisplayColors(prevState));
     }
 
     handleAccountsChange = (updatedAccounts) => {

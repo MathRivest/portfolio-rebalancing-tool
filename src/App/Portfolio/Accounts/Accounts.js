@@ -35,16 +35,8 @@ class Account extends React.Component {
             });
     }
 
-    setDisplayColors = () => {
-        this.handleAccountChange({
-            ...this.props.account,
-            ...AccountHelpers.setDisplayColors(this.props.account)
-        })
-    }
-
     componentDidMount() {
         this.setSecurities();
-        this.setDisplayColors();
     }
 
     handleSecurityRemove = (security) => {
@@ -103,7 +95,6 @@ class Account extends React.Component {
             ...this.props.account,
             ...AccountHelpers.addSecurity(this.props.account, AccountHelpers.createSecurity()),
         }
-        stateObj = AccountHelpers.setDisplayColors(stateObj);
         this.handleAccountChange({
             ...this.props.account,
             ...stateObj
@@ -117,15 +108,6 @@ class Account extends React.Component {
         this.handleAccountChange({
             ...this.props.account,
             ...AccountHelpers.updateSecurities(this.props.account, clearedSecurities)
-        });
-    }
-
-    handleBalancingConfigurationBuyOnlyChange = (e) => {
-        let balancingConfiguration = {
-            [e.target.name]: e.target.checked
-        };
-        this.setState({
-            balancingConfiguration: balancingConfiguration
         });
     }
 
@@ -256,9 +238,8 @@ class Account extends React.Component {
 class Accounts extends React.Component {
     makeList = () => {
          return this.props.accounts.map((account) =>
-            <Card>
+            <Card key={account.id}>
                 <Account
-                    key={account.id}
                     account={account}
                     onAccountChange={this.props.onAccountChange}
                     onAccountRemove={this.props.onAccountRemove}/>
