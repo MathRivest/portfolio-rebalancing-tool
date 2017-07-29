@@ -31,6 +31,18 @@ const getTotalofMultiplied = (securities, propertyA, propertyB) => {
     }, 0);
 }
 
+const getSumOfSecurity = (symbol, prop, accounts) => {
+    return  _.reduce(accounts, (sum, account) => {
+        let security = _.find(account.securities, {'symbol': symbol});
+        return security ? sum + security[prop] : sum;
+    }, 0);
+}
+const getSumCash = (prop, accounts) => {
+    return _.reduce(accounts, (sum, account) => {
+        return sum + account.cash[prop];
+    }, 0);
+}
+
 const balancedBuyOnly = (securities, total, moneyLeft) => {
     let sortedSecurities = _.chain(securities)
         .orderBy(['cost'], ['desc'])
@@ -101,4 +113,12 @@ const getBalancedList = (config, securities, cash) => {
     }
 }
 
-export default { multiplyValues, getTotalWithCash, getPercentOf, getTotalofMultiplied, getBalancedList };
+export default {
+    multiplyValues,
+    getTotalWithCash,
+    getPercentOf,
+    getTotalofMultiplied,
+    getBalancedList,
+    getSumOfSecurity,
+    getSumCash
+};

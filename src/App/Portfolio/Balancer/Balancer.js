@@ -5,6 +5,7 @@ import './Balancer.css';
 import BalancerHeader from './BalancerHeader';
 import BalancerSecurity from './BalancerSecurity';
 import BalancerCash from './BalancerCash';
+import BalancerCharts from './BalancerCharts';
 
 import AccountHelpers from '../Accounts/AccountHelpers';
 import SecurityHelpers from '../Security/SecurityHelpers';
@@ -241,6 +242,10 @@ class Balancer extends React.Component {
                             {totalRow}
                         </tfoot>
                     </table>
+                </Card>
+
+                <Card>
+                    <BalancerCharts accounts={this.props.accounts}/>
                 </Card>
             </div>
         )
