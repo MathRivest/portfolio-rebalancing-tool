@@ -13,3 +13,6 @@
   .Balancer-actions li {
     list-style: none;
     margin-left: 12px; }
+
+.Balancer-chart {
+  margin: 0 auto; }

@@ -17,28 +17,6 @@ class BalancerCharts extends React.Component {
             .value();
     }
 
-    portPercentData = () => {
-        let securities = this.getFilteredSecurities();
-        let total = SecurityHelpers.getTotalWithCash(
-                this.getFilteredSecurities(),
-                SecurityHelpers.getSumCash('mktValue'),
-                'mktValue',
-                this.props.accounts
-            );
-        let sumOfSecurityMktValue;
-        let sumOfPortPercent;
-
-        return _.map(securities, (o) => {
-            sumOfSecurityMktValue = SecurityHelpers.getSumOfSecurity(o.symbol, 'mktValue', this.props.accounts);
-            sumOfPortPercent = SecurityHelpers.getPercentOf(sumOfSecurityMktValue, total);
-            return {
-                name: o.symbol,
-                value: sumOfPortPercent,
-                rgb: o.displayColor
-            }
-        });
-    }
-
     newPortPercentData = () => {
         const securities = this.getFilteredSecurities();
         const totalCash = SecurityHelpers.getTotalWithCash(
@@ -47,31 +25,20 @@ class BalancerCharts extends React.Component {
             'mktValue'
         );
         const total = SecurityHelpers.getTotalWithCash(
-                this.getFilteredSecurities(),
+                securities,
                 totalCash,
                 'mktValue',
                 this.props.accounts
             );
         let price;
-        let newSumOfPortPercent;
+        let newPortPercent;
 
         return _.map(securities, (o) => {
-
-            price = SecurityHelpers.multiplyValues(
-                o.cost,
-                SecurityHelpers.getSumOfSecurity(o.symbol, 'buyQty', this.props.accounts)
-            );
-            newSumOfPortPercent = SecurityHelpers.getPercentOf(
-                SecurityHelpers.getSumOfSecurity(
-                    o.symbol,
-                    'mktValue',
-                    this.props.accounts
-                ) + price,
-                total,
-            );
+            price = SecurityHelpers.multiplyValues(o.buyQty, o.cost);
+            newPortPercent = SecurityHelpers.getPercentOf(o.mktValue + price, total);
             return {
                 name: o.symbol,
-                value: newSumOfPortPercent,
+                value: newPortPercent,
                 rgb: o.displayColor
             }
         });
@@ -89,42 +56,42 @@ class BalancerCharts extends React.Component {
     }
 
     render() {
-
         const innerPieData = this.newPortPercentData();
         const outerPieData = this.portPercentTargetData();
         return(
-
-            <PieChart width={320} height={320}>
-                <Pie
-                    data={innerPieData}
-                    dataKey="value"
-                    cx="50%"
-                    cy="50%"
-                    startAngle={450}
-                    endAngle={90}
-                    outerRadius={50}
-                    fill="#8884d8">
-                    {innerPieData.map((o, i) => {
-                        return <Cell key={i} fill={'rgba(' + o.rgb  + ', 1)'}/>
-                    })}
-                </Pie>
-                <Pie
-                    data={outerPieData}
-                    dataKey="value"
-                    cx="50%"
-                    cy="50%"
-                    startAngle={450}
-                    endAngle={90}
-                    innerRadius={60}
-                    outerRadius={80}
-                    fill="#82ca9d"
-                    label>
-                    {outerPieData.map((o, i) => {
-                        return <Cell key={i} fill={'rgba(' + o.rgb  + ', 0.8)'}/>
-                    })}
-                </Pie>
-                <Tooltip/>
-            </PieChart>
+            <div>
+                <PieChart width={340} height={340}>
+                    <Pie
+                        data={innerPieData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        startAngle={450}
+                        endAngle={90}
+                        outerRadius={70}>
+                        {innerPieData.map((o, i) => {
+                            return <Cell key={i} fill={'rgba(' + o.rgb  + ', 1)'}/>
+                        })}
+                    </Pie>
+                    <Pie
+                        data={outerPieData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        startAngle={450}
+                        endAngle={90}
+                        innerRadius={80}
+                        outerRadius={100}
+                        label={true}>
+                        {outerPieData.map((o, i) => {
+                            return <Cell key={i} fill={'rgba(' + o.rgb  + ', 0.8)'}/>
+                        })}
+                    </Pie>
+                    <Tooltip/>
+                </PieChart>
+            </div>
         )
     }
 }

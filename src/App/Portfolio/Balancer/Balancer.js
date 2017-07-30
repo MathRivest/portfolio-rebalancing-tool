@@ -229,6 +229,7 @@ class Balancer extends React.Component {
                         </li>
                     </ul>
                 </div>
+
                 <Card>
                     <table className="DataTable">
                         <thead>
@@ -244,8 +245,11 @@ class Balancer extends React.Component {
                     </table>
                 </Card>
 
+                <div className="Balancer-header">
+                    <h3>Balanced vs Target (%)</h3>
+                </div>
                 <Card>
-                    <BalancerCharts accounts={this.props.accounts}/>
+                    <BalancerCharts className="Balancer-chart" accounts={this.props.accounts}/>
                 </Card>
             </div>
         )
