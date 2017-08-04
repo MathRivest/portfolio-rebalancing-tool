@@ -45,7 +45,7 @@ class BalancerCharts extends React.Component {
     }
 
     portPercentTargetData = () => {
-        let securities = this.getFilteredSecurities();
+        let securities = _.uniqBy(this.getFilteredSecurities(), 'symbol');
         return _.map(securities, (o) => {
             return {
                 name: o.symbol,
@@ -69,7 +69,7 @@ class BalancerCharts extends React.Component {
                         cy="50%"
                         startAngle={450}
                         endAngle={90}
-                        outerRadius={70}>
+                        outerRadius={90}>
                         {innerPieData.map((o, i) => {
                             return <Cell key={i} fill={'rgba(' + o.rgb  + ', 1)'}/>
                         })}
@@ -82,9 +82,9 @@ class BalancerCharts extends React.Component {
                         cy="50%"
                         startAngle={450}
                         endAngle={90}
-                        innerRadius={80}
-                        outerRadius={100}
-                        label={true}>
+                        innerRadius={100}
+                        outerRadius={120}
+                        label={'name'}>
                         {outerPieData.map((o, i) => {
                             return <Cell key={i} fill={'rgba(' + o.rgb  + ', 0.8)'}/>
                         })}
