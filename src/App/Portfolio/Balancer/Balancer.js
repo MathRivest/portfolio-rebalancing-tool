@@ -189,10 +189,12 @@ class Balancer extends React.Component {
             sameSecurities = _.filter(allSecurities, {'symbol': i.symbol});
             symbolPortPercentTarget = _.find(sameSecurities, (o) => {
                 return o.portPercentTarget > 0;
-            }).portPercentTarget;
-            updateValues(i);
-            while((newSumOfPortPercent < symbolPortPercentTarget) && (moneyLeftInAccount >= i.cost)) {
-                distribute(i);
+            });
+            if(symbolPortPercentTarget) {
+                updateValues(i);
+                while((newSumOfPortPercent < symbolPortPercentTarget.portPercentTarget) && (moneyLeftInAccount >= i.cost)) {
+                    distribute(i);
+                }
             }
         });
 

@@ -3,6 +3,33 @@ import './App.css';
 
 import Portfolio from './Portfolio/Portfolio';
 
+const Changelogs = () => {
+    return(
+        <div style={{
+            'padding': '0 24px'
+        }}>
+            <h2>ChangeLogs:</h2>
+            <ul>
+                <li>
+                    3.0.1
+                    <ul>
+                        <li>New charts</li>
+                        <li>Add cash in charts</li>
+                    </ul>
+                </li>
+            </ul>
+            <h2>Todo</h2>
+            <ul>
+                <li>Improve numeric inputs</li>
+                <li>Limit buyQty to not go negative money</li>
+                <li>Prevent too many rendering</li>
+                <li>Make intro banner / Onboarding</li>
+            </ul>
+        </div>
+    )
+}
+
+
 class App extends Component {
 
     render() {
@@ -10,18 +37,11 @@ class App extends Component {
             <div className="App">
                 <div className="App-header">
                     <h2>Portfolio Rebalancing Tool</h2>
-                    <div>Version 3.0.0</div>
+                    <div>Version 3.0.1</div>
                 </div>
 
                 <Portfolio/>
-
-                <h1>Todo:</h1>
-                <ul>
-                    <li>Limit buyQty to not go negative</li>
-                    <li>Redo charts with recharts</li>
-                    <li>Prevent too many rendering</li>
-                    <li>Make intro banner / Onboarding</li>
-                </ul>
+                <Changelogs/>
             </div>
         );
     }

@@ -7,6 +7,7 @@ import './Portfolio.css';
 
 import PortfolioHelpers from './PortfolioHelpers';
 import PortfolioActions from './PortfolioActions';
+import PortfolioService from './PortfolioService';
 
 import Accounts from './Accounts/Accounts';
 
@@ -22,6 +23,7 @@ class Portfolio extends React.Component {
     }
 
     componentDidMount() {
+        PortfolioService.getAccounts();
         _.forEach(Mock.accounts, (account) => {
             this.handleAccountAdd(account);
         });
@@ -39,13 +41,17 @@ class Portfolio extends React.Component {
                 accounts: updatedAccounts
             }
         });
-        this.setState((prevState, props) => PortfolioHelpers.setDisplayColors(prevState));
+        this.setState((prevState, props) => {
+            return PortfolioHelpers.setDisplayColors(prevState)
+        }, this.saveAccounts(this.state.accounts));
     }
 
     handleAccountsChange = (updatedAccounts) => {
-        this.setState({
-            accounts: updatedAccounts
-        });
+        this.setState((prevState, props) => {
+            return {
+                accounts: updatedAccounts
+            }
+        }, this.saveAccounts(this.state.accounts));
     }
 
     handleAccountAdd = (account) => {
@@ -55,11 +61,19 @@ class Portfolio extends React.Component {
         } else {
             newAccount = PortfolioHelpers.createAccount()
         }
-        this.setState((prevState, props) => PortfolioHelpers.addAccount(prevState, newAccount));
+        this.setState((prevState, props) => {
+            return PortfolioHelpers.addAccount(prevState, newAccount)
+        }, this.saveAccounts(this.state.accounts));
     }
 
     handleAccountRemove = (account) => {
-        this.setState((prevState, props) => PortfolioHelpers.removeAccount(prevState, account));
+        this.setState((prevState, props) => {
+            return PortfolioHelpers.removeAccount(prevState, account)
+        }, this.saveAccounts(this.state.accounts));
+    }
+
+    saveAccounts = (accounts) => {
+        PortfolioService.saveAccounts(accounts);
     }
 
     render() {

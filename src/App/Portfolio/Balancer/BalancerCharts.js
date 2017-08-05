@@ -18,6 +18,7 @@ class BalancerCharts extends React.Component {
     }
 
     newPortPercentData = () => {
+        let data = [];
         const securities = this.getFilteredSecurities();
         const totalCash = SecurityHelpers.getTotalWithCash(
             securities,
@@ -33,7 +34,7 @@ class BalancerCharts extends React.Component {
         let price;
         let newPortPercent;
 
-        return _.map(securities, (o) => {
+        data = _.map(securities, (o) => {
             price = SecurityHelpers.multiplyValues(o.buyQty, o.cost);
             newPortPercent = SecurityHelpers.getPercentOf(o.mktValue + price, total);
             return {
@@ -42,17 +43,40 @@ class BalancerCharts extends React.Component {
                 rgb: o.displayColor
             }
         });
+
+        _.forEach(this.props.accounts, (account) => {
+            let price = SecurityHelpers.getTotalofMultiplied(account.securities, 'cost', 'buyQty');
+            let cashNewPortPercent = SecurityHelpers.getPercentOf(account.cash.mktValue - price, total);
+            data.push({
+                name: account.cash.symbol,
+                value: cashNewPortPercent,
+                rgb: account.cash.displayColor
+            });
+        });
+
+        return data;
     }
 
     portPercentTargetData = () => {
+        let data = [];
         let securities = _.uniqBy(this.getFilteredSecurities(), 'symbol');
-        return _.map(securities, (o) => {
+        data = _.map(securities, (o) => {
             return {
                 name: o.symbol,
                 value: o.portPercentTarget,
                 rgb: o.displayColor
             }
         });
+
+        _.forEach(this.props.accounts, (account) => {
+            data.push({
+                name: account.cash.symbol,
+                value: account.cash.portPercentTarget,
+                rgb: account.cash.displayColor
+            });
+        });
+
+        return data;
     }
 
     render() {
@@ -84,7 +108,7 @@ class BalancerCharts extends React.Component {
                         endAngle={90}
                         innerRadius={100}
                         outerRadius={120}
-                        label={'name'}>
+                        label>
                         {outerPieData.map((o, i) => {
                             return <Cell key={i} fill={'rgba(' + o.rgb  + ', 0.8)'}/>
                         })}

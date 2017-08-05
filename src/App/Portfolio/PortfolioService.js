@@ -29,6 +29,16 @@ class PortfolioSvc {
             })
         });
     }
+
+    saveAccounts = (accounts) => {
+        // clean up accounts to keep symbols and mkt val
+        console.log('saving!!', accounts);
+
+    }
+
+    getAccounts() {
+        console.log('getting accounts!!');
+    }
 }
 
 let PortfolioService = new PortfolioSvc();
