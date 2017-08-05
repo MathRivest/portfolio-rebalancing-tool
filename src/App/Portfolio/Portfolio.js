@@ -23,8 +23,8 @@ class Portfolio extends React.Component {
     }
 
     componentDidMount() {
-        PortfolioService.getAccounts();
-        _.forEach(Mock.accounts, (account) => {
+        const accounts = PortfolioService.getAccounts();
+        _.forEach(accounts, (account) => {
             this.handleAccountAdd(account);
         });
     }
@@ -42,16 +42,19 @@ class Portfolio extends React.Component {
             }
         });
         this.setState((prevState, props) => {
-            return PortfolioHelpers.setDisplayColors(prevState)
-        }, this.saveAccounts(this.state.accounts));
+            const updatedState = PortfolioHelpers.setDisplayColors(prevState);
+            this.saveAccounts(updatedState.accounts);
+            return updatedState
+        });
     }
 
     handleAccountsChange = (updatedAccounts) => {
         this.setState((prevState, props) => {
+            this.saveAccounts(updatedAccounts);
             return {
                 accounts: updatedAccounts
             }
-        }, this.saveAccounts(this.state.accounts));
+        });
     }
 
     handleAccountAdd = (account) => {
@@ -62,14 +65,18 @@ class Portfolio extends React.Component {
             newAccount = PortfolioHelpers.createAccount()
         }
         this.setState((prevState, props) => {
-            return PortfolioHelpers.addAccount(prevState, newAccount)
-        }, this.saveAccounts(this.state.accounts));
+            const updatedState = PortfolioHelpers.addAccount(prevState, newAccount);
+            this.saveAccounts(updatedState.accounts);
+            return updatedState;
+        });
     }
 
     handleAccountRemove = (account) => {
         this.setState((prevState, props) => {
-            return PortfolioHelpers.removeAccount(prevState, account)
-        }, this.saveAccounts(this.state.accounts));
+            const updatedState = PortfolioHelpers.removeAccount(prevState, account);
+            this.saveAccounts(updatedState.accounts);
+            return updatedState;
+        });
     }
 
     saveAccounts = (accounts) => {

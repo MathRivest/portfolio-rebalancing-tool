@@ -32,12 +32,12 @@ class PortfolioSvc {
 
     saveAccounts = (accounts) => {
         // clean up accounts to keep symbols and mkt val
-        console.log('saving!!', accounts);
-
+        localStorage.setItem('portfolio-accounts', JSON.stringify(accounts));
     }
 
     getAccounts() {
-        console.log('getting accounts!!');
+        const accounts = JSON.parse(localStorage.getItem('portfolio-accounts')) || [];
+        return accounts;
     }
 }
 
