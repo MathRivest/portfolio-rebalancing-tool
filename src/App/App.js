@@ -11,6 +11,12 @@ const Changelogs = () => {
             <h2>ChangeLogs:</h2>
             <ul>
                 <li>
+                    3.0.2
+                    <ul>
+                        <li>Add local storage</li>
+                    </ul>
+                </li>
+                <li>
                     3.0.1
                     <ul>
                         <li>New charts</li>
@@ -20,7 +26,7 @@ const Changelogs = () => {
             </ul>
             <h2>Todo</h2>
             <ul>
-                <li>Improve numeric inputs</li>
+                <li>Improve rebalancing algo</li>
                 <li>Limit buyQty to not go negative money</li>
                 <li>Prevent too many rendering</li>
                 <li>Make intro banner / Onboarding</li>
