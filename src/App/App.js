@@ -43,7 +43,7 @@ class App extends Component {
             <div className="App">
                 <div className="App-header">
                     <h2>Portfolio Rebalancing Tool</h2>
-                    <div>Version 3.0.1</div>
+                    <div>Version 3.0.2</div>
                 </div>
 
                 <Portfolio/>
