@@ -160,6 +160,10 @@ class Balancer extends React.Component {
             itemAccount,
             moneyLeftInAccount;
 
+        _.forEach(allSecurities, (i) => {
+            i.buyQty = 0;
+        });
+
         const updateValues = (item) => {
             itemAccount = this.getAccountBySecurityId(accounts, item.id);
             priceSumOfSecurity = SecurityHelpers.multiplyValues(
@@ -176,12 +180,13 @@ class Balancer extends React.Component {
 
         const distribute = (item) => {
             _.forEach(sameSecurities, (j) => {
-                updateValues(item);
-                if(moneyLeftInAccount >= item.cost) {
-                    item.buyQty++
-                    updateValues(item);
+                updateValues(j);
+                if(moneyLeftInAccount >= j.cost) {
+                    j.buyQty++;
+                    updateValues(j);
                 }
             });
+            updateValues(item);
         }
 
         // Balance portfolio
@@ -208,6 +213,14 @@ class Balancer extends React.Component {
         this.props.onAccountsChange(balancedAccounts);
     }
 
+    handleAccountsClearButton = () => {
+        const clearedAccounts = [...this.props.accounts];
+        _.forEach(this.getAllSecurities(), (i) => {
+            i.buyQty = 0;
+        });
+        this.props.onAccountsChange(clearedAccounts);
+    }
+
     render() {
         const list = this.makeList();
         const cashRow = this.makeCashRow();
@@ -227,6 +240,15 @@ class Balancer extends React.Component {
                                 onClick={this.handleAccountsBalanceButton}
                                 disabled={!canBalance}>
                                 Balance
+                            </Button>
+                        </li>
+                        <li>
+                            <Button
+                                variant="primary"
+                                iconName="undo"
+                                size="lg"
+                                onClick={this.handleAccountsClearButton}>
+                                Clear
                             </Button>
                         </li>
                     </ul>

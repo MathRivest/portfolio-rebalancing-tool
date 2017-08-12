@@ -12,7 +12,6 @@ import SecurityHelpers from '../Security/SecurityHelpers';
 
 // Components
 import SecurityList from '../Security/SecurityList';
-import SecurityGraphs from '../Security/SecurityGraphs';
 import { Button, Icon, Card } from '../../Components';
 
 class Account extends React.Component {
@@ -185,11 +184,6 @@ class Account extends React.Component {
                         cash={this.props.account.cash}
                         onCashChange={this.handleCashChange}
                         total={total}/>
-
-                    {/*<SecurityGraphs
-                        securities={this.props.account.securities}
-                        cash={this.props.account.cash}
-                        total={total}/>*/}
                 </div>
                 <ul className="Account-actions">
                     <li>

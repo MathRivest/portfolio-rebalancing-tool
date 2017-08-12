@@ -14,6 +14,7 @@ const Changelogs = () => {
                     3.0.2
                     <ul>
                         <li>Add local storage</li>
+                        <li>Improve rebalancing algo</li>
                     </ul>
                 </li>
                 <li>
@@ -26,7 +27,6 @@ const Changelogs = () => {
             </ul>
             <h2>Todo</h2>
             <ul>
-                <li>Improve rebalancing algo</li>
                 <li>Limit buyQty to not go negative money</li>
                 <li>Prevent too many rendering</li>
                 <li>Make intro banner / Onboarding</li>
