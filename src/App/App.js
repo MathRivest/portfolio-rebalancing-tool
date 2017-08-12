@@ -27,6 +27,7 @@ const Changelogs = () => {
             </ul>
             <h2>Todo</h2>
             <ul>
+                <li>Filter and order in balancer</li>
                 <li>Limit buyQty to not go negative money</li>
                 <li>Prevent too many rendering</li>
                 <li>Make intro banner / Onboarding</li>
