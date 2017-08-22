@@ -27,8 +27,8 @@ const Changelogs = () => {
             </ul>
             <h2>Todo</h2>
             <ul>
+                <li>Improve balancing algo by limiting distribution per account to target</li>
                 <li>Filter and order in balancer</li>
-                <li>Limit buyQty to not go negative money</li>
                 <li>Prevent too many rendering</li>
                 <li>Make intro banner / Onboarding</li>
             </ul>

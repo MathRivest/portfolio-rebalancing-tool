@@ -248,7 +248,7 @@ class Balancer extends React.Component {
                                 iconName="undo"
                                 size="lg"
                                 onClick={this.handleAccountsClearButton}>
-                                Clear
+                                Clear Buy
                             </Button>
                         </li>
                     </ul>

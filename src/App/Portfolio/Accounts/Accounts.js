@@ -141,7 +141,7 @@ class Account extends React.Component {
                         size="sm"
                         iconName="add"
                         onClick={this.handleAddButtonClick}>
-                        Add security
+                        Add Security
                     </Button>
                 </li>
                 <li>
@@ -150,7 +150,7 @@ class Account extends React.Component {
                         size="sm"
                         iconName="update"
                         onClick={this.handleRefreshButtonClick}>
-                        Refresh quotes
+                        Refresh Quotes
                     </Button>
                 </li>
                 <li>
@@ -159,7 +159,7 @@ class Account extends React.Component {
                         size="sm"
                         iconName="undo"
                         onClick={this.handleClearButtonClick}>
-                        Clear buy
+                        Clear Buy
                     </Button>
                 </li>
             </ul>
