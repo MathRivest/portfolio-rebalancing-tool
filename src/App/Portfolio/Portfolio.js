@@ -25,6 +25,7 @@ class Portfolio extends React.Component {
     componentDidMount() {
         const accounts = PortfolioService.getAccounts();
         _.forEach(accounts, (account) => {
+            account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
             this.handleAccountAdd(account);
         });
     }
