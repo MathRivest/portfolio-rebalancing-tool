@@ -27,6 +27,7 @@ const Changelogs = () => {
             </ul>
             <h2>Todo</h2>
             <ul>
+                <li>Replace yahoo finance with https://www.alphavantage.co/documentation/#intraday latest minute close.</li>
                 <li>Improve balancing algo by limiting distribution per account to target</li>
                 <li>Filter and order in balancer</li>
                 <li>Prevent too many rendering</li>

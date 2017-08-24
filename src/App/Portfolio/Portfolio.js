@@ -12,23 +12,23 @@ import PortfolioService from './PortfolioService';
 import Accounts from './Accounts/Accounts';
 
 import Balancer from './Balancer/Balancer';
+import { Button, Card } from '../Components';
 
 class Portfolio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            accounts: [
-            ]
+            accounts: []
         }
     }
 
-    componentDidMount() {
-        const accounts = PortfolioService.getAccounts();
-        _.forEach(accounts, (account) => {
-            account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
-            this.handleAccountAdd(account);
-        });
-    }
+    // componentDidMount() {
+    //     const accounts = PortfolioService.getAccounts();
+    //     _.forEach(accounts, (account) => {
+    //         account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
+    //         this.handleAccountAdd(account);
+    //     });
+    // }
 
     handleAccountChange = (updatedAccount) => {
         this.setState((prevState, props) => {
@@ -81,13 +81,40 @@ class Portfolio extends React.Component {
     }
 
     saveAccounts = (accounts) => {
-        PortfolioService.saveAccounts(accounts);
+        //PortfolioService.saveAccounts(accounts);
     }
 
     render() {
+        if(this.state.accounts.length == 0) {
+            return(
+                <div className="Portfolio">
+                    <div className="Portfolio-empty">
+                        <Card>
+                            <h2 className="Portfolio-empty-title">Your porfolio is empty!</h2>
+                            <p className="Portfolio-empty-subtitle">Get started by adding an account. You will then be able to add securities, set your target and visualize your portfolio!</p>
+                            <p className="Portfolio-empty-cta">
+                                <Button
+                                    variant="primary"
+                                    size="lg"
+                                    position="center"
+                                    onClick={this.handleAccountAdd}>
+                                    Add an Account
+                                </Button>
+                                <Button
+                                    size="lg"
+                                    position="center"
+                                    onClick={this.handleAccountAdd}>
+                                    Learn More
+                                </Button>
+                            </p>
+                        </Card>
+                    </div>
+                </div>
+            )
+        }
+
         return(
             <div className="Portfolio">
-
                 <div className="Portfolio-accounts">
                     <div className="Portfolio-header">
                         <h3>Accounts</h3>

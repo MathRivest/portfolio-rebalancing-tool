@@ -13,20 +13,28 @@
   transition-property: background-color, color, opacity;
   transition-duration: 100ms;
   transition-timing-function: ease-in; }
+  .Button-icon + .Button-text {
+    margin-left: 4px; }
   .Button:focus {
     outline: none; }
   .Button:hover {
     color: #3F3F44; }
-  .Button-icon + .Button-text {
-    margin-left: 4px; }
-  .Button + .Button {
-    margin-left: 12px; }
-  .Button--sm {
-    padding: 5px 10px;
-    font-size: 13px; }
   .Button[disabled] {
     opacity: 0.4;
     pointer-events: none; }
+  .Button--center {
+    margin: 0 auto; }
+  .Button + .Button {
+    margin-left: 12px; }
+    .Button + .Button--center {
+      margin-left: auto;
+      margin-top: 12px; }
+  .Button--sm {
+    padding: 5px 10px;
+    font-size: 13px; }
+  .Button--lg {
+    padding: 10px 18px;
+    font-size: 16px; }
 
 .Button--default {
   background: #fff;

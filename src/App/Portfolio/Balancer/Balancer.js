@@ -236,7 +236,6 @@ class Balancer extends React.Component {
                             <Button
                                 variant="primary"
                                 iconName="donut_large"
-                                size="lg"
                                 onClick={this.handleAccountsBalanceButton}
                                 disabled={!canBalance}>
                                 Balance
@@ -246,7 +245,6 @@ class Balancer extends React.Component {
                             <Button
                                 variant="primary"
                                 iconName="undo"
-                                size="lg"
                                 onClick={this.handleAccountsClearButton}>
                                 Clear Buy
                             </Button>

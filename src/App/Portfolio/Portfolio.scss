@@ -5,6 +5,7 @@
     padding: 0 24px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 
     &-header {
         display: flex;
@@ -33,5 +34,24 @@
 
     &-balancer {
         width: 30%;
+    }
+
+    &-empty {
+        width: 100%;
+        max-width: 500px;
+        flex: 1 0 auto;
+        margin-top: 48px;
+        text-align: center;
+        &-title {
+            margin: 36px 0 18px;
+        }
+
+        &-subtitle {
+            margin: 0;
+        }
+
+        &-cta {
+            margin: 30px 0 24px;
+        }
     }
 }

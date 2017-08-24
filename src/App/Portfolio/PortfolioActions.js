@@ -9,7 +9,6 @@ class PortfolioActions extends React.Component {
                     <Button
                         variant="primary"
                         iconName="add"
-                        size="lg"
                         onClick={this.props.onAccountAdd}>
                         Add Account
                     </Button>

@@ -16,14 +16,7 @@
     transition-duration: 100ms;
     transition-timing-function: ease-in;
 
-    &:focus {
-        outline: none;
-    }
-
-    &:hover {
-        color: $color-primary;
-    }
-
+    // Children
     &-icon {
 
     }
@@ -32,21 +25,47 @@
         margin-left: 4px;
     }
 
-    + .Button {
-        margin-left: 12px;
+    // States
+    &:focus {
+        outline: none;
     }
 
-    &--sm {
-        padding: 5px 10px;
-        font-size: 13px;
+    &:hover {
+        color: $color-primary;
     }
 
     &[disabled] {
         opacity: 0.4;
         pointer-events: none;
     }
+
+    // Positions
+    &--center {
+        margin: 0 auto;
+    }
+
+    + .Button {
+        margin-left: 12px;
+        &--center {
+            margin-left: auto;
+            margin-top: 12px;
+        }
+    }
+
+    // Sizes
+    &--sm {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+
+    &--lg {
+        padding: 10px 18px;
+        font-size: 16px;
+    }
 }
 
+
+// Variants
 .Button--default {
     background: #fff;
     border: 1px solid rgba($color-brand, .6);
