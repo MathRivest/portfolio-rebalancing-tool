@@ -35,7 +35,7 @@ let updateSecurity = (prevState, security, partialSecurity) => {
                 i = _.assign(security, partialSecurity);
                 i.status = {
                     type: partialSecurity.cost ? 'Success' : 'Failed',
-                    message: partialSecurity.cost ? null : 'Could not find cost. Try another symbol.'
+                    message: partialSecurity.cost ? null : 'Could not find cost. Try again or another symbol.'
                 }
             } else if(security.symbol === '') {
                 i = _.assign(security, partialSecurity);
@@ -62,7 +62,7 @@ let updateSecurities = (prevState, partialSecurities) => {
         if(partialSecurity) {
             newSecurity.status = {
                 type: partialSecurity.cost ? 'Success' : 'Failed',
-                message: partialSecurity.cost ? null : 'Could not find cost. Try another symbol.'
+                message: partialSecurity.cost ? null : 'Could not find cost. Try again or another symbol.'
             }
         }
         return newSecurity;

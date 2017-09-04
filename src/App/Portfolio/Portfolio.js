@@ -22,13 +22,13 @@ class Portfolio extends React.Component {
         }
     }
 
-    // componentDidMount() {
-    //     const accounts = PortfolioService.getAccounts();
-    //     _.forEach(accounts, (account) => {
-    //         account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
-    //         this.handleAccountAdd(account);
-    //     });
-    // }
+    componentDidMount() {
+        const accounts = PortfolioService.getAccounts();
+        _.forEach(accounts, (account) => {
+            account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
+            this.handleAccountAdd(account);
+        });
+    }
 
     handleAccountChange = (updatedAccount) => {
         this.setState((prevState, props) => {
@@ -81,17 +81,17 @@ class Portfolio extends React.Component {
     }
 
     saveAccounts = (accounts) => {
-        //PortfolioService.saveAccounts(accounts);
+        PortfolioService.saveAccounts(accounts);
     }
 
     render() {
-        if(this.state.accounts.length == 0) {
+        if(this.state.accounts.length === 0) {
             return(
                 <div className="Portfolio">
                     <div className="Portfolio-empty">
                         <Card>
                             <h2 className="Portfolio-empty-title">Your porfolio is empty!</h2>
-                            <p className="Portfolio-empty-subtitle">Get started by adding an account. You will then be able to add securities, set your target and visualize your portfolio!</p>
+                            <p className="Portfolio-empty-subtitle">Get started by adding an account. You will then be able to add securities, set your targets and visualize your portfolio!</p>
                             <p className="Portfolio-empty-cta">
                                 <Button
                                     variant="primary"

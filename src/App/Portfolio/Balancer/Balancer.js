@@ -181,10 +181,19 @@ class Balancer extends React.Component {
         const distribute = (item) => {
             _.forEach(sameSecurities, (j) => {
                 updateValues(j);
+                // let newPrice = SecurityHelpers.multiplyValues(
+                //     j.cost,
+                //     j.buyQty
+                // );
+                // let newTarget = SecurityHelpers.getPercentOf(
+                //     j.mktValue,
+                //     newPrice
+                // );
+                // && newTarget < symbolPortPercentTarget.portPercentTarget
                 if(moneyLeftInAccount >= j.cost) {
                     j.buyQty++;
-                    updateValues(j);
                 }
+                updateValues(j);
             });
             updateValues(item);
         }
