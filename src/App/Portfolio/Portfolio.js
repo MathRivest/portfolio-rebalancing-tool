@@ -28,6 +28,8 @@ class Portfolio extends React.Component {
             account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
             this.handleAccountAdd(account);
         });
+
+        PortfolioService.initApi();
     }
 
     handleAccountChange = (updatedAccount) => {
