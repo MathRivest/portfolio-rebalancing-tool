@@ -13,24 +13,26 @@ class PortfolioSvc {
         let token = localStorage.getItem('refreshToken') ? localStorage.getItem('refreshToken') : this.refreshToken
         let url = format(this.authServer, token);
         let config = {
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        axios.get(url, config)
-            .then((response) => {
-                console.log('success');
-                this.refreshToken = response.refreshToken;
-                this.apiServer = response.api_server;
-                this.accessToken = response.access_token;
-                localStorage.setItem('refreshToken', response.refreshToken);
-                console.log(response.refreshToken);
+        fetch(url, config)
+            .then(response => {
                 console.log(response);
+                return response.json();
+            })
+            .then(json => {
+                console.log(json);
+                this.refreshToken = json.refreshToken;
+                this.apiServer = json.api_server;
+                this.accessToken = json.access_token;
+                localStorage.setItem('refreshToken', json.refreshToken);
             })
             .catch((error) => {
-                console.log(error.message);
-                console.log(error.config); // The config that was used to make the request
+                console.log('Error!: ', error);
             });
     }
 
