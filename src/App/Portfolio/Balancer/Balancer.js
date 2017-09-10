@@ -241,7 +241,9 @@ class Balancer extends React.Component {
                 <div className="Balancer-header">
                     <h3>Targets</h3>
                     <ul className="Balancer-actions">
-                        <li>
+                        <li
+                            data-title={!canBalance ? 'The total sum must be 100% before you can balance.' : ''}
+                            data-title-position="right">
                             <Button
                                 variant="primary"
                                 iconName="donut_large"
@@ -274,8 +276,6 @@ class Balancer extends React.Component {
                             {totalRow}
                         </tfoot>
                     </table>
-
-                    <p>Set your target for each security here, the total sum must be 100% before you can balance.</p>
                 </Card>
 
                 <div className="Balancer-header">

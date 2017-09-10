@@ -14,6 +14,7 @@ const Changelogs = () => {
                     3.0.3
                     <ul>
                         <li>Replace axios with native fetch</li>
+                        <li>Add onboarding and limitations</li>
                     </ul>
                 </li>
                 <li>
@@ -31,19 +32,20 @@ const Changelogs = () => {
                     </ul>
                 </li>
             </ul>
-            <h2>Todo</h2>
+            <h2>Coming soon</h2>
             <ul>
-                <li>Add dismissible message box</li>
-                <li>Add onboarding (localstorage, CAD, )</li>
-                <li>Add Limitations (currency)</li>
                 <li>Change changelogs to "What's new" popover</li>
+                <li>Add GA using https://github.com/react-ga/react-ga (Add/delete account, add/delete security, balance, what's new)</li>
                 <li>Domain name</li>
+                <li>Transform everything to CAD using http://api.fixer.io/latest?base=CAD</li>
                 <li>Improve balancing algo by limiting distribution per account to target</li>
                 <li>Prevent too many rendering</li>
             </ul>
         </div>
     )
 }
+
+
 
 
 class App extends Component {

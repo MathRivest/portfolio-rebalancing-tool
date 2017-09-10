@@ -19,7 +19,7 @@
     .Portfolio-actions li {
       list-style: none;
       margin-left: 12px; }
-  .Portfolio-accounts {
+  .Portfolio-body {
     max-width: 70%;
     padding-right: 24px;
     flex: 1 0 auto; }
@@ -27,10 +27,14 @@
     width: 30%; }
   .Portfolio-empty {
     width: 100%;
-    max-width: 500px;
     flex: 1 0 auto;
     margin-top: 48px;
-    text-align: center; }
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .Portfolio-empty > * {
+      width: 500px; }
     .Portfolio-empty-title {
       margin: 36px 0 18px; }
     .Portfolio-empty-subtitle {

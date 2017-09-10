@@ -110,7 +110,8 @@ class Portfolio extends React.Component {
 
         return(
             <div className="Portfolio">
-                <div className="Portfolio-accounts">
+
+                <div className="Portfolio-body">
                     <div className="Portfolio-header">
                         <h3>Accounts</h3>
                         <PortfolioActions
@@ -121,6 +122,16 @@ class Portfolio extends React.Component {
                         onAccountChange={this.handleAccountChange}
                         onAccountAdd={this.handleAccountAdd}
                         onAccountRemove={this.handleAccountRemove}/>
+
+                    <Card>
+                        <div className="Card-body">
+                            <h3>Security</h3>
+                            <p>Everything you enter is secure, nothing is sent to any server. Your data is kept in your brower's local storage so when you come back, your stored portfolio will be used.</p>
+                            <h3>Limitation</h3>
+                            <p>Currently, anything you enter is assumed to be in CAD currency. We will add more in the future.</p>
+                        </div>
+                    </Card>
+                    <br/>
                 </div>
                 <div className="Portfolio-balancer">
                     <Balancer
