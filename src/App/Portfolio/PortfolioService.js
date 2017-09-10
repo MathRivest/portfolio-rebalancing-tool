@@ -5,35 +5,6 @@ import format from 'string-format';
 class PortfolioSvc {
     constructor() {
         this.baseUrl = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22{0}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=`;
-        this.authServer = `https://login.questrade.com/oauth2/token?grant_type=refresh_token&refresh_token={0}`;
-        this.apiServer = null;
-    }
-
-    initApi() {
-        let token = localStorage.getItem('refreshToken') ? localStorage.getItem('refreshToken') : this.refreshToken
-        let url = format(this.authServer, token);
-        let config = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }
-        fetch(url, config)
-            .then(response => {
-                console.log(response);
-                return response.json();
-            })
-            .then(json => {
-                console.log(json);
-                this.refreshToken = json.refreshToken;
-                this.apiServer = json.api_server;
-                this.accessToken = json.access_token;
-                localStorage.setItem('refreshToken', json.refreshToken);
-            })
-            .catch((error) => {
-                console.log('Error!: ', error);
-            });
     }
 
     getSecurities = (symbols) => {
