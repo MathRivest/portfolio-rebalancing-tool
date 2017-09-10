@@ -8,8 +8,14 @@ const Changelogs = () => {
         <div style={{
             'padding': '0 24px'
         }}>
-            <h2>ChangeLogs:</h2>
+            <h2>Changelogs:</h2>
             <ul>
+                <li>
+                    3.0.3
+                    <ul>
+                        <li>Replace axios with native fetch</li>
+                    </ul>
+                </li>
                 <li>
                     3.0.2
                     <ul>
@@ -20,18 +26,20 @@ const Changelogs = () => {
                 <li>
                     3.0.1
                     <ul>
-                        <li>New charts</li>
-                        <li>Add cash in charts</li>
+                        <li>New chart</li>
+                        <li>Add cash in chart</li>
                     </ul>
                 </li>
             </ul>
             <h2>Todo</h2>
             <ul>
-                <li>Replace yahoo finance with https://www.alphavantage.co/documentation/#intraday latest minute close.</li>
+                <li>Add dismissible message box</li>
+                <li>Add onboarding (localstorage, CAD, )</li>
+                <li>Add Limitations (currency)</li>
+                <li>Change changelogs to "What's new" popover</li>
+                <li>Domain name</li>
                 <li>Improve balancing algo by limiting distribution per account to target</li>
-                <li>Filter and order in balancer</li>
                 <li>Prevent too many rendering</li>
-                <li>Make intro banner / Onboarding</li>
             </ul>
         </div>
     )
@@ -45,7 +53,7 @@ class App extends Component {
             <div className="App">
                 <div className="App-header">
                     <h2>Portfolio Rebalancing Tool</h2>
-                    <div>Version 3.0.2</div>
+                    <div>Version 3.0.3</div>
                 </div>
 
                 <Portfolio/>

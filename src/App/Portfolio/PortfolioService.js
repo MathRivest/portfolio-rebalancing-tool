@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import axios from 'axios';
 import format from 'string-format';
 
 class PortfolioSvc {
@@ -22,14 +21,15 @@ class PortfolioSvc {
     _getYahooSecurities = (symbols) => {
         let symbolList = _.join(symbols, ',');
         let url = format(this.baseUrl, symbolList);
-        return axios.get(url)
+        return fetch(url)
+            .then(response => response.json())
             .then((resp) => {
                 let data = null,
-                    count = resp.data.query.count;
+                    count = resp.query.count;
                 if(count > 1) {
-                    data = resp.data.query.results.quote;
+                    data = resp.query.results.quote;
                 } else if(count === 1) {
-                    data = [resp.data.query.results.quote];
+                    data = [resp.query.results.quote];
                 } else {
                     data = [];
                 }

@@ -1,16 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
 
-import Mock from './PortfolioMock.js';
-
-import './Portfolio.css';
-
 import PortfolioHelpers from './PortfolioHelpers';
 import PortfolioActions from './PortfolioActions';
 import PortfolioService from './PortfolioService';
-
+import './Portfolio.css';
 import Accounts from './Accounts/Accounts';
-
 import Balancer from './Balancer/Balancer';
 import { Button, Card } from '../Components';
 

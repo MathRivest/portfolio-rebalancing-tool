@@ -274,6 +274,8 @@ class Balancer extends React.Component {
                             {totalRow}
                         </tfoot>
                     </table>
+
+                    <p>Set your target for each security here, the total sum must be 100% before you can balance.</p>
                 </Card>
 
                 <div className="Balancer-header">
