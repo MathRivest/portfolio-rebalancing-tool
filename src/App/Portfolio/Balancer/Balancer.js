@@ -159,7 +159,8 @@ class Balancer extends React.Component {
             sameSecurities,
             symbolPortPercentTarget,
             itemAccount,
-            moneyLeftInAccount;
+            moneyLeftInAccount,
+            isOverOwnTarget = false;
 
         _.forEach(allSecurities, (i) => {
             i.buyQty = 0;
@@ -182,15 +183,17 @@ class Balancer extends React.Component {
         const distribute = (item) => {
             _.forEach(sameSecurities, (j) => {
                 updateValues(j);
+
                 // let newPrice = SecurityHelpers.multiplyValues(
                 //     j.cost,
                 //     j.buyQty
                 // );
-                // let newTarget = SecurityHelpers.getPercentOf(
+                // let newPortPercent = SecurityHelpers.getPercentOf(
                 //     j.mktValue,
                 //     newPrice
                 // );
-                // && newTarget < symbolPortPercentTarget.portPercentTarget
+                // isOverOwnTarget = newPortPercent > symbolPortPercentTarget.portPercentTarget;
+
                 if(moneyLeftInAccount >= j.cost) {
                     j.buyQty++;
                 }
@@ -207,7 +210,13 @@ class Balancer extends React.Component {
             });
             if(symbolPortPercentTarget) {
                 updateValues(i);
-                while((newSumOfPortPercent < symbolPortPercentTarget.portPercentTarget) && (moneyLeftInAccount >= i.cost)) {
+
+                let isUnderTotalTarget = newSumOfPortPercent < symbolPortPercentTarget.portPercentTarget,
+                    canBuy = moneyLeftInAccount >= i.cost,
+                    protector = 0;
+
+                while(isUnderTotalTarget && canBuy && protector < 200) {
+                    protector++;
                     distribute(i);
                 }
             }
