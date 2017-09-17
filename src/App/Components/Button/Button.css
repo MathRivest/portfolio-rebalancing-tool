@@ -18,7 +18,7 @@
   .Button:focus {
     outline: none; }
   .Button:hover {
-    color: #3F3F44; }
+    color: #212121; }
   .Button[disabled] {
     opacity: 0.4;
     pointer-events: none; }
@@ -50,5 +50,11 @@
   border-radius: 2px;
   color: #fff; }
   .Button--primary:hover {
+    opacity: 0.8;
+    color: #fff; }
+
+.Button--inverted {
+  color: #fff; }
+  .Button--inverted:hover {
     opacity: 0.8;
     color: #fff; }

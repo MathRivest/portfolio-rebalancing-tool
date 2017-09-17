@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import ReactGA from 'react-ga';
 
 import './Accounts.css';
 
@@ -48,12 +49,13 @@ class Account extends React.Component {
                 ...account,
                 ...AccountHelpers.addSecurity(account, AccountHelpers.createSecurity())
             };
-            account = {
-                ...account,
-                ...AccountHelpers.setDisplayColors(account)
-            };
         }
         this.handleAccountChange(account);
+
+        ReactGA.event({
+            category: 'Account Security',
+            action: 'Remove'
+        });
     }
 
     handleAccountSecurityChange = (security) => {
@@ -64,11 +66,6 @@ class Account extends React.Component {
     }
 
     handleSecurityNameChange = (security) => {
-        // TODO: Change this to update symbol first then get cost
-        // this.handleAccountChange({
-        //     ...this.props.account,
-        //     ...AccountHelpers.updateSecurity(this.props.account, security)
-        // });
         PortfolioService.getSecurities([security.symbol])
             .then((resp) => {
                 this.handleAccountChange({
@@ -87,6 +84,11 @@ class Account extends React.Component {
 
     handleRefreshButtonClick = () => {
         this.setSecurities();
+
+        ReactGA.event({
+            category: 'Account',
+            action: 'Refresh Price'
+        });
     }
 
     handleAddButtonClick = () => {
@@ -94,9 +96,15 @@ class Account extends React.Component {
             ...this.props.account,
             ...AccountHelpers.addSecurity(this.props.account, AccountHelpers.createSecurity()),
         }
+
         this.handleAccountChange({
             ...this.props.account,
             ...stateObj
+        });
+
+        ReactGA.event({
+            category: 'Account Security',
+            action: 'Add'
         });
     }
 
@@ -108,12 +116,22 @@ class Account extends React.Component {
             ...this.props.account,
             ...AccountHelpers.updateSecurities(this.props.account, clearedSecurities)
         });
+
+        ReactGA.event({
+            category: 'Account',
+            action: 'Clear Buy'
+        });
     }
 
     handleToggleAccount = () => {
         this.handleAccountChange({
             ...this.props.account,
             closed: !this.props.account.closed
+        });
+
+        ReactGA.event({
+            category: 'Account',
+            action: 'Toggle Visibility'
         });
     }
 
@@ -126,6 +144,11 @@ class Account extends React.Component {
 
     handleRemoveButtonClick = (e) => {
         this.props.onAccountRemove(this.props.account);
+
+        ReactGA.event({
+            category: 'Account',
+            action: 'Removed'
+        });
     }
 
     accountContentActions = () => {

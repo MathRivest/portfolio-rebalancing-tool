@@ -1,0 +1,32 @@
+.Popover {
+  z-index: 1;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  transform: translateY(12px);
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
+  background: white;
+  color: #212121;
+  line-height: 22px; }
+  .Popover-content {
+    overflow: auto;
+    max-height: 400px;
+    width: 320px;
+    padding: 24px 18px; }
+  .Popover:after {
+    content: "";
+    position: absolute;
+    top: -18px;
+    right: 12px;
+    border: 9px solid transparent;
+    border-bottom-color: white;
+    width: 0;
+    height: 0; }
+
+.Popover-content ul {
+  margin-left: 0;
+  padding-left: 18px; }
+  .Popover-content ul > li {
+    margin-bottom: 6px; }
+  .Popover-content ul ul li {
+    margin: 0; }

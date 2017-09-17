@@ -86,3 +86,11 @@
         color: #fff;
     }
 }
+
+.Button--inverted {
+    color: #fff;
+    &:hover {
+        opacity: 0.8;
+        color: #fff;
+    }
+}

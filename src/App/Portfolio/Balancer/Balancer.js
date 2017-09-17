@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import ReactGA from 'react-ga';
 
 import './Balancer.css';
 import BalancerHeader from './BalancerHeader';
@@ -220,6 +221,10 @@ class Balancer extends React.Component {
     handleAccountsBalanceButton = () => {
         const balancedAccounts = this.balanceAccounts();
         this.props.onAccountsChange(balancedAccounts);
+        ReactGA.event({
+            category: 'Portfolio',
+            action: 'Balance'
+        });
     }
 
     handleAccountsClearButton = () => {
@@ -228,6 +233,10 @@ class Balancer extends React.Component {
             i.buyQty = 0;
         });
         this.props.onAccountsChange(clearedAccounts);
+        ReactGA.event({
+            category: 'Portfolio',
+            action: 'Clear Buy'
+        });
     }
 
     render() {

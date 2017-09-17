@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import ReactGA from 'react-ga';
 
 import PortfolioHelpers from './PortfolioHelpers';
 import PortfolioActions from './PortfolioActions';
@@ -75,6 +76,14 @@ class Portfolio extends React.Component {
         });
     }
 
+    handleAddAccountClick = () => {
+        this.handleAccountAdd();
+        ReactGA.event({
+            category: 'Account',
+            action: 'Add'
+        });
+    }
+
     saveAccounts = (accounts) => {
         PortfolioService.saveAccounts(accounts);
     }
@@ -92,13 +101,13 @@ class Portfolio extends React.Component {
                                     variant="primary"
                                     size="lg"
                                     position="center"
-                                    onClick={this.handleAccountAdd}>
+                                    onClick={this.handleAddAccountClick}>
                                     Add an Account
                                 </Button>
                                 <Button
                                     size="lg"
                                     position="center"
-                                    onClick={this.handleAccountAdd}>
+                                    onClick={this.handleAddAccountClick}>
                                     Learn More
                                 </Button>
                             </p>
@@ -115,20 +124,19 @@ class Portfolio extends React.Component {
                     <div className="Portfolio-header">
                         <h3>Accounts</h3>
                         <PortfolioActions
-                            onAccountAdd={this.handleAccountAdd}/>
+                            onAccountAdd={this.handleAddAccountClick}/>
                     </div>
                     <Accounts
                         accounts={this.state.accounts}
                         onAccountChange={this.handleAccountChange}
-                        onAccountAdd={this.handleAccountAdd}
                         onAccountRemove={this.handleAccountRemove}/>
 
                     <Card>
                         <div className="Card-body">
                             <h3>Security</h3>
                             <p>Everything you enter is secure, nothing is sent to any server. Your data is kept in your brower's local storage so when you come back, your stored portfolio will be used.</p>
-                            <h3>Limitation</h3>
-                            <p>Currently, anything you enter is assumed to be in CAD currency. We will add more in the future.</p>
+                            <h3>Limitations</h3>
+                            <p>Currently, everything you enter is assumed to be in CAD currency. We will add more support in the future.</p>
                         </div>
                     </Card>
                     <br/>

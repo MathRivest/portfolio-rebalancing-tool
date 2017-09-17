@@ -3,63 +3,74 @@ import './App.css';
 
 import Portfolio from './Portfolio/Portfolio';
 
+import { Button, Popover } from './Components';
+
 const Changelogs = () => {
-    return(
-        <div style={{
-            'padding': '0 24px'
-        }}>
-            <h2>Changelogs:</h2>
+    return (
+        <div>
+            <h3>What's new</h3>
             <ul>
                 <li>
-                    3.0.3
+                    0.2.0
+                    <ul>
+                        <li>Add "What's new" popover</li>
+                    </ul>
+                </li>
+                <li>
+                    0.1.0
                     <ul>
                         <li>Replace axios with native fetch</li>
                         <li>Add onboarding and limitations</li>
-                    </ul>
-                </li>
-                <li>
-                    3.0.2
-                    <ul>
                         <li>Add local storage</li>
                         <li>Improve rebalancing algo</li>
-                    </ul>
-                </li>
-                <li>
-                    3.0.1
-                    <ul>
                         <li>New chart</li>
                         <li>Add cash in chart</li>
                     </ul>
                 </li>
             </ul>
-            <h2>Coming soon</h2>
+            <h3>Coming soon</h3>
             <ul>
-                <li>Change changelogs to "What's new" popover</li>
-                <li>Add GA using https://github.com/react-ga/react-ga (Add/delete account, add/delete security, balance, what's new)</li>
-                <li>Domain name</li>
-                <li>Transform everything to CAD using http://api.fixer.io/latest?base=CAD</li>
                 <li>Improve balancing algo by limiting distribution per account to target</li>
+                <li>Domain name</li>
+                <li>--Release--</li>
+                <li>Transform everything to CAD using http://api.fixer.io/latest?base=CAD</li>
                 <li>Prevent too many rendering</li>
             </ul>
         </div>
     )
 }
 
-
-
-
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isPopoverOpen: false
+        }
+    }
+    handlePopoverClick = () => {
+        this.setState({
+            isPopoverOpen: !this.state.isPopoverOpen
+        });
+    }
 
     render() {
         return (
             <div className="App">
                 <div className="App-header">
                     <h2>Portfolio Rebalancing Tool</h2>
-                    <div>Version 3.0.3</div>
+                    <div className="App-changelogs">
+                        <Button
+                            variant="inverted"
+                            iconName="notifications"
+                            onClick={this.handlePopoverClick}>
+                            What's new
+                        </Button>
+                        <Popover isOpen={this.state.isPopoverOpen}>
+                            <Changelogs />
+                        </Popover>
+                    </div>
                 </div>
-
-                <Portfolio/>
-                <Changelogs/>
+                <Portfolio />
             </div>
         );
     }

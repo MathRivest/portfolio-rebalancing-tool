@@ -5,6 +5,7 @@
 .App-header {
   background-color: #111111;
   padding: 18px 24px;
+  height: 66px;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -12,6 +13,14 @@
   .App-header h2 {
     font-weight: 400;
     margin: 0; }
+
+.App-changelogs {
+  position: relative; }
+  .App-changelogs-trigger {
+    display: flex;
+    align-items: center; }
+    .App-changelogs-trigger > * {
+      margin-left: 6px; }
 
 @keyframes App-logo-spin {
   from {

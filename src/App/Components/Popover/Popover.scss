@@ -1,0 +1,46 @@
+@import '../../../Styles/variables';
+
+.Popover {
+    z-index: 1;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    transform: translateY(12px);
+    box-shadow: $elevation-3;
+    background: white;
+    color: $color-primary;
+    line-height: 22px;
+
+    &-content {
+        overflow: auto;
+        max-height: 400px;
+        width: 320px;
+        padding: 24px 18px;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        top: -18px;
+        right: 12px;
+        border: 9px solid transparent;
+        border-bottom-color: white;
+        width: 0;
+        height: 0;
+    }
+}
+
+.Popover-content {
+    ul {
+        margin-left: 0;
+        padding-left: 18px;
+        > li {
+            margin-bottom: 6px;
+        }
+        ul {
+            li {
+                margin: 0;
+            }
+        }
+    }
+}
