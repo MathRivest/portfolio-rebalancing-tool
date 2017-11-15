@@ -1,7 +1,7 @@
 .UserLogin {
   padding: 24px 24px 0 24px;
   width: 100%;
-  max-width: 360px; }
+  max-width: 380px; }
   .UserLogin-header {
     text-align: center;
     margin-top: 18px;
@@ -15,10 +15,25 @@
     color: #596981; }
   .UserLogin input {
     max-width: none;
-    width: 100%;
-    margin-bottom: 18px; }
-  .UserLogin-content {
-    margin-bottom: 18px; }
+    width: 100%; }
   .UserLogin-footer {
+    margin-bottom: 18px;
     display: flex;
-    justify-content: flex-end; }
+    justify-content: space-between;
+    align-items: center; }
+    .UserLogin-footer-note {
+      color: #596981;
+      text-decoration: none; }
+
+.FormElement {
+  margin-bottom: 24px; }
+  .FormElement input + .FormElement-help {
+    margin-top: 4px;
+    text-align: right; }
+  .FormElement-help {
+    display: block; }
+    .FormElement-help a {
+      color: #596981;
+      text-decoration: none; }
+      .FormElement-help a:hover {
+        text-decoration: underline; }

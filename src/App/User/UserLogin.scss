@@ -1,7 +1,7 @@
 .UserLogin {
     padding: 24px 24px 0 24px;
     width: 100%;
-    max-width: 360px;
+    max-width: 380px;
     &-header {
         text-align: center;
         margin-top: 18px;
@@ -19,14 +19,35 @@
     input {
         max-width: none;
         width: 100%;
-        margin-bottom: 18px;
     }
 
-    &-content {
-        margin-bottom: 18px;
-    }
     &-footer {
+        &-note {
+            color: #596981;
+            text-decoration: none;
+        }
+        margin-bottom: 18px;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+// TODO: Move to component
+.FormElement {
+    margin-bottom: 24px;
+    input + .FormElement-help {
+        margin-top: 4px;
+        text-align: right;
+    }
+    &-help {
+        display: block;
+        a {
+            color: #596981;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
