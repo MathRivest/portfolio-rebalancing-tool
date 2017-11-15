@@ -1,0 +1,552 @@
+From 3390a73e5d5140b0a5b098949a26ea3b28909a77 Mon Sep 17 00:00:00 2001
+From: Mathieu Rivest <rivest.mathieu@gmail.com>
+Date: Tue, 14 Nov 2017 20:41:27 -0500
+Subject: [PATCH] add login form
+
+---
+ .gitignore                      |  2 +
+ .vscode/settings.json           |  7 +++
+ package-lock.json               | 98 +++++++++++++++++++++++++++++++++++------
+ package.json                    |  4 +-
+ src/App/App.js                  | 15 +++----
+ src/App/User/UserLogin.css      | 24 ++++++++++
+ src/App/User/UserLogin.js       | 68 ++++++++++++++++++++++++++++
+ src/App/User/UserLogin.scss     | 32 ++++++++++++++
+ src/App/User/logo-wealthica.svg | 14 ++++++
+ src/Cognito.js                  | 75 +++++++++++++++++++++++++++++++
+ 10 files changed, 317 insertions(+), 22 deletions(-)
+ create mode 100644 .vscode/settings.json
+ create mode 100644 src/App/User/UserLogin.css
+ create mode 100644 src/App/User/UserLogin.js
+ create mode 100644 src/App/User/UserLogin.scss
+ create mode 100644 src/App/User/logo-wealthica.svg
+ create mode 100644 src/Cognito.js
+
+diff --git a/.gitignore b/.gitignore
+index d30f40e..d1c3681 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -19,3 +19,5 @@
+ npm-debug.log*
+ yarn-debug.log*
+ yarn-error.log*
++
++cognito-pool-data.json
+\ No newline at end of file
+diff --git a/.vscode/settings.json b/.vscode/settings.json
+new file mode 100644
+index 0000000..2125779
+--- /dev/null
++++ b/.vscode/settings.json
+@@ -0,0 +1,7 @@
++{
++    "editor.formatOnSave": true,
++    "prettier.printWidth": 120,
++    "prettier.singleQuote": true,
++    "prettier.tabWidth": 4,
++    "prettier.jsonEnable": [null]
++}
+diff --git a/package-lock.json b/package-lock.json
+index de01492..ba34884 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -107,6 +107,15 @@
+       "integrity": "sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=",
+       "dev": true
+     },
++    "amazon-cognito-identity-js": {
++      "version": "1.25.0",
++      "resolved": "https://registry.npmjs.org/amazon-cognito-identity-js/-/amazon-cognito-identity-js-1.25.0.tgz",
++      "integrity": "sha1-iYo8hV3MtfDuugphLIxf8qb+HYs=",
++      "requires": {
++        "aws-sdk": "2.150.0",
++        "js-cookie": "2.2.0"
++      }
++    },
+     "amdefine": {
+       "version": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.1.tgz",
+       "integrity": "sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=",
+@@ -340,6 +349,49 @@
+         "postcss-value-parser": "https://registry.npmjs.org/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz"
+       }
+     },
++    "aws-sdk": {
++      "version": "2.150.0",
++      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.150.0.tgz",
++      "integrity": "sha1-9LwrwN2bKzWenzOxb9qwF8INcrY=",
++      "requires": {
++        "buffer": "https://registry.npmjs.org/buffer/-/buffer-4.9.1.tgz",
++        "crypto-browserify": "1.0.9",
++        "events": "https://registry.npmjs.org/events/-/events-1.1.1.tgz",
++        "jmespath": "0.15.0",
++        "querystring": "https://registry.npmjs.org/querystring/-/querystring-0.2.0.tgz",
++        "sax": "1.2.1",
++        "url": "0.10.3",
++        "uuid": "https://registry.npmjs.org/uuid/-/uuid-3.1.0.tgz",
++        "xml2js": "0.4.17",
++        "xmlbuilder": "4.2.1"
++      },
++      "dependencies": {
++        "crypto-browserify": {
++          "version": "1.0.9",
++          "resolved": "https://registry.npmjs.org/crypto-browserify/-/crypto-browserify-1.0.9.tgz",
++          "integrity": "sha1-zFRJaF37hesRyYKKzHy4erW7/MA="
++        },
++        "punycode": {
++          "version": "1.3.2",
++          "resolved": "https://registry.npmjs.org/punycode/-/punycode-1.3.2.tgz",
++          "integrity": "sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0="
++        },
++        "sax": {
++          "version": "1.2.1",
++          "resolved": "https://registry.npmjs.org/sax/-/sax-1.2.1.tgz",
++          "integrity": "sha1-e45lYZCyKOgaZq6nSEgNgozS03o="
++        },
++        "url": {
++          "version": "0.10.3",
++          "resolved": "https://registry.npmjs.org/url/-/url-0.10.3.tgz",
++          "integrity": "sha1-Ah5NnHcF8hu/N9A861h2dAJ3TGQ=",
++          "requires": {
++            "punycode": "1.3.2",
++            "querystring": "https://registry.npmjs.org/querystring/-/querystring-0.2.0.tgz"
++          }
++        }
++      }
++    },
+     "aws-sign2": {
+       "version": "https://registry.npmjs.org/aws-sign2/-/aws-sign2-0.6.0.tgz",
+       "integrity": "sha1-FDQt0428yU0OW4fXY81jYSwOeU8=",
+@@ -1414,8 +1466,7 @@
+     },
+     "base64-js": {
+       "version": "https://registry.npmjs.org/base64-js/-/base64-js-1.2.1.tgz",
+-      "integrity": "sha1-qRlH2h9KUW6jjltOwOw3c2deCIY=",
+-      "dev": true
++      "integrity": "sha1-qRlH2h9KUW6jjltOwOw3c2deCIY="
+     },
+     "base64url": {
+       "version": "https://registry.npmjs.org/base64url/-/base64url-2.0.0.tgz",
+@@ -1623,7 +1674,6 @@
+     "buffer": {
+       "version": "https://registry.npmjs.org/buffer/-/buffer-4.9.1.tgz",
+       "integrity": "sha1-bRu2AbB6TvztlwlBMgkwJ8lbwpg=",
+-      "dev": true,
+       "requires": {
+         "base64-js": "https://registry.npmjs.org/base64-js/-/base64-js-1.2.1.tgz",
+         "ieee754": "https://registry.npmjs.org/ieee754/-/ieee754-1.1.8.tgz",
+@@ -3187,8 +3237,7 @@
+     },
+     "events": {
+       "version": "https://registry.npmjs.org/events/-/events-1.1.1.tgz",
+-      "integrity": "sha1-nr23Y1rQmccNzEwqH1AEKI6L2SQ=",
+-      "dev": true
++      "integrity": "sha1-nr23Y1rQmccNzEwqH1AEKI6L2SQ="
+     },
+     "eventsource": {
+       "version": "https://registry.npmjs.org/eventsource/-/eventsource-0.1.6.tgz",
+@@ -5152,8 +5201,7 @@
+     },
+     "ieee754": {
+       "version": "https://registry.npmjs.org/ieee754/-/ieee754-1.1.8.tgz",
+-      "integrity": "sha1-vjPUCsEO8ZJnAfbwii2G+/0a0+Q=",
+-      "dev": true
++      "integrity": "sha1-vjPUCsEO8ZJnAfbwii2G+/0a0+Q="
+     },
+     "ignore": {
+       "version": "https://registry.npmjs.org/ignore/-/ignore-3.3.5.tgz",
+@@ -5496,8 +5544,7 @@
+     },
+     "isarray": {
+       "version": "https://registry.npmjs.org/isarray/-/isarray-1.0.0.tgz",
+-      "integrity": "sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=",
+-      "dev": true
++      "integrity": "sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE="
+     },
+     "isexe": {
+       "version": "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz",
+@@ -5886,11 +5933,21 @@
+         "pretty-format": "https://registry.npmjs.org/pretty-format/-/pretty-format-20.0.3.tgz"
+       }
+     },
++    "jmespath": {
++      "version": "0.15.0",
++      "resolved": "https://registry.npmjs.org/jmespath/-/jmespath-0.15.0.tgz",
++      "integrity": "sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc="
++    },
+     "js-base64": {
+       "version": "https://registry.npmjs.org/js-base64/-/js-base64-2.2.0.tgz",
+       "integrity": "sha1-XoqNGTqQgZjdI9FwSCbSB7DlqPY=",
+       "dev": true
+     },
++    "js-cookie": {
++      "version": "2.2.0",
++      "resolved": "https://registry.npmjs.org/js-cookie/-/js-cookie-2.2.0.tgz",
++      "integrity": "sha1-Gywnmm7s44ChIWi5JIUmWzWx7/s="
++    },
+     "js-tokens": {
+       "version": "https://registry.npmjs.org/js-tokens/-/js-tokens-3.0.2.tgz",
+       "integrity": "sha1-mGbfOVECEw449/mWvOtlRDIJwls="
+@@ -8366,8 +8423,7 @@
+     },
+     "querystring": {
+       "version": "https://registry.npmjs.org/querystring/-/querystring-0.2.0.tgz",
+-      "integrity": "sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=",
+-      "dev": true
++      "integrity": "sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA="
+     },
+     "querystring-es3": {
+       "version": "https://registry.npmjs.org/querystring-es3/-/querystring-es3-0.2.1.tgz",
+@@ -10205,8 +10261,7 @@
+     },
+     "sax": {
+       "version": "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz",
+-      "integrity": "sha1-KBYjTiN4vdxOU1T6tcqold9xANk=",
+-      "dev": true
++      "integrity": "sha1-KBYjTiN4vdxOU1T6tcqold9xANk="
+     },
+     "schema-utils": {
+       "version": "https://registry.npmjs.org/schema-utils/-/schema-utils-0.3.0.tgz",
+@@ -11714,6 +11769,23 @@
+       "integrity": "sha1-TYuPHszTQZqjYgYb7O9RXh5VljU=",
+       "dev": true
+     },
++    "xml2js": {
++      "version": "0.4.17",
++      "resolved": "https://registry.npmjs.org/xml2js/-/xml2js-0.4.17.tgz",
++      "integrity": "sha1-F76T6q4/O3eTWceVtBlwWogX6Gg=",
++      "requires": {
++        "sax": "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz",
++        "xmlbuilder": "4.2.1"
++      }
++    },
++    "xmlbuilder": {
++      "version": "4.2.1",
++      "resolved": "https://registry.npmjs.org/xmlbuilder/-/xmlbuilder-4.2.1.tgz",
++      "integrity": "sha1-qlijBBoGb5DqoWwvU4n/GfP0YaU=",
++      "requires": {
++        "lodash": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz"
++      }
++    },
+     "xtend": {
+       "version": "https://registry.npmjs.org/xtend/-/xtend-4.0.1.tgz",
+       "integrity": "sha1-pcbVMr5lbiPbgg77lDofBJmNY68=",
+diff --git a/package.json b/package.json
+index 3a76d09..2440a5e 100644
+--- a/package.json
++++ b/package.json
+@@ -11,7 +11,9 @@
+     "react-ga": "^2.2.0",
+     "recharts": "^1.0.0-alpha.4",
+     "string-format": "^0.5.0",
+-    "uuid": "^3.1.0"
++    "uuid": "^3.1.0",
++    "amazon-cognito-identity-js": "^1.16.0",
++    "aws-sdk": "^2.36.0"
+   },
+   "devDependencies": {
+     "gh-pages": "^1.0.0",
+diff --git a/src/App/App.js b/src/App/App.js
+index 7af77fb..b4990f0 100644
+--- a/src/App/App.js
++++ b/src/App/App.js
+@@ -2,6 +2,7 @@ import React, { Component } from 'react';
+ import './App.css';
+ 
+ import Portfolio from './Portfolio/Portfolio';
++import UserLogin from './User/UserLogin';
+ 
+ import { Button, Popover } from './Components';
+ 
+@@ -37,21 +38,21 @@ const Changelogs = () => {
+                 <li>Prevent too many rendering</li>
+             </ul>
+         </div>
+-    )
+-}
++    );
++};
+ 
+ class App extends Component {
+     constructor(props) {
+         super(props);
+         this.state = {
+             isPopoverOpen: false
+-        }
++        };
+     }
+     handlePopoverClick = () => {
+         this.setState({
+             isPopoverOpen: !this.state.isPopoverOpen
+         });
+-    }
++    };
+ 
+     render() {
+         return (
+@@ -59,10 +60,7 @@ class App extends Component {
+                 <div className="App-header">
+                     <h2>Portfolio Rebalancing Tool</h2>
+                     <div className="App-changelogs">
+-                        <Button
+-                            variant="inverted"
+-                            iconName="notifications"
+-                            onClick={this.handlePopoverClick}>
++                        <Button variant="inverted" iconName="notifications" onClick={this.handlePopoverClick}>
+                             What's new
+                         </Button>
+                         <Popover isOpen={this.state.isPopoverOpen}>
+@@ -70,6 +68,7 @@ class App extends Component {
+                         </Popover>
+                     </div>
+                 </div>
++                <UserLogin />
+                 <Portfolio />
+             </div>
+         );
+diff --git a/src/App/User/UserLogin.css b/src/App/User/UserLogin.css
+new file mode 100644
+index 0000000..1910194
+--- /dev/null
++++ b/src/App/User/UserLogin.css
+@@ -0,0 +1,24 @@
++.UserLogin {
++  padding: 24px 24px 0 24px;
++  width: 100%;
++  max-width: 360px; }
++  .UserLogin-header {
++    text-align: center;
++    margin-top: 18px;
++    margin-bottom: 18px; }
++    .UserLogin-header img {
++      margin-bottom: 12px; }
++  .UserLogin label {
++    display: block;
++    margin-bottom: 6px;
++    font-size: 12px;
++    color: #596981; }
++  .UserLogin input {
++    max-width: none;
++    width: 100%;
++    margin-bottom: 18px; }
++  .UserLogin-content {
++    margin-bottom: 18px; }
++  .UserLogin-footer {
++    display: flex;
++    justify-content: flex-end; }
+diff --git a/src/App/User/UserLogin.js b/src/App/User/UserLogin.js
+new file mode 100644
+index 0000000..a9836a9
+--- /dev/null
++++ b/src/App/User/UserLogin.js
+@@ -0,0 +1,68 @@
++import React from 'react';
++import './UserLogin.css';
++import wealthicaLogo from './logo-wealthica.svg';
++import { Button, Icon, Card } from '../Components';
++import { authenticateUser } from '../../Cognito';
++
++class UserLogin extends React.Component {
++    constructor(props) {
++        super(props);
++        this.state = {};
++    }
++
++    componentDidMount() {
++        console.log('UserLogin will mount');
++        authenticateUser('rivest.mathieu@gmail.com', 'rancid040289', this.authenticationCallback);
++    }
++
++    authenticationCallback(err, result) {
++        if (err) {
++            console.log('Failed to authenticate', err);
++        } else {
++            console.log('Authentication successful', result);
++        }
++    }
++
++    handleLoginSubmit() {}
++
++    render() {
++        return (
++            <div className="UserLogin">
++                <Card>
++                    <div className="UserLogin-header">
++                        <img src={wealthicaLogo} alt="Logo Wealthica" />
++                        <h2>Login with Wealthica</h2>
++                    </div>
++                    <form className="UserLogin-content">
++                        <div>
++                            <label>Email:</label>
++                            <input
++                                value={this.state.email}
++                                placeholder="Email or username"
++                                type="text"
++                                onChange={this.changeEmail}
++                            />
++                        </div>
++                        <div>
++                            <label>Password:</label>
++                            <input
++                                value={this.state.password}
++                                placeholder="Password"
++                                type="password"
++                                minLength={6}
++                                onChange={this.changePassword}
++                            />
++                        </div>
++                        <div className="UserLogin-footer">
++                            <Button type="submit" variant="primary" iconName="lock" onClick={this.handleLoginSubmit}>
++                                Get Started
++                            </Button>
++                        </div>
++                    </form>
++                </Card>
++            </div>
++        );
++    }
++}
++
++export default UserLogin;
+diff --git a/src/App/User/UserLogin.scss b/src/App/User/UserLogin.scss
+new file mode 100644
+index 0000000..faa6e26
+--- /dev/null
++++ b/src/App/User/UserLogin.scss
+@@ -0,0 +1,32 @@
++.UserLogin {
++    padding: 24px 24px 0 24px;
++    width: 100%;
++    max-width: 360px;
++    &-header {
++        text-align: center;
++        margin-top: 18px;
++        margin-bottom: 18px;
++        img {
++            margin-bottom: 12px;
++        }
++    }
++    label {
++        display: block;
++        margin-bottom: 6px;
++        font-size: 12px;
++        color: #596981;
++    }
++    input {
++        max-width: none;
++        width: 100%;
++        margin-bottom: 18px;
++    }
++
++    &-content {
++        margin-bottom: 18px;
++    }
++    &-footer {
++        display: flex;
++        justify-content: flex-end;
++    }
++}
+diff --git a/src/App/User/logo-wealthica.svg b/src/App/User/logo-wealthica.svg
+new file mode 100644
+index 0000000..c9bc1aa
+--- /dev/null
++++ b/src/App/User/logo-wealthica.svg
+@@ -0,0 +1,14 @@
++<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36px" height="22px" viewBox="0 0 36 22" version="1.1" class="injected-svg logo svg-inject">
++    <title>LOGO</title>
++    <desc>Created with Sketch.</desc>
++    <defs></defs>
++    <g id="svg_logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
++        <g id="svg_logo__line" transform="translate(-190.000000, -34.000000)" stroke-width="1.5" stroke="#484f64">
++            <g id="NAVIGATION">
++                <g id="LOGO" transform="translate(191.000000, 34.000000)">
++                    <path d="M0.541235221,1.29823852 C0.1917149,0.871047021 -0.046096745,0.980045461 0.00755300833,1.51654299 L1.80919239,19.5329368 C1.86396816,20.0806945 2.35573789,20.5247399 2.90652638,20.5247399 L30.910219,20.5247399 C31.4614841,20.5247399 31.9539033,20.0694343 32.007553,19.5329368 L33.8091924,1.51654299 C33.8639682,0.968785262 33.6291515,0.866010212 33.2755102,1.29823852 L24.9083727,11.5247399 L17.4966318,1.33359615 C17.1717453,0.886877169 16.6421984,0.89072957 16.3201136,1.33359615 L8.9083727,11.5247399 L0.541235221,1.29823852 Z"></path>
++                </g>
++            </g>
++        </g>
++    </g>
++</svg>
+\ No newline at end of file
+diff --git a/src/Cognito.js b/src/Cognito.js
+new file mode 100644
+index 0000000..2ee5671
+--- /dev/null
++++ b/src/Cognito.js
+@@ -0,0 +1,75 @@
++import { CognitoUserPool, CognitoUserAttribute, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
++import poolData from './cognito-pool-data.json';
++
++const userPool = new CognitoUserPool(poolData);
++
++export const createUser = (username, email, password, callback) => {
++    const attributeList = [
++        new CognitoUserAttribute({
++            Name: 'email',
++            Value: email
++        })
++    ];
++
++    // Username must be unique in a pool, and cant be a valid email format
++    // To log in with email, make sure it is set as an alias attribute in Cognito
++    // More info: http://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-attributes.html#user-pool-settings-usernames
++
++    userPool.signUp(username, password, attributeList, null, callback);
++};
++
++export const verifyUser = (username, verifyCode, callback) => {
++    const userData = {
++        Username: username,
++        Pool: userPool
++    };
++    const cognitoUser = new CognitoUser(userData);
++    cognitoUser.confirmRegistration(verifyCode, true, callback);
++};
++
++export const authenticateUser = (email, password, callback) => {
++    const authData = {
++        Username: email,
++        Password: password
++    };
++    const authDetails = new AuthenticationDetails(authData);
++    const userData = {
++        Username: email,
++        Pool: userPool
++    };
++    const cognitoUser = new CognitoUser(userData);
++    cognitoUser.authenticateUser(authDetails, {
++        onSuccess: result => {
++            console.log('access token + ' + result.getAccessToken().getJwtToken());
++            callback(null, result);
++        },
++        onFailure: err => {
++            callback(err);
++        }
++    });
++};
++
++export const signOut = () => {
++    userPool.getCurrentUser().signOut();
++    window.location.reload();
++};
++
++export const getCurrentUser = callback => {
++    const cognitoUser = userPool.getCurrentUser();
++    if (!cognitoUser) return false;
++
++    cognitoUser.getSession((err, session) => {
++        if (err) {
++            console.log(err);
++            return;
++        }
++
++        console.log('Session valid?', session.isValid());
++        console.log(session);
++
++        cognitoUser.getUserAttributes((err, attributes) => {
++            if (err) return console.log(err);
++            callback(attributes);
++        });
++    });
++};
+-- 
+2.8.1
+

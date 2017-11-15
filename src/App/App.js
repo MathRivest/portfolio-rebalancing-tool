@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Portfolio from './Portfolio/Portfolio';
+import UserLogin from './User/UserLogin';
 
 import { Button, Popover } from './Components';
 
@@ -37,21 +38,21 @@ const Changelogs = () => {
                 <li>Prevent too many rendering</li>
             </ul>
         </div>
-    )
-}
+    );
+};
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isPopoverOpen: false
-        }
+        };
     }
     handlePopoverClick = () => {
         this.setState({
             isPopoverOpen: !this.state.isPopoverOpen
         });
-    }
+    };
 
     render() {
         return (
@@ -59,10 +60,7 @@ class App extends Component {
                 <div className="App-header">
                     <h2>Portfolio Rebalancing Tool</h2>
                     <div className="App-changelogs">
-                        <Button
-                            variant="inverted"
-                            iconName="notifications"
-                            onClick={this.handlePopoverClick}>
+                        <Button variant="inverted" iconName="notifications" onClick={this.handlePopoverClick}>
                             What's new
                         </Button>
                         <Popover isOpen={this.state.isPopoverOpen}>
@@ -70,6 +68,7 @@ class App extends Component {
                         </Popover>
                     </div>
                 </div>
+                <UserLogin />
                 <Portfolio />
             </div>
         );

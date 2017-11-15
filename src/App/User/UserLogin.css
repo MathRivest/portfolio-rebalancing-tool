@@ -1,0 +1,24 @@
+.UserLogin {
+  padding: 24px 24px 0 24px;
+  width: 100%;
+  max-width: 360px; }
+  .UserLogin-header {
+    text-align: center;
+    margin-top: 18px;
+    margin-bottom: 18px; }
+    .UserLogin-header img {
+      margin-bottom: 12px; }
+  .UserLogin label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: #596981; }
+  .UserLogin input {
+    max-width: none;
+    width: 100%;
+    margin-bottom: 18px; }
+  .UserLogin-content {
+    margin-bottom: 18px; }
+  .UserLogin-footer {
+    display: flex;
+    justify-content: flex-end; }

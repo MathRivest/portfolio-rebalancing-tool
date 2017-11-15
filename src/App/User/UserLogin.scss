@@ -1,0 +1,32 @@
+.UserLogin {
+    padding: 24px 24px 0 24px;
+    width: 100%;
+    max-width: 360px;
+    &-header {
+        text-align: center;
+        margin-top: 18px;
+        margin-bottom: 18px;
+        img {
+            margin-bottom: 12px;
+        }
+    }
+    label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 12px;
+        color: #596981;
+    }
+    input {
+        max-width: none;
+        width: 100%;
+        margin-bottom: 18px;
+    }
+
+    &-content {
+        margin-bottom: 18px;
+    }
+    &-footer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
