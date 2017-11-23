@@ -9,7 +9,7 @@ class Wealthica {
         this.headers.append('Authorization', `Bearer ${this.accessToken}`);
     }
 
-    getPortfolio() {
+    getAccounts() {
         const url = `${this.basePath}/positions`;
         return fetch(url, { headers: this.headers })
             .then(response => response.json())
@@ -59,7 +59,6 @@ class Wealthica {
                             readOnly: true
                         };
                     })
-                    .sortBy('symbol')
                     .value();
 
                 return {

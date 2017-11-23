@@ -19,20 +19,14 @@ class Portfolio extends React.Component {
     }
 
     componentDidMount() {
-        // const accounts = PortfolioService.getAccounts();
-        // _.forEach(accounts, (account) => {
-        //     account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
-        //     this.handleAccountAdd(account);
-        // });
-        console.log('mounting');
+        const portfolioProvider = this.props.provider ? this.props.provider : PortfolioService;
 
-        if (this.props.provider) {
-            this.props.provider.getPortfolio().then(accounts => {
-                _.forEach(accounts, account => {
-                    this.handleAccountAdd(account);
-                });
+        portfolioProvider.getAccounts().then(accounts => {
+            _.forEach(accounts, account => {
+                account.securities = _.orderBy(account.securities, ['symbol'], ['asc']);
+                this.handleAccountAdd(account);
             });
-        }
+        });
     }
 
     handleAccountChange = updatedAccount => {
@@ -94,7 +88,7 @@ class Portfolio extends React.Component {
     };
 
     saveAccounts = accounts => {
-        //PortfolioService.saveAccounts(accounts);
+        PortfolioService.saveAccounts(accounts);
     };
 
     render() {

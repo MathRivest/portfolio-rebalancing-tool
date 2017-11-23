@@ -6,29 +6,28 @@ class PortfolioSvc {
         this.baseUrl = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22{0}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=`;
     }
 
-    getSecurities = (symbols) => {
-        return this._getYahooSecurities(symbols)
-            .catch(() => {
-                return symbols.map(symbol => {
-                    return {
-                        symbol: symbol,
-                        cost: null
-                    }
-                })
+    getSecurities = symbols => {
+        return this._getYahooSecurities(symbols).catch(() => {
+            return symbols.map(symbol => {
+                return {
+                    symbol: symbol,
+                    cost: null
+                };
             });
-    }
+        });
+    };
 
-    _getYahooSecurities = (symbols) => {
+    _getYahooSecurities = symbols => {
         let symbolList = _.join(symbols, ',');
         let url = format(this.baseUrl, symbolList);
         return fetch(url)
             .then(response => response.json())
-            .then((resp) => {
+            .then(resp => {
                 let data = null,
                     count = resp.query.count;
-                if(count > 1) {
+                if (count > 1) {
                     data = resp.query.results.quote;
-                } else if(count === 1) {
+                } else if (count === 1) {
                     data = [resp.query.results.quote];
                 } else {
                     data = [];
@@ -37,20 +36,20 @@ class PortfolioSvc {
                 return data.map(security => {
                     return {
                         symbol: security.symbol,
-                        cost: security.Ask ? parseFloat(security.Ask): null
-                    }
-                })
+                        cost: security.Ask ? parseFloat(security.Ask) : null
+                    };
+                });
             });
-    }
+    };
 
-    saveAccounts = (accounts) => {
+    saveAccounts = accounts => {
         // clean up accounts to keep symbols and mkt val
         localStorage.setItem('portfolio-accounts', JSON.stringify(accounts));
-    }
+    };
 
     getAccounts() {
         const accounts = JSON.parse(localStorage.getItem('portfolio-accounts')) || [];
-        return accounts;
+        return Promise.resolve(accounts);
     }
 }
 
