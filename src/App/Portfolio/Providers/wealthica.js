@@ -50,7 +50,7 @@ class Wealthica {
                             investment: uniqInvestment.investment
                         });
                         return {
-                            id: position.security.id,
+                            id: `${uniqInvestment.investment}-${position.security.id}`,
                             symbol: position.security.symbol,
                             cost: position.security.last_price,
                             portPercentTarget: 0,
