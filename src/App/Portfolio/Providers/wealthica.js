@@ -74,6 +74,9 @@ class Wealthica {
                     readOnly: true
                 };
             })
+            .filter(account => {
+                return account.securities.length > 0;
+            })
             .value();
 
         return accounts;
