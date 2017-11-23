@@ -4,6 +4,10 @@ import './App.css';
 import Portfolio from './Portfolio/Portfolio';
 import UserLogin from './User/UserLogin';
 
+import { getCurrentUser } from '../Cognito';
+
+import Wealthica from './Portfolio/Providers/wealthica';
+
 import { Button, Popover } from './Components';
 
 const Changelogs = () => {
@@ -45,13 +49,35 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isPopoverOpen: false
+            isPopoverOpen: false,
+            isLoggedIn: false,
+            portfolioProvider: null
         };
     }
+
     handlePopoverClick = () => {
         this.setState({
             isPopoverOpen: !this.state.isPopoverOpen
         });
+    };
+
+    componentDidMount() {
+        getCurrentUser((attributes, session) => {
+            const accessToken = session.getIdToken().getJwtToken();
+            const portfolioProvider = new Wealthica(accessToken);
+            this.setState({
+                isLoggedIn: true,
+                portfolioProvider: portfolioProvider
+            });
+        });
+    }
+
+    renderView = () => {
+        if (this.state.isLoggedIn && this.state.portfolioProvider) {
+            return <Portfolio provider={this.state.portfolioProvider} />;
+        } else {
+            return <UserLogin />;
+        }
     };
 
     render() {
@@ -68,8 +94,7 @@ class App extends Component {
                         </Popover>
                     </div>
                 </div>
-                <UserLogin />
-                <Portfolio />
+                {this.renderView()}
             </div>
         );
     }

@@ -69,7 +69,7 @@ export const getCurrentUser = callback => {
 
         cognitoUser.getUserAttributes((err, attributes) => {
             if (err) return console.log(err);
-            callback(attributes);
+            callback(attributes, session);
         });
     });
 };
