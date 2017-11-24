@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Portfolio from './Portfolio/Portfolio';
-import UserLogin from './User/UserLogin';
+import Intro from './Intro/Intro';
+import { Button, Popover } from './Components';
 
 import { getCurrentUser } from '../Cognito';
-
 import Wealthica from './Portfolio/Providers/wealthica';
-
-import { Button, Popover } from './Components';
 
 const Changelogs = () => {
     return (
@@ -49,34 +47,49 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isPopoverOpen: false,
+            isChangelogOpen: false,
             isLoggedIn: false,
-            portfolioProvider: null
+            portfolioProvider: null,
+            hasStarted: false
         };
     }
 
     handlePopoverClick = () => {
         this.setState({
-            isPopoverOpen: !this.state.isPopoverOpen
+            isChangelogOpen: !this.state.isChangelogOpen
         });
     };
 
     componentDidMount() {
-        getCurrentUser((attributes, session) => {
-            const accessToken = session.getIdToken().getJwtToken();
-            const portfolioProvider = new Wealthica(accessToken);
-            this.setState({
-                isLoggedIn: true,
-                portfolioProvider: portfolioProvider
-            });
-        });
+        // getCurrentUser((attributes, session) => {
+        // const accessToken = session.getIdToken().getJwtToken();
+        // const portfolioProvider = new Wealthica(accessToken);
+        // this.setState({
+        //     isLoggedIn: true,
+        //     portfolioProvider: portfolioProvider
+        // });
+        // });
     }
 
+    handleOnStart = data => {
+        if (!data.provider) {
+            this.setState({
+                hasStarted: true
+            });
+        } else if (data.provider === 'Wealthica') {
+            this.setState({
+                portfolioProvider: data.provider,
+                hasStarted: true
+            });
+        }
+    };
+
     renderView = () => {
-        if (this.state.isLoggedIn && this.state.portfolioProvider) {
+        console.log('rendering...');
+        if (this.state.hasStarted) {
             return <Portfolio provider={this.state.portfolioProvider} />;
         } else {
-            return <UserLogin />;
+            return <Intro onStart={this.handleOnStart} />;
         }
     };
 
@@ -89,12 +102,12 @@ class App extends Component {
                         <Button variant="inverted" iconName="notifications" onClick={this.handlePopoverClick}>
                             What's new
                         </Button>
-                        <Popover isOpen={this.state.isPopoverOpen}>
+                        <Popover isOpen={this.state.isChangelogOpen}>
                             <Changelogs />
                         </Popover>
                     </div>
                 </div>
-                {this.renderView()}
+                <div className="App-body">{this.renderView()}</div>
             </div>
         );
     }

@@ -1,0 +1,18 @@
+.Intro {
+    width: 100%;
+    max-width: 640px;
+    &-body {
+        display: flex;
+        margin: -12px -24px;
+
+        > * {
+            width: 100%;
+            flex: 0 1 auto;
+            padding: 36px 24px;
+        }
+
+        &-content {
+            background-color: #e7e5e5fa;
+        }
+    }
+}
