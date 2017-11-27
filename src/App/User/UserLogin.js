@@ -9,21 +9,23 @@ class UserLogin extends React.Component {
         super(props);
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            isLoading: false
         };
     }
 
     authenticationCallback = (err, result) => {
+        this.setState({ isLoading: false });
         if (err) {
             console.log('Failed to authenticate', err);
         } else {
-            console.log('Authentication successful', result);
-            this.setState({ user: result });
+            this.props.onLogin();
         }
     };
 
     handleLoginSubmit = e => {
         e.preventDefault();
+        this.setState({ isLoading: true });
         authenticateUser(this.state.email, this.state.password, this.authenticationCallback);
     };
 
@@ -71,8 +73,14 @@ class UserLogin extends React.Component {
                                 No account? Sign up here.
                             </a>
                         </small>
-                        <Button type="submit" variant="primary" iconName="lock" onClick={this.handleLoginSubmit}>
-                            Get Started
+                        <Button
+                            disable={this.state.isLoading}
+                            type="submit"
+                            variant="primary"
+                            iconName="lock"
+                            onClick={this.handleLoginSubmit}
+                        >
+                            {this.state.isLoading ? 'Loading...' : 'Get Started'}
                         </Button>
                     </div>
                 </form>

@@ -60,16 +60,7 @@ class App extends Component {
         });
     };
 
-    componentDidMount() {
-        // getCurrentUser((attributes, session) => {
-        // const accessToken = session.getIdToken().getJwtToken();
-        // const portfolioProvider = new Wealthica(accessToken);
-        // this.setState({
-        //     isLoggedIn: true,
-        //     portfolioProvider: portfolioProvider
-        // });
-        // });
-    }
+    componentDidMount() {}
 
     handleOnStart = data => {
         if (!data.provider) {
@@ -77,9 +68,14 @@ class App extends Component {
                 hasStarted: true
             });
         } else if (data.provider === 'Wealthica') {
-            this.setState({
-                portfolioProvider: data.provider,
-                hasStarted: true
+            getCurrentUser((attributes, session) => {
+                const accessToken = session.getIdToken().getJwtToken();
+                const portfolioProvider = new Wealthica(accessToken);
+                this.setState({
+                    isLoggedIn: true,
+                    hasStarted: true,
+                    portfolioProvider: portfolioProvider
+                });
             });
         }
     };

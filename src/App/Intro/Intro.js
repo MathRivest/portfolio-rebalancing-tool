@@ -11,7 +11,7 @@ class Intro extends React.Component {
     };
 
     handleOnLogin = () => {
-        this.props.onStart({ provider: 'null' });
+        this.props.onStart({ provider: 'Wealthica' });
     };
 
     render(props) {
@@ -24,7 +24,7 @@ class Intro extends React.Component {
                                 Add your own
                             </Button>
                         </div>
-                        <UserLogin />
+                        <UserLogin onLogin={this.handleOnLogin} />
                     </div>
                 </Card>
             </div>
